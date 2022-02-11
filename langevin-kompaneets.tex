@@ -1,0 +1,1090 @@
+\documentclass[a4paper,12pt,reqno,superscriptaddress,nofootinbib]{revtex4}
+
+\usepackage[centertags]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{newlfont}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{euscript}
+\usepackage{graphicx}
+\setlength{\marginparwidth}{2cm}
+%\usepackage[normalem]{ulem} % for strikeout text with \sout
+\usepackage{color}
+\usepackage{soul} % Strikeout
+\usepackage[font=small,labelfont=bf,
+justification=RaggedRight,singlelinecheck=false]{caption}
+\usepackage{wrapfig}
+\usepackage{amscd}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{subfig}
+\usepackage{siunitx}
+
+%=== TEMPORARY ===
+\usepackage{changes}
+
+
+% THEOREM-LIKE ENVIRONMENTS -----------------------------------------
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+\newtheorem{notes}[theorem]{Notes}
+\newtheorem{example}[theorem]{Example}
+
+
+
+% GREEK - 2 letters ------------------------------------------------
+
+\let\al=\alpha %\let\be=\beta
+\let\de=\delta \let\ep=\epsilon
+\let\ve=\varepsilon \let\vp=\varphi \let\ga=\gamma \let\io=\iota
+\let\ka=\kappa \let\la=\lambda \let\om=\omega \let\vr=\varrho
+\let\si=\sigma \let\vs=\varsigma \let\th=\theta \let\vt=\vartheta
+\let\ze=\zeta \let\up=\upsilon
+
+\let\De=\Delta \let\Ga=\chi \let\La=\Lambda \let\Om=\Omega
+\let\Th=\Theta \let\Up=\Upsilon
+
+% \MATHCAL - \ca ----------------------------------------------------
+
+
+\def\fr{\frac}
+\def\th{\theta}
+\def\al{\alpha}
+\def\om{\omega}
+\def\ka{\kappa}
+\def\ii{\textrm i}
+\def\ee{\textrm e}
+\def\e{\textrm e}
+\def\vp{\varphi}
+\def\sgn{{\textrm{sgn}}}
+\def\ud{\textrm{d}}
+\def\bn{{\boldsymbol \nabla}}
+\def\setR{\mathbb{R}}
+
+\let\lam=\lambda
+\let\si=\sigma \let\vs=\varsigma \let\th=\theta \let\vt=\vartheta
+\let\ze=\zeta \let\up=\upsilon
+
+\let\De=\Delta \let\Ga=\Gamma \let\La=\Lambda \let\Om=\Omega
+\let\Th=\Theta \let\Up=\Upsilon
+\let\om=\omega
+
+\newcommand{\caA}{{\mathcal A}}
+\newcommand{\caB}{{\mathcal B}}
+\newcommand{\caC}{{\mathcal C}}
+\newcommand{\caD}{{\mathcal D}}
+\newcommand{\caE}{{\mathcal E}}
+\newcommand{\caF}{{\mathcal F}}
+\newcommand{\caG}{{\mathcal G}}
+\newcommand{\caH}{{\mathcal H}}
+\newcommand{\caI}{{\mathcal I}}
+\newcommand{\caJ}{{\mathcal J}}
+\newcommand{\caK}{{\mathcal K}}
+\newcommand{\caL}{{\mathcal L}}
+\newcommand{\caM}{{\mathcal M}}
+\newcommand{\caN}{{\mathcal N}}
+\newcommand{\caO}{{\mathcal O}}
+\newcommand{\caP}{{\mathcal P}}
+\newcommand{\caQ}{{\mathcal Q}}
+\newcommand{\caR}{{\mathcal R}}
+\newcommand{\caS}{{\mathcal S}}
+\newcommand{\caT}{{\mathcal T}}
+\newcommand{\caU}{{\mathcal U}}
+\newcommand{\caV}{{\mathcal V}}
+\newcommand{\caW}{{\mathcal W}}
+\newcommand{\caX}{{\mathcal X}}
+\newcommand{\caY}{{\mathcal Y}}
+\newcommand{\caZ}{{\mathcal Z}}
+
+\newcommand{\bR}{\mathbb{R}}
+
+% \MATHBB - \bb -----------------------------------------------------
+
+\newcommand{\bba}{{\mathbb a}}
+\newcommand{\bbb}{{\mathbb b}}
+\newcommand{\bbc}{{\mathbb c}}
+\newcommand{\bbd}{{\mathbb d}}
+\newcommand{\bbe}{{\mathbb e}}
+\newcommand{\bbf}{{\mathbb f}}
+\newcommand{\bbg}{{\mathbb g}}
+\newcommand{\bbh}{{\mathbb h}}
+\newcommand{\bbi}{{\mathbb i}}
+\newcommand{\bbj}{{\mathbb j}}
+\newcommand{\bbk}{{\mathbb k}}
+\newcommand{\bbl}{{\mathbb l}}
+\newcommand{\bbm}{{\mathbb m}}
+\newcommand{\bbn}{{\mathbb n}}
+\newcommand{\bbo}{{\mathbb o}}
+\newcommand{\bbp}{{\mathbb p}}
+\newcommand{\bbq}{{\mathbb q}}
+\newcommand{\bbr}{{\mathbb r}}
+\newcommand{\bbs}{{\mathbb s}}
+\newcommand{\bbt}{{\mathbb t}}
+\newcommand{\bbu}{{\mathbb u}}
+\newcommand{\bbv}{{\mathbb v}}
+\newcommand{\bbw}{{\mathbb w}}
+\newcommand{\bbx}{{\mathbb x}}
+\newcommand{\bby}{{\mathbb y}}
+\newcommand{\bbz}{{\mathbb z}}
+
+\newcommand{\bbA}{{\mathbb A}}
+\newcommand{\bbB}{{\mathbb B}}
+\newcommand{\bbC}{{\mathbb C}}
+\newcommand{\bbD}{{\mathbb D}}
+\newcommand{\bbE}{{\mathbb E}}
+\newcommand{\bbF}{{\mathbb F}}
+\newcommand{\bbG}{{\mathbb G}}
+\newcommand{\bbH}{{\mathbb H}}
+\newcommand{\bbI}{{\mathbb I}}
+\newcommand{\bbJ}{{\mathbb J}}
+\newcommand{\bbK}{{\mathbb K}}
+\newcommand{\bbL}{{\mathbb L}}
+\newcommand{\bbM}{{\mathbb M}}
+\newcommand{\bbN}{{\mathbb N}}
+\newcommand{\bbO}{{\mathbb O}}
+\newcommand{\bbP}{{\mathbb P}}
+\newcommand{\bbQ}{{\mathbb Q}}
+\newcommand{\bbR}{{\mathbb R}}
+\newcommand{\bbS}{{\mathbb S}}
+\newcommand{\bbT}{{\mathbb T}}
+\newcommand{\bbU}{{\mathbb U}}
+\newcommand{\bbV}{{\mathbb V}}
+\newcommand{\bbW}{{\mathbb W}}
+\newcommand{\bbX}{{\mathbb X}}
+\newcommand{\bbY}{{\mathbb Y}}
+\newcommand{\bbZ}{{\mathbb Z}}
+
+\newcommand{\opunit}{\text{1}\kern-0.22em\text{l}}
+\newcommand{\funit}{\mathbf{1}}
+
+% \MATHFRAK - \fr ---------------------------------------------------
+
+\newcommand{\ong}{\backsimeq}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\CC}{\mathbb C}
+%\newcommand{\de}{\text{d}}
+\newcommand{\dt}{\text{d}t}
+\newcommand{\dx}{\text{d}x}
+\newcommand{\dV}{\text{d}V}
+\newcommand{\dr}{\text{d}r}
+\newcommand{\ds}{\text{d}s}
+\newcommand{\BE}{\text{BE}}
+\newcommand{\een}{\mathds{1}}
+
+
+
+\newcommand{\fra}{{\mathfrak a}}
+\newcommand{\frb}{{\mathfrak b}}
+\newcommand{\frc}{{\mathfrak c}}
+\newcommand{\frd}{{\mathfrak d}}
+\newcommand{\fre}{{\mathfrak e}}
+\newcommand{\frf}{{\mathfrak f}}
+\newcommand{\frg}{{\mathfrak g}}
+\newcommand{\frh}{{\mathfrak h}}
+\newcommand{\fri}{{\mathfrak i}}
+\newcommand{\frj}{{\mathfrak j}}
+\newcommand{\frk}{{\mathfrak k}}
+\newcommand{\frl}{{\mathfrak l}}
+\newcommand{\frm}{{\mathfrak m}}
+\newcommand{\frn}{{\mathfrak n}}
+\newcommand{\fro}{{\mathfrak o}}
+\newcommand{\frp}{{\mathfrak p}}
+\newcommand{\frq}{{\mathfrak q}}
+\newcommand{\frr}{{\mathfrak r}}
+\newcommand{\frs}{{\mathfrak s}}
+\newcommand{\frt}{{\mathfrak t}}
+\newcommand{\fru}{{\mathfrak u}}
+\newcommand{\frv}{{\mathfrak v}}
+\newcommand{\frw}{{\mathfrak w}}
+\newcommand{\frx}{{\mathfrak x}}
+\newcommand{\fry}{{\mathfrak y}}
+\newcommand{\frz}{{\mathfrak z}}
+
+\newcommand{\frA}{{\mathfrak A}}
+\newcommand{\frB}{{\mathfrak B}}
+\newcommand{\frC}{{\mathfrak C}}
+\newcommand{\frD}{{\mathfrak D}}
+\newcommand{\frE}{{\mathfrak E}}
+\newcommand{\frF}{{\mathfrak F}}
+\newcommand{\frG}{{\mathfrak G}}
+\newcommand{\frH}{{\mathfrak H}}
+\newcommand{\frI}{{\mathfrak I}}
+\newcommand{\frJ}{{\mathfrak J}}
+\newcommand{\frK}{{\mathfrak K}}
+\newcommand{\frL}{{\mathfrak L}}
+\newcommand{\frM}{{\mathfrak M}}
+\newcommand{\frN}{{\mathfrak N}}
+\newcommand{\frO}{{\mathfrak O}}
+\newcommand{\frP}{{\mathfrak P}}
+\newcommand{\frQ}{{\mathfrak Q}}
+\newcommand{\frR}{{\mathfrak R}}
+\newcommand{\frS}{{\mathfrak S}}
+\newcommand{\frT}{{\mathfrak T}}
+\newcommand{\frU}{{\mathfrak U}}
+\newcommand{\frV}{{\mathfrak V}}
+\newcommand{\frW}{{\mathfrak W}}
+\newcommand{\frX}{{\mathfrak X}}
+\newcommand{\frY}{{\mathfrak Y}}
+\newcommand{\frZ}{{\mathfrak Z}}
+
+% \BOLDSYMBOL - \bs -------------------------------------------------
+
+\newcommand{\bsa}{{\boldsymbol a}}
+\newcommand{\bsb}{{\boldsymbol b}}
+\newcommand{\bsc}{{\boldsymbol c}}
+\newcommand{\bsd}{{\boldsymbol d}}
+\newcommand{\bse}{{\boldsymbol e}}
+\newcommand{\bsf}{{\boldsymbol f}}
+\newcommand{\bsg}{{\boldsymbol g}}
+\newcommand{\bsh}{{\boldsymbol h}}
+\newcommand{\bsi}{{\boldsymbol i}}
+\newcommand{\bsj}{{\boldsymbol j}}
+\newcommand{\bsk}{{\boldsymbol k}}
+\newcommand{\bsl}{{\boldsymbol l}}
+\newcommand{\bsm}{{\boldsymbol m}}
+\newcommand{\bsn}{{\boldsymbol n}}
+\newcommand{\bso}{{\boldsymbol o}}
+\newcommand{\bsp}{{\boldsymbol p}}
+\newcommand{\bsq}{{\boldsymbol q}}
+\newcommand{\bsr}{{\boldsymbol r}}
+\newcommand{\bss}{{\boldsymbol s}}
+\newcommand{\bst}{{\boldsymbol t}}
+\newcommand{\bsu}{{\boldsymbol u}}
+\newcommand{\bsv}{{\boldsymbol v}}
+\newcommand{\bsw}{{\boldsymbol w}}
+\newcommand{\bsx}{{\boldsymbol x}}
+\newcommand{\bsy}{{\boldsymbol y}}
+\newcommand{\bsz}{{\boldsymbol z}}
+
+\newcommand{\bsA}{{\boldsymbol A}}
+\newcommand{\bsB}{{\boldsymbol B}}
+\newcommand{\bsC}{{\boldsymbol C}}
+\newcommand{\bsD}{{\boldsymbol D}}
+\newcommand{\bsE}{{\boldsymbol E}}
+\newcommand{\bsF}{{\boldsymbol F}}
+\newcommand{\bsG}{{\boldsymbol G}}
+\newcommand{\bsH}{{\boldsymbol H}}
+\newcommand{\bsI}{{\boldsymbol I}}
+\newcommand{\bsJ}{{\boldsymbol J}}
+\newcommand{\bsK}{{\boldsymbol K}}
+\newcommand{\bsL}{{\boldsymbol L}}
+\newcommand{\bsM}{{\boldsymbol M}}
+\newcommand{\bsN}{{\boldsymbol N}}
+\newcommand{\bsO}{{\boldsymbol O}}
+\newcommand{\bsP}{{\boldsymbol P}}
+\newcommand{\bsQ}{{\boldsymbol Q}}
+\newcommand{\bsR}{{\boldsymbol R}}
+\newcommand{\bsS}{{\boldsymbol S}}
+\newcommand{\bsT}{{\boldsymbol T}}
+\newcommand{\bsU}{{\boldsymbol U}}
+\newcommand{\bsV}{{\boldsymbol V}}
+\newcommand{\bsW}{{\boldsymbol W}}
+\newcommand{\bsX}{{\boldsymbol X}}
+\newcommand{\bsY}{{\boldsymbol Y}}
+\newcommand{\bsZ}{{\boldsymbol Z}}
+
+\newcommand{\scS}{{\mathscr S}}
+\newcommand{\scD}{{\mathscr D}}
+
+
+\newcommand{\bsalpha}{{\boldsymbol \alpha}}
+\newcommand{\bsbeta}{{\boldsymbol \beta}}
+\newcommand{\bsgamma}{{\boldsymbol \gamma}}
+\newcommand{\bsdelta}{{\boldsymbol \delta}}
+\newcommand{\bsepsilon}{{\boldsymbol \epsilon}}
+\newcommand{\bsmu}{{\boldsymbol \mu}}
+\newcommand{\bsomega}{{\boldsymbol \omega}}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\pzo}{\mathpzc{o}}
+\newcommand{\pzO}{\mathpzc{O}}
+
+
+% ABBREVIATION ------------------------------------------------------
+
+\newcommand{\fig}{Fig.\;}
+\newcommand{\cf}{cf.\;}
+\newcommand{\eg}{e.g.\;}
+\newcommand{\ie}{i.e.\;}
+
+% MISCELLANEOUS -----------------------------------------------------
+
+\newcommand{\un}[1]{\underline{#1}}
+\newcommand{\defin}{\stackrel{\text{def}}{=}}
+\newcommand{\bound}{\partial}
+\newcommand{\sbound}{\hat{\partial}}
+\newcommand{\rel}{\,|\,}
+\newcommand{\pnt}{\rightsquigarrow}
+\newcommand{\pa}{_\bullet}
+\newcommand{\nb}[1]{\marginpar{\tiny {#1}}}
+\newcommand{\pair}[1]{\langle{#1}\rangle}
+\newcommand{\0}{^{(0)}}
+\newcommand{\1}{^{(1)}}
+\newcommand{\2}{^{(2)}}
+\newcommand{\tot}{_{\text{TOT}}}
+\newcommand{\out}{_{\text{OUT}}}
+\newcommand{\con}{_{\text{con}}}
+\newcommand{\can}{\text{can}}
+\newcommand{\tomean}{\stackrel{1}{\to}}
+\newcommand{\rev}{_{\text{REV}}}
+\newcommand{\irr}{_{\text{IRR}}}
+
+\DeclareMathOperator{\cnst}{const}
+\def\Z{\mathcal Z}
+\def\cL{\mathscr L}
+\def\cH{\mathscr H}
+\def\cA{\mathcal A}
+\def\R{\mathbb R}
+\def\S{\mathcal S}
+\def\mbf{\mathbf }
+
+\def\dbar{{\mathchar'26\mkern-12mu d}}
+
+\long\def\red#1{{\color{red}#1}}
+\renewcommand\div{\mathop\mathrm{div}}
+
+
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+	\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+	{\box0\lower0.4pt\box2}}
+
+\let\a=\alpha %\let\be=\beta
+\let\de=\delta \let\ep=\epsilon
+\let\ve=\varepsilon \let\vp=\varphi \let\ga=\gamma \let\io=\iota
+\let\ka=\kappa  \let\om=\omega \let\vr=\varrho
+\let\si=\sigma \let\vs=\varsigma \let\th=\theta \let\vt=\vartheta
+\let\ze=\zeta \let\up=\upsilon
+\let\be=\beta
+
+\let\De=\Delta \let\Ga=\Gamma \let\La=\Lambda \let\Om=\Omega
+\let\Th=\Theta
+
+\graphicspath{{plots/}}
+
+%===============================================
+\begin{document}
+	\title{Photon frequency diffusion process}	
+	\author{Guilherme Eduardo Freire Oliveira, Christian Maes and Kasper Meerts\\ {\it Instituut voor Theoretische Fysica, KU Leuven}}
+
+\begin{abstract}
+	We introduce a  stochastic multi-photon dynamics on reciprocal space.  
+	Assuming isotropy, we derive the diffusion limit for a tagged photon to be a nonlinear 
+	Markov process on frequency.  The nonlinearity stems from the stimulated 
+	emission.  In the case of Compton scattering with thermal electrons, the 
+	limiting process describes the dynamical fluctuations around the Kompaneets 
+	equation.  More generally, we construct a photon frequency diffusion 
+	process which enables to include nonequilibrium effects.  Modifications of 
+	the Planck Law may thus be explored, where we focus on the low-frequency 
+	regime.
+\end{abstract}
+\maketitle
+
+\tableofcontents
+\section{Introduction}
+Time-dependent and nonequilibrium dynamics of photons are of increasing interest in a wide range of subjects. \textbf{better formulations to be added - reference on quantum opticalmechanics} Quantum electromagnetic fields may be manipulated \cite{metaphotonics} to produce photonic lattices (spatial network of coupled photon modes) where time-dependent driving leads to a breaking of time-reversal invariance (synthetic magnetic field) \cite{koch,fang,roushan}.  In quantum optomechanical studies photon gases may be enclosed in cavities with time-dependent geometry.  Same thing for wave guides where the input field may be driven by either a laser or microwave generator, imposing a nonequilibrium boundary condition on the propagating photons \cite{pozar,roy}.  In another domain and since much longer, plasma physics has dealt the problem of understanding the origin of suprathermal tails and high-energy cosmic radiation as a result of the scattering of electrons with turbulent electromagnetic fields \cite{fermi, sturrock,brin}.  Finally, in Early Universe cosmology, the dynamical origin of the main features of the cosmic background radiation (CMB) remains of central importance, especially to understand (possible) deviations from homogeneity or from the Planck Law \cite{arcade1,arcade2,edges,arca}.\\
+As understood from the pioneering days of statistical mechanics and in analogy with Brownian motion, we expect that the studies mentioned above may benefit from modeling fluctuations, i.e., to identify the random motion in photon frequency space. In that way, considering a mesoscopic level of description, we become able to insert nonequilibrium effects on the one-photon level and to discern meaningful possibilities.\\
+
+In the present paper  we derive a (stochastic) diffusion process for a tagged photon, that can be seen as the diffusion limit of a multi-photon hopping dynamics in reciprocal space.  Stimulated emission results in the nonlinearity of the Markov diffusion process.\\ 
+  We first apply our construction to build a Kompaneets process, i.e. the stochastic (one-photon) dynamics that has the well-known Kompaneets equation as its nonlinear Fokker-Planck equation.
+That new fluctuation dynamics  is the counterpart to the analysis of Kompaneets in \cite{kompa} and makes our first main result: the derivation of the frequency diffusion process for a tagged photon in a plasma dominated by Compton scattering.  Similarly, many other processes such as double Compton and  \textit{Bremsstrahlung} can be considered, and thanks to our setup, are easily added to the dynamics, turning it into a fully nonlinear reaction-diffision dynamics.  Not only does that process complement (in some precise sense) the Kompaneets equation, it allows also to see beyond and leading to our second main contribution.  A possible avenue indeed that gets opened, is the implementation and exploration of nonequilibrium effects modifying the Planck law, via interventions on the single photon level. Our work explores how changing drift and adding diffusion may change the low-frequency distribution, where the relaxation times in the Kompaneets process are largest.\\
+
+
+\textbf{Plan of the paper:}  In the next section we describe the Kompaneets equation for relaxation to the Planck law via Compton scattering.  In Section \ref{ksp} we introduce the Kompaneets {\it process}, describing the hopping of photons in reciprocal space.  Its diffusion limit for a tagged photon gives a nonlinear Markov process, described in Eq. \eqref{kp-ito2}.  Other non photon-number preserving radiation processes are added in Section \ref{rbdc}. Bremsstrahlung and double Compton scattering are described there as low-frequency corrections. These are reactive mechanisms to control photon-number that can be handled and taken effectively in the simulation. That simulation is explained in Section \ref{simul}, where the results are shown in terms of the time-dependence of the spectral density. We confirm the validity of the simulation scheme by verifying relaxation to the Planck law. There, we also show the appearance of a condensate when the number of photons is taken to be large enough, an effect already observed in \cite{levermore}. We verify the absorption of that condensate by considering reactive processes, as expected. Section \ref{extk-sec} discusses even more general photon-number processes, extending the Kompaneets process to implement two type of low-frequency modifications, either in the drift or in the diffusion. They are nonequilibrium features in the photon dynamics, effectively implementable on the single photon level that we simulate. Finally, in Section \ref{simex}, we explain the simulation details for that extension with reactive mechanisms, comparing various implementations to understand the effect of stimulated emission. We confront the results with the expected stationary solution and, again, good agreement is found. That illustrates in great detail how nonequilibrium features change the stationary solution to enhance low-frequency occupation, but we recover the Planck law as the asymptotic distribution. 
+
+As a final remark, it should be noted in all these cases that we start from a multi-photon diffusion process in frequency space.  It means to include the stimulated emission in the reactivities. That presents a nontrivial aspect in both the theoretical and computational analysis, leading finally to important nonlinearities in the corresponding Fokker-Planck equation. However, our results indicate that the processes simulate indeed the Kompaneets equation and its extensions, in the sense that the empirical density of photons follows these equations.
+
+
+
+
+\section{Kompaneets equation}
+
+The Compton effect is a quantum process in which photons collide with and scatter from free electrons.  It  eventually  leads to the relaxation of the photon distribution to that of the Planck radiation law.
+The Kompaneets equation 
+\begin{equation}\label{ke}
+	\omega^2\frac{\partial n}{\partial t}(t,\omega)= \frac{n_e\sigma_T 
+		c}{m_e c^2}\frac{\partial }{\partial \omega}\omega^4\left\{k_B T 
+	\frac{\partial n}{\partial \omega}(t,\omega) + 
+	\hbar\left[1+n(t,\omega)\right]n(t,\omega)\right\}
+\end{equation}
+ describes that relaxation towards equilibrium of a photon gas in contact with a nondegenerate, nonrelativistic electron bath in thermal equilibrium at temperature $T$. Here, $n(t,\omega)$ is the occupation number distribution function  at frequency $\omega$ of the photon gas at time $t$; stationarity is then achieved when $n(t,\omega)$ reaches the Bose-Einstein distribution. Apart from the usual constants in \eqref{ke}, we recognize $\sigma_T$ as the Thomson total cross section and $n_e,m_e$ as the density and mass of the electrons, respectively.  The induced Compton scattering \cite{liedahl, blandford}  leads to the nonlinearity (in the second term) appearing in the Kompaneets equation \eqref{ke}.\\
+ In 1957 Kompaneets \cite{kompa} gave a mesoscopic derivation of \eqref{ke}, starting from a semi-classical Boltzmann equation. It remains essential for the understanding of the CMB spectrum and related phenomena such as the Sunyaev-Zeldovich effect \cite{sunyaeveffect,sunyaev}.  The understanding of the Kompaneets equation has been evolving over the years and excellent reviews include \cite{practical,gui,zeldovich}. We emphasize that many extensions to the equation exist, for example, the isotropy condition for the distribution functions has been relaxed in \cite{buet, pitrou}, while nonrelativistic extensions can be found in \cite{barbosa, brown, itoh, itoh2, cooper, kohyama1, kohyama2, kohyama3}.  More recently in \cite{paper} we addressed some consistency problems in Kompaneets' original framework \cite{kompa}.\\
+
+For simplicity it is convenient to use the dimensionless counterpart of \eqref{ke} in order to introduce (in the next Section) the Kompaneets {\it process}, which describes the hopping of photons in reciprocal space.\\ 
+The dynamics of the average photon occupation number $n(t, x)$ at dimensionless frequency $x= \hbar \omega/k_B T$ in a thermal environment with temperature $T$, is obtained from equation \eqref{ke} as
+\begin{equation}\label{ake}
+x^2\frac{\partial n}{\partial y}(y,x) = \frac{\partial }{\partial x}x^4\left\{
+\frac{\partial n}{\partial x}(y,x) + 
+\left[1+n(y,x)\right]n(y,x)\right\}
+\end{equation}
+where we have defined the dimensionless Compton optical depth
+\[y = \frac{ k_B T }{m_e c^2} n_e \sigma_T c \, t =  \frac{ t}{\tau_C}\]
+Here, $\tau_C$ is the  characteristic time in which photons change their frequency due to Compton scattering with thermal electrons,
+\begin{equation}\label{shift}
+\left\langle\frac{1}{2\tau}\left(\frac{\Delta\omega}{\omega}\right)^2\right\rangle\approx \frac{ k_B T }{m_e c^2}\; \frac 1{\tau}= \frac{1}{\tau_C}
+\end{equation}
+where $\tau = \ell/c$ is the average collision rate, related 
+to the mean free path of photons $\ell=(n_e\sigma_T)^{-1}$.\\
+Note that the
+\begin{equation}\label{cc}
+n_\mu(x) = \frac 1{e^{x+\mu}-1}, \qquad \mu\geq 0
+\end{equation}
+are stationary solutions of \eqref{ake}: $\frac{\dd n_\mu}{\dd x}(x) + [ 
+1+n_\mu(x) ] \,n_\mu(x)=0$.\\
+
+
+
+
+Central for our purposes to simulate the Compton scattering on a mesoscopic level is to write the Kompaneets equation \eqref{ke}--\eqref{ake} in terms of the photon density. 
+Assuming that photons are confined to a box of volume $V$ with periodic boundary conditions, the density of states is
+\[
+g(\vb{k}) \dd^3 \vb{k} = \frac{2V}{(2\pi)^3} \dd^3 \vb{k} = \frac{2V}{(2\pi)^3} 
+4\pi k^2 \dd k
+\]
+where $\vb{k}$ is the wave vector.  It is useful here to 
+assume isotropy: in function of the dimensionless $x = \hbar \omega / k_B T$, the density of states is
+\[
+g(x) \dd x = \frac{2V}{(2\pi)^3} \left( \frac{k_B T}{\hbar c} \right)^3 4\pi 
+x^2 \dd x
+\] 
+From here we define the spectral number density of photons, related to the number of particles with energy between $E$ and $E+\dd E$: 
+\begin{equation}\label{eq:snd}
+u(y,x) = g(x) n(y,x) = V \frac{1}{\pi^2} \left( \frac{k_B T}{\hbar c} \right)^3 
+x^2 n(y,x)
+\end{equation}
+Integrating yields the total number of photons
+\[ N_y = \int_0^\infty \dd{x} u(y,x)
+ \]
+That allows to write the spectral probability density
+\begin{equation}\label{eq:spd}
+\rho(y,x) = \frac{V}{N_y} \frac{1}{\pi^2} \left(\frac{k_B T}{\hbar c}\right)^3 
+x^2 n(y,x) = \frac{x^2 n(y,x)}{2\zeta(3) Z_y},
+\end{equation}
+where $2\zeta(3) = \int_0^\infty \dd x \, x^2/(e^x-1) \simeq 2.404$.
+By using the normalization of the spectral probability density while integrating \eqref{eq:spd} in frequency, we can write
+\[
+Z_y =  \frac 1{2\zeta(3)}\,\int_0^\infty \dd x\, x^2 n(y,x) \propto  \frac{N_y}{V} \left(\frac{\hbar c}{k_B T}\right)^3
+\]
+which is a possibly time-dependent parameter, depending on the temperature and 
+proportional to the number of photons per volume. Since the Kompaneets equation 
+is photon-number preserving, $Z_y$ is time-independent and yields for the 
+stationary $n_\mu$ in \eqref{cc}
+\[
+Z = \frac{\text{Li}_3 (e^{-\mu})}{\zeta(3)}
+\]
+with Li$_3$ the polylogarithm of order 3.
+In that notation, the Kompaneets equation \eqref{ake} becomes
+\begin{equation}\label{kp}
+\frac{\partial \rho}{\partial y} (y,x) = -\frac{\partial}{\partial x}\left[\left(4x- x^2\left(1+2\zeta(3) Z\,\frac{\rho(y,x)}{x^2}\right)\right)\rho(y,x)\right] + \frac{\partial^2}{\partial x^2}\left[x^2 \rho(y,x)\right]
+\end{equation}
+Observe still that  $Z$
+can be interpreted as the ratio of the actual photon spectral density to that 
+of the Planck distribution corresponding to the same temperature.  For the 
+Bose-Einstein distribution $n(y,x)= n_\text{BE}(x) = n_0(x) = 1 / (e^x - 1)$, 
+the photon number equals
+\[
+N_\text{BE} = 2 \zeta(3) \frac{V}{\pi^2} \left( \frac{k_B T}{\hbar c} \right)^3
+\]
+corresponding to a spectral probability density with $Z = 1$:
+\begin{equation}\label{eq:bespd}
+\rho_\text{BE}(x) = \frac{x^2 n_{BE}(x)}{2\zeta(3)}
+\end{equation}
+We make a ``hot'' Planck spectral density by changing $x\rightarrow x/2$ (doubling the temperature), taking $n(x) = n_\text{BE}(x/2)$, leading to
+\begin{eqnarray}\label{hott}
+\rho_\text{BE}^\text{hot}(x) = \frac{x^2 n_\text{BE}(x/2)}{16\zeta(3)}
+\end{eqnarray}
+in which case $Z=8$.  On the other hand, as $Z$ goes to zero, we recover the Wien expression $\rho_\text{Wien}(x) = x^2 e^{-x}/2$ to be the stationary spectral probability density for equation \eqref{kp} which becomes linear at $Z=0$.\\
+
+
+As a final comment we note that the Kompaneets equation is positivity preserving \cite{positivity}. That is important because any solution of the equation will retain its sign, suggesting indeed to interpret this equation as of Fokker-Planck type. 
+
+% Als ik hier een \\ tussenzet compileert het niet op het ITF
+\section{Mesoscopics of Compton scattering: Kompaneets stochastic 
+process}\label{ksp}	
+
+When considering a single Compton scattering event, the transition rates are fully determined by the incident electron and photon momenta together with energy-momentum conservation. However, in the presence of repeated scattering, treating the electron as a nondegenerate particle and the photon as a boson, the transition rates must account for stimulated emission, \textit{i.e.}, transitions are enhanced if photons are present in the final state. Mathematically, we work on a symmetrized Fock space, where transition rates (between incoming  $|\text{i}\rangle$ and final states $|\text{f}\rangle$) have an additional term coming from the matrix element \cite{kadanoff}
+\begin{equation}
+\left|\langle \text{f}\,| a^\dagger_{{\mathbf k'}}a_{\mathbf k}|\text{i}\rangle\right|^2 = (1+n({\mathbf k'}))\,n({\mathbf k})
+\end{equation}
+where $a^{(\dagger)}_{\mathbf k}$ are the annihilation (creation) operators in the Fock space  related to the photon momentum $\vb{k}$, and $n({\mathbf k})$ are occupation numbers.  That is the only ``interaction'' between the photons that we take into account so far.
+
+
+\subsection{Jump process in reciprocal space}
+
+As introduced in \cite{paper}, we start from a random walk of bosons in reciprocal space. Here we consider a bath of a large number $N$ of photons, confined to a cube of sidelength $L$ with 
+periodic boundary conditions. We will end up working in the thermodynamic limit for fixed density $N/L^3$.  For now however the modes are quantized, at a fixed distance $\delta = 2\pi / L$.  We designate each photon by its wave vector $\vb{k}_i$ so that the full state of the bath is described by $\vb{K} = (\vb{k}_1, \dots, \vb{k}_N)$.  Yet, we must treat the photons indistinguishably, and soon we will work with occupation numbers.\\
+Transitions $\vb{K}\rightarrow \vb{K}'$ between  states are restricted to 
+these for which only one photon jumps to another wave vector, i.e., to transitions
+\[
+\vb{K} = (\vb{k}_1, 
+\dots,\vb{k}_i,\ldots, \vb{k}_N)\longrightarrow \vb{K}' = (\vb{k}_1, 
+\dots, \vb{k}_i+\vb{a} \delta,\dots, \vb{k}_N)
+\] 
+where $\vb{a}$ is one of the six unit vectors. The corresponding rate of such a transition is of the form
+\[
+w_i(\vb{K}, \vb{a}\delta) = w(\vb{k}_i,\vb{a}\delta) \left(1 + n_{\vb{k}_i+\vb{a} \delta}(\vb{K} )\right)
+\]
+where
+\[
+n_{\vb{k}}(\vb{K}) = \sum_{i} \delta_{ \vb{k}, \vb{k}_i}
+\]
+(with the Kronecker delta) counts the number of photons at $\vb{k}$.  It realizes the stimulated emission in the process.  The rest of the rates is taken as usual,
+\[
+w(\vb{k},\vb{a}\delta) = D\left( \vb{k} + \frac{\vb{a} \delta}{2} \right) 
+\exp\left\{-\frac{\beta}{2}\left(U(\vb{k} + \vb{a} \delta) - 
+U(\vb{k})\right)\right\}
+\]
+to satisfy detailed balance with energy function $U$ at inverse temperature $\beta$.   We also added a (time-symmetric) reactivity $D$, also to be specified below in the case of Compton scattering.\\
+
+The thus defined process $\vb{K}(t)$ is Markovian and has backward generator $L_\delta$, to be applied to observables
+$F(\vb{K})$, given by
+\begin{equation}\label{ld}
+L_\delta F(\vb{K})= \sum_{i,\vb{a}} w_i(\vb{K},\vb{a}\delta) \left(F(\vb{K}') 
+-F(\vb{K})\right)
+\end{equation}
+where $\vb{k}'_j = \vb{k}_j$ for $j \neq i$ and 
+$\vb{k}'_i = \vb{k}_i + \vb{a} \delta$.
+So far the process can be seen as a generalized zero range process \cite{blythe}.  That generalization is sometimes referred to as a ``misanthrope process,'' motivated by the convenience of monotonicity; see \cite{cocozza,sethuraman}.  Here that name is less appropriate as the dependence on the target configuration is one of ``stimulation.'' \\
+We are not staying with the multiparticle dynamics generated by \eqref{ld}, as we wish to find the dynamics for a single tagged photon.  To have a rigorous understanding of the dynamics of a tagged particle in a ``misanthrope'' (or stimulated) zero range process is far from trivial; see also \cite{jara}.  Our approach will therefore be more heuristic.\\
+
+
+To start, we find the time evolution of the expected occupation numbers by applying the above rule to the observables
+$n_{\vb{k}}$ and by noting that  \[ n_{\vb{k}}(\vb{K}') - n_{\vb{k}}(\vb{K}) = \delta_{\vb{k},\vb{k}_i + \vb{a} 
+	\delta} - \delta_{\vb{k},\vb{k}_i} \]
+Hence,
+\begin{alignat}{3}
+L_\delta n_{\vb{k}} (\vb{K}) &=& \sum_{i,\vb{a}} w(\vb{k}_i,\vb{a}\delta) \left(1 + 
+n_{\vb{k}_i+ \vb{a}\delta}(\vb{K}) \right)& (\delta_{\vb{k},\vb{k}_i + \vb{a} 
+	\delta} - \delta_{\vb{k},\vb{k}_i} )\nonumber\\
+&=& \sum_{\vb{a}} w( \vb{k} - \vb{a}\delta, \vb{a}\delta)
+\left(1 + n_{\vb{k}}(\vb{K}) \right) &\left(\sum_i \delta_{\vb{k},\vb{k}_i + 
+	\vb{a} \delta}\right) \nonumber\\
+&& & \  -  \sum_{\vb{a}} w(\vb{k}, \vb{a} \delta) \left(1 + n_{\vb{k}+ \vb{a}\delta}(\vb{K}) 
+\right) \left(\sum_i \delta_{\vb{k},\vb{k}_i} \right)\nonumber\\
+&=& \sum_{\vb{a}}  w( \vb{k} - \vb{a}\delta, \vb{a}\delta)
+\left(1 + n_{\vb{k}}(\vb{K}) \right)& n_{\vb{k} - \vb{a} \delta}(\vb{K}) - w(\vb{k}, \vb{a} \delta) \left(1 + n_{\vb{k}+ \vb{a}\delta}(\vb{K}) 
+\right) n_{\vb{k}}(\vb{K})\label{deln}
+\end{alignat}
+%Note that for $U=0$ (no energy exchange) the factor of stimulated emission disappears: $U=0 \implies$
+%\[
+%L_\delta n_{\vb{k}} (\vb{K}) =
+%\sum_{\vb{a}}  B( \vb{k} + \vb{a}\delta/2)[
+%n_{\vb{k} + \vb{a} \delta}(\vb{K}) 
+%-   n_{\vb{k}}(\vb{K})]  \]  
+
+Continuing with \eqref{deln} and writing $n(t,\vb{k}) = \left\langle n_{\vb{k}}(\vb{K}(t)) \right\rangle$ for the expectation value over the process at time $t$, we thus get
+\begin{align*}
+{\pdv{n}{t}} (t,\vb{k}) = \sum_{\vb{a}}&  w(\vb{k} - \vb{a} \delta, \vb{a}\delta) 
+\left\langle (1 + n_{\vb{k}} ) n_{\vb{k} - \vb{a}\delta} \right\rangle 
+-  w(\vb{k}, \vb{a}\delta) \left\langle (1 + n_{\vb{k}+\vb{a} \delta} ) 
+n_{\vb{k}} \right\rangle
+\end{align*}
+Assuming that the correlations between occupations factorize, we end up with
+\begin{align}
+{\pdv{n}{t} }(t,\vb{k}) 
+= \sum_{\vb{a}}  w(\vb{k} - \vb{a} \delta, \vb{a}\delta) (1 
++ n(t,&\vb{k})) n(t,\vb{k} - \vb{a}\delta) \nonumber \\
+&-  w(\vb{k}, \vb{a}\delta) (1 + n(t,\vb{k}+\vb{a} \delta)) n(t,\vb{k})
+\end{align}
+which has the form of a nonlinear Master equation.  We already note the resemblance with the Kompaneets equation \eqref{ke} but that can be made more complete by taking the diffusion limit.
+
+\subsection{Diffusion limit}
+
+
+The process above can be considered in the limit $\delta\downarrow 0$ while rescaling time.
+To obtain the limiting diffusion process we calculate the limiting backward generator $L = L_\delta/\delta^2$ on permutation-invariant functions $F$ which are piecewise constant on cubes of side $2\delta$ around $\vb{K}\in (\delta\bbZ)^{3N}$.   We remember from \eqref{ld} that
+\begin{eqnarray}
+L_\delta F(\vb{K}) = \sum_{i,a} D\left( \vb{k}_i + \frac{\vb{a} \delta}{2} \right) 
+\exp\left\{-\frac{\beta}{2}\left(U(\vb{k}_i + \vb{a} \delta) - 
+U(\vb{k}_i)\right)\right\}&&(1+ n_{\vb{k}_i+ \vb{a}\delta}(\vb{K}))\nonumber\\
+&&\left(F(\vb{K}') 
+-F(\vb{K})\right)
+\end{eqnarray}
+For expanding that to order $\delta^2$ we must take into account
+\begin{align*}
+&w(\vb{k},\vb{a}\delta) = \big(D(\vb{k}) + \frac{ \delta}{2}\vb{a}\cdot 
+\nabla_{\vb{k}} D (\vb{k})\big)\;\big(1-\frac{\beta\delta}{2}\vb{a}\cdot 
+\nabla_{\vb{k}} U (\vb{k})\big) \\
+&n_{\vb{k+a\delta}} = n_{\vb{k}} +  \delta\,\vb{a}\cdot \nabla_{\vb{k}} n
+%\sum_j (\delta_{\vb{k}+\vb{a}\delta,\vb{k}_j}-\delta_{\vb{k},\vb{k}_j})
+\end{align*}
+Whence, to nonvanishing order,
+\begin{align}
+\frac 1{\delta^2}L_\delta F(\vb{K}) = \sum_{i}D(\vb{k}_i)(1+ 
+n_{\vb{k}_i}(\vb{K}))\Delta_{\vb{k}_i}&F(\vb{K})+\sum_{i,\vb{a}}\bigg{\{}\left(\frac{1}{2}\vb{a}\cdot \nabla_{\vb{k}} D (\vb{k}_i) 
+-\frac{\beta}{2}D(\vb{k}_i)\vb{a}\cdot \nabla_{\vb{k}} U 
+(\vb{k}_i)\right)\nonumber\\
+&(1+n_{\vb{k}_i}(\vb{K}))\
++ D(\vb{k}_i) \,\vb{a}\cdot 
+\nabla_{\vb{k}} n\bigg{\}}\vb{a}\cdot\nabla_{\vb{k}_i}F(\vb{K})\label{2o}
+\end{align}
+We should remember that $F$ depends on $\vb{K}$ only through the occupations $n_{\vb{k}}(\vb{K})$.
+Moreover we are interested in the dynamics of a tagged photon, which amounts to 
+a single particle description.  We take therefore functions $F(\vb{K}) = 
+\int\dd^3\vb{k} f(\vb{k}) n_{\vb{k}}(\vb{K})$ for the field $n_{\vb{k}}(\vb{K}) 
+= \sum_j \delta(\vb{k}_j-\vb{k}) $,
+\begin{equation}\label{sumj}
+F(\vb{K}) =
+\sum_j \int\dd^3\vb{k} f(\vb{k}) \, \delta(\vb{k_j}-\vb{k}) = \sum_j f({\vb{k}_j})
+\end{equation}
+In that case, expression \eqref{2o} can be rewritten line per line and per wave 
+vector by using $\frac 1{\delta^2}L_\delta F(\vb{K}) = \int \dd^3\vb{k} 
+\,n(\vb{k})\,{\cal L}f(\vb{k})$ for 
+\begin{align}
+{\cal L}f(\vb{k})= D(\vb{k})(1+ n_{\vb{k}})&\Delta_{\vb{k}}f(\vb{k}) +\sum_{\vb{a}} \bigg{\{}\frac{1}{2}\vb{a}\cdot \nabla_{\vb{k}} D (\vb{k})(1+n_{\vb{k}})\nonumber\\
+&-\frac{\beta}{2}D(\vb{k})\vb{a}\cdot \nabla_{\vb{k}} U (\vb{k})(1+n_{\vb{k}})+ D(\vb{k}) \,\;\vb{a}\cdot \nabla_{\vb{k}} n\bigg{\}}\quad\vb{a}\cdot\nabla_{\vb{k}}f(\vb{k})\label{4o}
+\end{align}
+ Note now that
+\begin{align}
+\int\dd^3\vb{k}\,n_{\vb{k}}\,\bigg\{ D(\vb{k})\,n_{\vb{k}}\Delta_{\vb{k}}&f(\vb{k})\nonumber\\
+&+ \sum_a\left[\frac{1}{2}\vb{a}\cdot \nabla_{\vb{k}} D (\vb{k})\,n_{\vb{k}}
++ D(\vb{k}) \,\;\vb{a}\cdot \nabla_{\vb{k}} n\right]\quad\vb{a}\cdot\nabla_{\vb{k}}f(\vb{k})\bigg\}=0
+\end{align}
+by partial integration.  We thus get
+\begin{align}
+\int\dd^3\vb{k}\,n(\vb{k})\,{\cal L}f(\vb{k})= &D(\vb{k})\,\Delta_{\vb{k}}f(\vb{k})\nonumber\\
+&+\sum_a \left\{\frac{1}{2}\vb{a}\cdot \nabla_{\vb{k}} D (\vb{k})
+-\frac{\beta}{2}D(\vb{k})\vb{a}\cdot \nabla_{\vb{k}} U (\vb{k})(1+n_{\vb{k}})\right\}\;\vb{a}\cdot\nabla_{\vb{k}}f(\vb{k})\label{5o}
+\end{align}
+Remember that we interpret $n_{\vb{k}}$ as a given continuum field.  As a consequence, the limiting diffusion of the tagged photon is given by
+ \begin{equation} \label{3dsde}
+\dot{\mbf{k}}_t = \nabla_{\vb{k}}{D}({\mbf{k}_t}) -\beta D(\vb{k}_t)\,\nabla_{\vb{k}} U (\vb{k}_t)(1+n_{\vb{k}_t}) + \sqrt{2D(\mbf{k}_t)}\,\mbf{\Xi}_t	
+\end{equation}
+where $\mbf{\Xi}_t$ is a standard white noise on $\bbR^3$ and It\^o-convention must be applied.
+
+	\subsection{Tagged photon nonlinear Markov process}
+We get to our main result.
+Assume that the process is isotropic to suppose that $D$ and $U$ only 
+depend on the radial component $x$ with ${\mbf{k}} = x/(\beta\hbar 
+c)\mbf{\hat{x}}$.  We keep referring to $x = \beta \hbar \omega$ as the dimensionless frequency.\\
+We apply Itô's lemma to \eqref{3dsde}, with calculation in Appendix \ref{itoder}), to end up with
+\begin{equation} \label{kp-ito2}
+\dot x	=  2\frac{{D}(x)}{x}+ \partial_xD(x) - \beta {D}(x) \partial_x U(x)(1+n(t,x))  + \sqrt{2{D}(x)}\, \xi_t
+\end{equation}
+where $\xi_t$ is again standard white noise.  That It\^o-stochastic process \eqref{kp-ito2} is what we call the Kompaneets process, and its construction and simulation (in the next Section) is our first main result.  It is the (nonlinear) Langevin dynamics associated to the Kompaneets equation \eqref{kp} in the case where 
+\begin{equation}\label{uu}
+\beta U(x) = x,\qquad D(x) = x^2
+\end{equation}
+Note the dependence on the photon occupation field $n(t,x)$.  What we have here is a mean-field nonlinear Markov process for the tagged photon, 
+where the field $n(t,x)$  represents the empirical occupations \cite{kolokoltsov, frank}; see also \cite{funaki}.  It 
+realizes the Kompaneets equation  as a nonlinear Fokker-Planck equation.  That 
+follows the spirit of the McKean-Vlasov equation \cite{mckean}, where the mean 
+field interaction leads to the nonlinearity in a multi-particle limit.  Our 
+derivation has been ``theoretical'' but confirmation of the soundness of our 
+approach is obtained in the next section.  One difficulty we ignore here is the 
+singularity in  the modulus of the vector ${\mbf{k}}$.  It also implies that the 
+white noise can lead to negative values of $x$.  Yet, in the simulations when starting with a particle number less than or equal to the value 
+corresponding to the Planck distribution ($Z\leq 1$), even without an explicit 
+boundary condition, there is no probability flux through the origin, that is, no negative frequencies are observed.  For a sufficiently small time step in the simulation, no particle ever reaches $x=0$.
+
+
+\section{Bremsstrahlung and double Compton scattering}\label{rbdc}
+ 
+Double Compton scattering and  Bremsstrahlung are additional radiation processes, physically similar in controlling 
+emission and absorption of photons. Since the number of photons is not conserved in this case, we can regard them as mechanisms to control the photon number density. \\
+Both can be implemented as stochastic processes but we skip the derivations.  We refer to \cite{emrmodel, longair}, where the analysis  leads to the master equation that was first obtained by Kompaneets \cite{kompa}.\\
+
+The Bremsstrahlung process resembles a chemical reaction, where photons are produced by electrons as they are deflected by nuclei. Kompaneets was the first to give the exact expression of the Bremsstrahlung kinetic equation (Eq. (18) in \cite{kompa}). Here, we use that expression to write in a slightly different manner
+\begin{equation}
+\left(\frac{\partial n}{\partial y}\right)_\text{B} = \frac{\tau_C}{\tau_B(x)} 
+\left( \frac{1}{e^x-1} - n(y,x)(y,x)\right)
+\end{equation}
+where we have used $\tau_C$, the characteristic Compton timescale of 
+\eqref{shift}, to make the comparison with the frequency dependent timescale 
+$\tau_B(x)$ of  Bremsstrahlung. Notice how there is no diffusion or drift, 
+Bremsstrahlung instead provides a pointwise convergence of the occupation 
+numbers towards the Bose-Einstein distribution.\\
+Assuming for a moment that all nuclei are single protons, which means their 
+density matches that of the electrons, we have
+\begin{equation}\label{brem}
+\frac{\tau_C}{\tau_B(x)} = \frac{9\alpha n_e}{8} \sqrt{\frac{\pi}{2} 
+\left(\frac{m_e c^2}{k_B T}\right)^3} \left( \frac{\hbar c}{k_B T}\right)^3 
+\frac{\sinh(x/2) K_0(x/2)}{x^3}
+\end{equation}
+where $\alpha$ is the fine structure constant and $K_0$ is a modified Bessel 
+function of the second kind \cite{macdon} (adapted to our notation from \cite{kompa}). Given 
+the $x^{-3}$ dependence of the timescale, we see that Bremsstrahlung dominates 
+the very lowest frequencies, but is negligible everywhere else.\\
+
+
+Similarly, we can treat the double Compton mechanism, whose radiative nature makes the treatment parallel to Bremsstrahlung. We choose to not give the detailed expression for the timescale, but we follow \cite{lightman} to note that double Compton scattering is faster in producing the Planck spectrum. In fact, both have nearly the same frequency dependence, but Bremsstrahlung is more relevant for rarefied photon gases and matter-dominated plasmas. Conversely, double Compton scattering becomes more important at higher electron-temperatures and for radiation-dominated plasmas \cite{lightman}. \\
+
+ Nevertheless, in our simulation of the Kompaneets process, we do not need the detailed implementation of the 
+processes.  Using the fact that both radiative mechanisms have 
+``nearly'' the same frequency dependence, we control in the 
+simulations the number of photons by hand.   Both processes completely 
+dominate the lower frequency ranges, but are negligible compared to Compton 
+scattering for higher frequencies. In the simulations of the Kompaneets process we will simply add or remove particles under a 
+certain cutoff such that their occupation numbers always exactly correspond to 
+the Bose-Einstein distribution for a given volume and temperature.
+ 
+\section{Simulation of the Kompaneets process}\label{simul}
+Suppose the following It\^o stochastic differential equation for $X_t\in \bbR$,
+\begin{equation}\label{genp}
+	\dot {X}_t = B(X_t)  +  \sqrt{2D(X_t)}\;\xi_t,\qquad t\geq 0
+\end{equation}
+with standard white noise $\xi_t$. Then, the Euler-Maruyama algorithm reads
+\begin{equation*}\label{em}
+X_{t_{i+1}}=X_{t_i} + B(X_{t_i})\Delta t + \sqrt{2D(X_{t_i})} \Delta W_i + 
+O(\Delta t^{3/2})
+\end{equation*}
+in which $\Delta t = t_{i+1} - t_i$ is the timestep and $\Delta W_i$ is a 
+Gaussian random variable with mean $0$ and variance $\Delta t$ at iteration 
+$i$.\\
+If $B = B(X_t,\rho_t)$ depends also on the distribution function $\rho_t$  at 
+time $t$, we need to consider an ensemble of processes. Here we take $N_E$ 
+independent Kompaneets processes, and approximate the probability density 
+$\rho_t$ with the empirical density $\rho_t^E$, which follows from a histogram 
+of the frequencies of the ensemble. We expect in the limit $\rho_t^E \to 
+\rho_t$ (large $N_E$) that the implementation of stimulated emission is exact. 
+\textbf{why?  not immediately taking the occupations as empirical  }. 
+Furthermore, a initial value for $Z$ is chosen, which can be interpreted as the 
+ratio of the total number of photons to the number of photons which would be 
+present in the same volume if the occupation number were to follow a 
+Bose-Einstein distribution. We can then at any point in time invert 
+\eqref{eq:spd} yielding the empirical occupation number
+\begin{equation*}
+n_t^E(x) = 2\zeta(3) Z \frac{\rho_t^E(x)}{x^2}
+\end{equation*}
+We simulate an ensemble of around $N_E\simeq 10^5$ particles, fixing the total 
+time $\simeq 100$ and using a timestep of $\dd t = 10^{-4}$. The timestep was 
+chosen to be low enough that lowering it did not appreciably change the 
+simulation. The histograms are binned with a step of $\dd x = 0.05$ in 
+frequency domain. As most of the distribution is concentrated between 0 and 10, 
+this implies a bin will have on average about \num{500} particles.
+
+
+%For the initial condition, the particles of the ensemble are randomly 
+%distributed over the frequency range according to a ``hot'' Planck 
+%distribution \eqref{hott}, with a temperature twice that of the effective electron 
+%temperature. 
+%Furthermore, we assume for now that the initial photon spatial 
+%density is exactly that of the Planck distribution corresponding to the same 
+%temperature, implying $Z$ is initially 1.
+The Euler-Maruyama algorithm for each particle reads at each iteration $i$
+\begin{equation}\label{emalg}
+x_{t_{i+1}}=x_{t_i} + \left(4x_{t_i} - x^2_{t_i}\left(1+n^E_{t_i}(x_{t_i})\right)\right)\dd t + x_{t_i}\sqrt{2\dd t} 
+u_i
+\end{equation}
+where the previous variable $y$ is identified with $t$ for simplicity. The above equation corresponds to the choices 
+\begin{align}
+	&B(x,\rho_t) =4x - x^2(1+n_t(x))
+	\label{drift}\\ 
+	&D(x) =x^2 \label{diffusion}
+\end{align}
+for drift and diffusion in \eqref{genp}, respectively (equivalent of \eqref{uu}).  Note here that at low frequencies, $x\ll 1$, there is almost no activity when also $x^2 n_t(x)\ll 1$. 
+At each iteration $i$, we update the frequency according to \eqref{emalg}. Note 
+that we check at each step the histogram at the frequency obtained in the 
+previous time step. Then, after the Euler-Maruyama step, the histogram is 
+updated accordingly.
+It is also important to mention here that we need to specify the initial occupation field $n_0(x)$, which determines the probability density $\rho_0(x)$ from which the initial $x_0$ is drawn.  The step from $n_0$ to $\rho_0$ requires specifying $Z$ in \eqref{eq:spd}.  In other words, there can be two different evolutions even when the initial $\rho_0$ are identical, if there is a different $Z$.\\
+Furthermore, we perform an {\it ad hoc} implementation of Bremsstrahlung and double Compton scattering, by 
+simply clamping the occupation numbers of the lowest frequencies to the Planck 
+distribution, as explained in Section \ref{rbdc}. Specifically, we look at the 
+lowest 1\% of the frequency range, which in our case consists of the lowest two 
+bins, and compare the empirical occupation number with value expected from the 
+Planck distribution. In case there is an excess, the right amount of particles 
+are randomly chosen and removed from the simulation. On the other hand, if 
+there is a deficit, particles are added, randomly distributed over the bin, to 
+make up the difference.\\ 
+Notice that as particles are being added to or removed from the ensemble, the 
+value of $Z$ will change, i.e, it becomes time-dependent $Z=Z_t$.\\
+
+
+Fig.~\ref{fig:spd-kompaneets} shows the results of our implementation for convergence to the Planck law. The dashed line shows the expected theoretical result, given by the stationary 
+solution of the Kompaneets equation \eqref{ke} ($Z=1$ in \eqref{kp}).
+
+To check how much the obtained histogram deviates from the theoretical 
+prediction, we computed the excess $\rho_\text{NUM}(x) - \rho_\text{BE}(x)$, where 
+$\rho_\text{NUM}(x)$ is the histogram found by letting the process evolve until time 
+$=10$ or $10^5$ timesteps.  Our simulations show that, in the worst case, the 
+results have a precision of order \num{e-3}. This happens around $x=0$. At 
+larger frequencies good agreement is found with our result and the theoretical 
+prediction.
+
+\begin{figure}
+	\includegraphics[width=0.8\textwidth]{{spd N-1e6.00 dx-0.05 t-3 dt-0.0001 ic-hotplanck}.pdf}
+	\caption{The spectral probability density $\rho_t$ in function of the dimensionless frequency $x$ for the Kompaneets process, with plots for $t=1,2,3$ going from right to left. The dotted line indicates the initial ``hot Planck'' condition corresponding to the occupation field $n_0(x) = n_\text{BE}(x/2)/8$ for which $Z=1$. Notice the fast thermalization to a Wien-like tail, followed by a slow final thermalization at lower frequencies ($x<6$).}
+	\label{fig:spd-kompaneets}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=0.8\textwidth]{{spd N-1e6.00 dx-0.05 t-3 dt-0.0001 ic-hotplanck Z-0.1000}.pdf}
+	\caption{Similar to Fig.~\ref{fig:spd-kompaneets}, but with $Z=0.1$, i.e.,  with the initial occupation field $n_0(x) = n_\text{BE}(x/2)/8$. There is a marked difference (going like $x^2$ at low frequency) with the dashed line representing the Planck density, as there is particle conservation. There is only the fast thermalization to a(n almost) Wien density because of the absence of low-frequency activity,  $x^2 n_t(x)\ll 1$ at low $x$.}
+	\label{fig:spd-boltzmann}
+\end{figure}
+
+If we lower $Z$ to, say, $0.1$, the frequency spectral density instead 
+converges to something closely resembling the Wien distribution $\simeq 
+x^2e^{-x}$, as verified in Fig.~\ref{fig:spd-boltzmann}. This corresponds to 
+\eqref{cc} with $\mu\simeq 2.13$. There is no further convergence to the Planck 
+law here because there is particle conservation and because of the absence of 
+low-frequency drift or diffusion for $x\ll 1$, making both \eqref{drift} and 
+\eqref{diffusion} negligible since  $n_t(x)$ is of order 1 there.\\
+
+We conclude from these simulations that the constructed process \eqref{kp-ito2}
+can be reliably simulated and indeed, for its deterministic behavior reproduces 
+the time-evolution \eqref{kp}, and hence the Kompaneets equation \eqref{ke}.  
+We have given examples of various initial conditions and we conclude that the 
+Kompaneets process shows two different time-scales: one is a fast relaxation to 
+the Planck shape, better at high frequencies, after which a slower relaxation 
+occurs shifting the distribution at the correct temperature.  Such a fast 
+prethermalization followed by a slower adjustment is not uncommon in kinetic 
+equations; it already happens in the classical Boltzmann equation where a local 
+Maxwellian is rapidly established (reference?). \\
+Finally, we note that when taking $Z>1$, a condensate is expected to form 
+\cite{levermore}.  Fig.~\ref{fig:spd-Zcondensate} shows that condensate appearing for the simulated spectral density for $Z=1.1$. In that case, we also find particles 
+going out of bounds at $x=0$, leading to unphysical negative energies. However, this is 
+remedied by non-particle-conserving processes, which absorb the condensate at 
+the origin.
+
+\begin{figure}
+	\includegraphics[width=0.8\textwidth]{{spd N-1e5.04 dx-0.05 t-100 dt-0.0001 ic-hotplanck Z-1.1000}.pdf}
+	\caption{"Stationary" spectral density for $Z=1.1$. The dashed line is the 
+	Planck density. Notice the formation of a condensate around the origin. In 
+	that case, there is also the appearance of non-physical negative 
+	frequencies. The condensate and the non-physical behavior are remedied by 
+	considering radiative processes like Bremsstrahlung.}
+	\label{fig:spd-Zcondensate}
+\end{figure}
+
+\section{Extension of the Kompaneets process}\label{extk-sec}
+
+It is well known that the Boltzmann equation, the traditional point of departure to obtain \eqref{ke}, may wash out certain nonequilibrium degrees of freedom of the electron bath: any isotropic distribution \cite{barbosa,brown,brown2, peebles} for the bath which respects a further constraint \cite{paper} yields the Kompaneets equation with a suitable redefinition of the temperature.\\
+As proposed in \cite{paper}, the Kompaneets equation can be extended to include more general diffusivities and a possible driving.   In the present section we directly interfere with the Kompaneets process to add nonequilibrium features to the photon process, leaving aside for a moment the specific origin.  There will in fact be two main directions of nonequilibrium, effectively introduced in a generalized Kompaneets equation.\\
+One is to change the drift, where we imagine a driving that depends on the frequency instead of a constant ``force" as in the Kompaneets process.  Obviously, we do not assume photon-photon scattering, which is extremely weak in vacuum \cite{silveira}. The drift can however be realized by employing strong light-matter coupling, resulting in strong effective energy exchanges (and dissipation) on single-photon level \cite{roy2}.  In other words, we change \eqref{uu}  (or \eqref{drift}) and replace the constant $U'$ with a frequency dependent force.\\
+A second  change is to add an extra diffusion (changing \eqref{diffusion}) where the diffusion constant no longer has the features of Compton scattering, but gets modified at low frequencies. One should think here of the analogue of creating suprathermal tails in electron velocity distributions by their Rutherford scattering against turbulent fields \cite{banerjee}.  From the Coulomb interaction, high energy electrons are least scattered.  Similarly, low-frequency photons are least affected by Compton scattering and that allows them to become abundant by nonequilibrium effects, breaking detailed balance with respect to the Planck law.\\
+
+On the level of the Kompaneets equation, the nonequilibrium extension is taken to be
+\begin{equation}\label{extk}
+\frac{\partial n}{\partial y}=\frac{1}{x^2}\frac{\partial}{\partial x} x^4 \left\{  \frac{\partial n}{\partial x} (y,x) +  (1+bx^k)[1+n(y,x)]n(y,x)\right\} + \frac{c}{x^2}\frac{\partial}{\partial x} x \left\{  \frac{\partial n}{\partial x} (y,x)\right\}
+\end{equation}
+parametrized by positive constants $b,c$ and $k$.
+As before, we have changed to dimensionless variables.  That makes a special case of a more general extended Kompaneets equation
+\begin{equation}\label{aeke}
+	x^2 \frac{\partial n}{\partial y}(y,x) = \frac{\partial}{\partial x} x^2 D(x)\left\{  \frac{\partial n}{\partial x} (y,x) +  g(x)[1+n(y,x)]n(y,x)\right\}
+\end{equation}
+for
+ \begin{equation}\label{ext-dri}
+D(x)= x^2 + \frac c{x},\qquad  g(x)=\frac{1 + bx^k}{1+cx^{-3}}
+\end{equation}
+Obviously, the case $c=b=0$ recovers the standard Kompaneets equation.  By making $c\neq 0$ an extra diffusion has been added in frequency space where the diffusivity decays with frequency, certainly unlike Compton-type processes.  That extra term (the last term in \eqref{extk}) was also introduced in \cite{arca}, motivated by hints of low-frequency modifications in the Planck law, as observed from ARCADE data \cite{arcade1,arcade2} and EDGES experiment \cite{edges}. The idea is to drastically increase the activity of low-frequency photons, which are otherwise largely untouched in Compton scattering.  Or, in other words, to decrease the activity of high-energy photons.  The latter was motivated by a mechanism similar to stochastic turbulence.  Obviously, the dependence $c/x$ should not be taken literally all the way to $x\downarrow 0$ but an appropriate cut-off will be installed in the simulation (in the next section).\\
+The change in the drift where to the energy function $U(\omega) = \hbar\omega$ (for the standard Kompaneets process) an extra potential $\sim \omega^{k+1}$ is added, is motivated by the search for higher order drivings where the force  may depend on the frequency. \\
+
+
+ A rearrangement is in order to rewrite \eqref{aeke} in terms of the spectral density $\rho(y,x)$, defined in the exact same way as \eqref{eq:spd}, yielding
+\begin{equation}\label{sc}
+	\frac{\partial}{\partial y} \rho(y,x) = - \frac{\partial}{\partial x} \left[ \left(2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(y,x)\right)\right)\rho(y,x)\right] + \frac{\partial^2}{\partial x^2}[D(x)\rho(y,x)]
+\end{equation} 
+Observe that \eqref{aeke} remains a continuity equation, photon-number preserving just like Kompaneets. It means that $Z_y$ in \eqref{eq:spd} for the density of the nonequilibrium extension \eqref{aeke} is also a time-independent prefactor, depending only on the system temperature and the (constant) number of photons per volume.\\
+Interpreting similarly as before the above equation as a Fokker-Planck type 
+equation and identifying for simplicity $y\to t$ again, we find the associated Langevin equation in the Itô-interpretation
+\begin{equation}\label{ekp}
+	\dot{x} = 2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(t,x)\right) + \sqrt{2D(x)}\, \xi_t
+\end{equation}
+where $\xi_t$ is a standard white noise as before. According to \eqref{genp}, we have in this case
+\begin{align}
+B(x,\rho_t) = 2\frac{D(x)}{x} + \partial_xD(x) - 
+D(x)g(x)\left(1+n(y,x)\right) 
+\label{edrift}
+\end{align}
+with drift and diffusion given by expression \eqref{ext-dri}.
+
+To be compared with \eqref{kp-ito2}, the above equation defines the \textit{extended Kompaneets process} and makes our second main result: it is the fluctuating single-photon dynamics that takes into account physically interesting nonequilibrium features.  Note that a stationary solution to \eqref{extk} can be found, of the form
+\begin{equation}\label{eq:stationary}
+n_\text{st}(x;b,c;k) = \frac{1}{\exp\left(\int_{x_0}^x \dd s \, \frac{1+bs^k}{1+cs^{-3}}\right) - 1} 
+\end{equation}
+where $x_0$ is the cutoff for the extra diffusion, as we expect for a realistic situation. That solution is only valid for $x>x_0$. For $x\leq x_0$ the details of the cutoff should enter in the exponent as to make $n_\text{st}$ well defined. When adding radiative processes to \eqref{sc} at low frequencies such as Bremsstrahlung (see Section \ref{rbdc}), the stationary solution may change.
+
+
+%
+%A stationary solution of  equation \eqref{extk} is given when the current vanishes, \textit{i.e.},
+%\begin{equation}
+%\left( 1 + cx^{-3}\right)\frac{\dd n_{st}}{\dd x}(x) + \left(1+bx^k\right)(1+n_{st}(x))n_{st}(x)=0
+%\end{equation}
+%we can solve this equation using separation of variables, yielding 
+%
+%This stationary solution can exhibit an interesting behavior, which is the crossing with the Planck spectrum as it can be observed from our simulations for some values of $c,b$ and $k$. The crossing happens for values of parameters and $x$ in which the Bose-Einstein occupation number coincides with the stationary one, that is
+%
+%\begin{align}
+%	&\frac{1}{\exp\left(\int_{x_0}^{x^*} \dd s \, \frac{1+bs^k}{1+cs^{-3}}\right) - 1}  = \frac{1}{\exp(x^*) - 1}\nonumber\\
+%	\implies& x^* = \int_{x_0}^{x^*} \dd s \, \frac{1+bs^k}{1+cs^{-3}}
+%\end{align}
+%for a crossing at $x^*$. We can numerically solve above equation by considering specific values of parameters $c,b,k$ and cut-off $x_0$. 
+%
+%\textbf{to be analyzed and complemented if necessary}
+
+
+
+
+\section{Simulation of the extended Kompaneets process}\label{simex}
+
+Simulations of these extended processes are straightforward, we repeat the 
+algorithm of Section \ref{simul}, but with different functions $B$ and $D$.
+
+\subsection{Adding low-frequency diffusion}
+
+We take $c = 0.1$, leaving $b=0$. A spurious difficulty arises for nonzero $c$, as the given diffusion and drift 
+coefficients diverge near the origin. To remedy this, we implement a cutoff in the simulation,
+where the extra diffusion term is taken to go linearly to zero as $x$ goes 
+below $0.1$ (i.e. 1\% of the relevant frequency range), as it is nonphysical 
+for the activity to remain the same all the way to zero frequency anyway.
+
+Simulating with initially \num{2e5} particles, Fig~\ref{fig:spd-c} shows the 
+resulting frequency histogram of the simulation for a total time of $T=5$ with 
+the black solid line corresponding to (almost) stationarity. Deviations from 
+the dashed Planckian distribution are evident, with an abundance of 
+low-frequency photons, but keeping the Planck-shape at larger frequency.  
+Together with the extra diffusivity, we implement reactive mechanisms. That 
+makes the behavior below the cutoff frequency $x_0$ similar as if we were to 
+turn off the extra diffusive term, i.e, to make $c=0$ for $x<x_0$. With that in 
+mind we define\\
+\[
+h(x) = \int_0^x \dd x' \begin{cases}
+\frac{1}{1+c / x'^3} & \text{for $x'>x_0$} \\
+1 & \text{for $x' < x_0$}
+\end{cases}
+\]
+where the cutoff in our case is taken to be $x_0 = 0.1 = 2 \dd x$. Then, the stationary distribution appears very well described as
+\begin{equation}\label{supsim}
+ n_\text{st}(x) = \frac{1}{\exp(h(x)) - 1} 
+ \end{equation}
+as is tested in Fig.~\ref{fig:spd-c}.  That theoretical density would 
+correspond to $Z=1.82$, which is however not the value $Z\approx1.73$ that is 
+found in the simulation. This is not surprising since the addition of reactive 
+processes should make the stationary distribution slightly different at low 
+frequencies.
+\begin{figure}
+	\includegraphics[width=0.8\linewidth]{{spd N-1e5.70 dx-0.05 t-100 dt-0.0001 ic-planck c-0.1000 brems}.pdf}
+	\caption{Solid line corresponds to the simulation of \eqref{ekp} for 
+	$c=0.10, b=0$.  The dashed line is the Planck law. The dotted line depicts 
+	the supposed stationary distribution \eqref{supsim}
+	}\label{fig:spd-c}
+\end{figure}
+
+\subsection{Adding frequency-dependent drift}
+
+Taking now a non-zero driving in \eqref{ekp}, we set $b=0.1$ and $k=0.4$, keeping $c=0$.  A marked deviation from the Planck law becomes visible.
+It is also interesting to note a remarkable feature for $b\neq 0$, which is the formation of a condensate around $x=0$. However, the low-frequency reaction mechanism (either double Compton or Bremssthralung) is able to absorb the condensate. In fact, the appearance of that condensate can be explained by looking at the stochastic equation \eqref{ekp}, where the extra drift coming from $g(x)$ contributes in the stimulated emission term, making shifts towards negatives values of frequency more frequent.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{{spd N-1e4.86 dx-0.05 t-100 dt-0.001 ic-planck b-0.1000 k-0.4000 Z-0.7300 brems}.pdf}
+	\caption{Stationary density profile when adding the frequency-dependent 
+	drift with $b=0.1$ and $k=0.4$, keeping $c=0$ in \eqref{ekp}.  Again a 
+	deviation is seen from the Planck law (dashed line), with the simulation 
+	almost completely overlapping with the stationary solution.}
+	\label{fig:spd-b}
+\end{figure}
+
+\section {Conclusions}\label{con}
+
+
+The present paper achieves to construct photon processes in frequency space dominated by Compton scattering.  The stimulated emission produces the nonlinearities.  From the single-photon stochastic process, we enter the realm of time-dependent fluctuation phenomena for photon dynamics.  It implies we can start exploring nonequilibrium photon dynamics, much in the tradition of stochastic dynamics for open particle systems.   We have explored the addition of nonequilibrium drift and diffusion terms which affect mostly the low-frequency part in a modified Planck spectrum. \\
+
+Various applications can be envisaged, subject of future studies, while the present paper sets the mathematical and simulational structure of the photon diffusion process. \textbf{New - complement, change, make it better} Therefore, we defined the Kompaneets process starting from the natural non-linear Markovian process which describes the hoping of photons in reciprocal space. That enables the access of fluctuations via the study of a tagged photon stochastic differential equation in frequency domain \eqref{kp-ito2}. Despite the appearance of nonlinearities, we simulate this process using traditional algorithms for stochastic equations and conclude that relaxation to the equilibrium Planck law can be reliable simulated, as seen in Fig.~\ref{fig:spd-kompaneets}. The nonlinearity due to stimulated emission, which makes a nontrivial aspect, is satisfactorily dealt by considering an ensemble of processes while using histograms to construct the empirical spectral density of photons at each time step. Physical processes such as Bremsstrahlung and double Compton can also be easily included by an \textit{ad hoc} procedure we describe in Section \ref{rbdc}. It means to continuously set, below some cutoff frequency, the density of photons to its corresponding value in the Planck spectrum, under the argument that low-frequency photons rapidly thermalize via reactive mechanisms.
+
+The $Z$ parameter can be tuned as to make the stimulated emission weaker and 
+convergence to a Wien-like spectrum is observed in the simulations; see 
+Fig.~\ref{fig:spd-boltzmann}. In fact, this would correspond to a rarefied 
+photon gas, where stimulated emission is expected to become less important. On 
+the other hand, detailed balance with respect to Planck's law is broken by 
+considering the extension to the Kompaneets equation. There, nonequilibrium 
+drift and diffusion make extra contributions to the standard equation for the 
+single-photon process. The proposed extension \eqref{extk} is parametrized by 
+the parameters $b,c$ and $k$, such that $b=c=0$ corresponds to the standard 
+Kompaneets process \eqref{kp-ito2}. The simulation results, 
+Figs.~\ref{fig:spd-c} and \ref{fig:spd-b}, show that, for the values of 
+parameters considered, modifications to the Planck law that ultimately lead to 
+higher occupancy in the low-frequency part of the spectrum are seen. Those 
+modifications match very well with the theoretical stationary solution 
+\eqref{supsim}, but slight deviations are expected due to the inclusion of 
+reaction mechanisms.
+
+
+ 
+
+
+ 
+\begin{appendix}
+
+\section{It\^o's lemma and the Kompaneets process}\label{itoder}
+
+Suppose we have a (possibly) time-dependent function of the random variable $\vb{X}_t$
+\[f=f(t,\vb{X}_t) \]
+then, $f$ itself is a random variable and, moreover, if $\vb{X}_t$ follows the stochastic differential equation \begin{equation*}
+	\dot{\vb{X}}_t=\vb{B}(\vb{X}_t) + \vb{Q}_t(\vb{X}_t)\vb{\Xi}_t
+\end{equation*}
+where $\vb{\Xi}_t$ is a three-dimensional white noise as before.
+
+Itô's lemma \cite{itolemma} states that $f$ satisfies the stochastic differential equation
+\begin{equation}\label{ilem}
+	\dot{f} (t, \vb{X}_t)= \frac{\partial f}{\partial t}+ \left(\nabla_{\vb{X}}f\right)\cdot\vb{B} +\frac{1}{2}\mathrm{Tr}\left[\vb{Q}^T_t\left(H_Xf\right)\vb{Q}_t\right] + \left(\nabla_{\vb{X}}f\right)^T\vb{Q}_t\, \vb{\Xi}_t
+\end{equation}
+where the positive $d\times d$ matrix $\vb{Q}_t$ is such that the diffusion tensor
+\[\vb{D}=\frac{1}{2}\vb{Q}_t\vb{Q}^T_t\]
+and $H_X$ is the Hessian matrix with respect to $\vb{X}_t$. 
+
+
+We use that to show in more detail the derivation of equation \eqref{kp-ito2}, assuming further that Itô's lemma holds when $B$ depends also on the distribution of $\vb{X}_t$.  We begin with the dimensionless version of \eqref{3dsde}, applying Itô's lemma for 
+\[f(\vb{k})=|\vb{k}|\]
+
+In order to simplify notation, we will opt to not differentiate the quantities from their dimensionless counterpart, therefore, it should be noted that all quantities appearing here are dimensionless. In particular, we shall identify the photon energy with its dimensionless version
+\[\beta U (\omega) \to U(x)=x\]
+
+A simple calculation yields
+\begin{align*}
+	&\nabla_{\vb{k}}f =  \frac{\vb{k}}{|\vb{k}|}\\
+	&H_{\vb{k}}f = 
+	\begin{pmatrix}
+		\frac{1}{|\vb{k}|}	-\frac{k_x^2}{|\vb{k}|^3} & & \\
+		&\frac{1}{|\vb{k}|} -\frac{k_y^2}{|\vb{k}|^3}  &\\
+		& & \frac{1}{|\vb{k}|}- \frac{k_z^2}{|\vb{k}|^3}
+	\end{pmatrix}
+\end{align*}
+
+Recall from \eqref{3dsde} that
+\begin{align*}
+	&\vb{B}(\vb{k},n_t) =\nabla_{\vb{k}}D(\vb{k}) - D(\vb{k})\nabla_{\vb{k}}{U}(\vb{k})(1+n_t(\vb{k})) \\
+	&\vb{Q}(\vb{k}) = \sqrt{2D(\vb{k})}\mathbf{I}_{3\times 3}
+\end{align*}
+
+Therefore, we can easily find all terms in Itô's lemma \eqref{ilem}
+\begin{align*}
+	\begin{cases}
+	&\partial_t f=0\\
+	&\left(\nabla_{\vb{X}}f\right)\cdot\vb{B} =\frac{\vb{k}}{|\vb{k}|} \cdot\left(\nabla_{\vb{k}}D(\vb{k}) - D(\vb{k})\nabla_{\vb{k}}{U}(\vb{k})(1+n_t(\vb{k}))\right)\\
+	&\frac{1}{2}\mathrm{Tr}\left[\mbf{Q}^T_t\left(H_Xf\right)\mbf{Q}_t\right] = 2 \frac{D(\vb{k})}{|\vb{k}|}  \\
+	&\left(\pmb{\nabla_X}f\right)^T\mbf{Q}_t  = \sqrt{2D(\vb{k})}\frac{\vb{k}}{|\vb{k}|}  
+	\end{cases}
+\end{align*}
+finally, substitute back in \eqref{ilem}, writing quantities in terms of the dimensionless frequency $\vb{k}=x\, \vb{\hat{x}}$ to find \eqref{kp-ito2}.
+
+\end{appendix}
+
+\bibliography{langevin-kompaneets}
+
+\end{document}
