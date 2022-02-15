@@ -14,54 +14,11 @@
 %\usepackage[normalem]{ulem} % for strikeout text with \sout
 \usepackage{color}
 \usepackage{soul} % Strikeout
-\usepackage[font=small,labelfont=bf,
-justification=RaggedRight,singlelinecheck=false]{caption}
-\usepackage{wrapfig}
-\usepackage{amscd}
+\usepackage[font=small,labelfont=bf,justification=RaggedRight,singlelinecheck=false]{caption}
 \usepackage{hyperref}
 \usepackage{physics}
-\usepackage{subfig}
 \usepackage{siunitx}
-
-%=== TEMPORARY ===
-\usepackage{changes}
-
-
-% THEOREM-LIKE ENVIRONMENTS -----------------------------------------
-
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{assumption}[theorem]{Assumption}
-\newtheorem{condition}[theorem]{Condition}
-\newtheorem{conjecture}[theorem]{Conjecture}
-
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{note}[theorem]{Note}
-\newtheorem{notes}[theorem]{Notes}
-\newtheorem{example}[theorem]{Example}
-
-
-
-% GREEK - 2 letters ------------------------------------------------
-
-\let\al=\alpha %\let\be=\beta
-\let\de=\delta \let\ep=\epsilon
-\let\ve=\varepsilon \let\vp=\varphi \let\ga=\gamma \let\io=\iota
-\let\ka=\kappa \let\la=\lambda \let\om=\omega \let\vr=\varrho
-\let\si=\sigma \let\vs=\varsigma \let\th=\theta \let\vt=\vartheta
-\let\ze=\zeta \let\up=\upsilon
-
-\let\De=\Delta \let\Ga=\chi \let\La=\Lambda \let\Om=\Omega
-\let\Th=\Theta \let\Up=\Upsilon
-
-% \MATHCAL - \ca ----------------------------------------------------
-
+\usepackage{textcomp}
 
 \def\fr{\frac}
 \def\th{\theta}
@@ -355,12 +312,6 @@ justification=RaggedRight,singlelinecheck=false]{caption}
 \def\S{\mathcal S}
 \def\mbf{\mathbf }
 
-\def\dbar{{\mathchar'26\mkern-12mu d}}
-
-\long\def\red#1{{\color{red}#1}}
-\renewcommand\div{\mathop\mathrm{div}}
-
-
 % New definition of square root:
 % it renames \sqrt as \oldsqrt
 \let\oldsqrt\sqrt
@@ -371,17 +322,6 @@ justification=RaggedRight,singlelinecheck=false]{caption}
 	\advance\dimen0-0.2\ht0
 	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
 	{\box0\lower0.4pt\box2}}
-
-\let\a=\alpha %\let\be=\beta
-\let\de=\delta \let\ep=\epsilon
-\let\ve=\varepsilon \let\vp=\varphi \let\ga=\gamma \let\io=\iota
-\let\ka=\kappa  \let\om=\omega \let\vr=\varrho
-\let\si=\sigma \let\vs=\varsigma \let\th=\theta \let\vt=\vartheta
-\let\ze=\zeta \let\up=\upsilon
-\let\be=\beta
-
-\let\De=\Delta \let\Ga=\Gamma \let\La=\Lambda \let\Om=\Omega
-\let\Th=\Theta
 
 
 %===============================================
@@ -404,7 +344,7 @@ justification=RaggedRight,singlelinecheck=false]{caption}
 
 %\tableofcontents
 \section{Introduction}
-Time-dependent and nonequilibrium dynamics of photons are of increasing interest in a wide range of subjects. Quantum electromagnetic fields can be manipulated  to produce photonic lattices (spatial network of coupled photon modes) where time-dependent driving leads to a breaking of time-reversal invariance (synthetic magnetic field) \cite{koch,fang,roushan}.  Same thing for wave guides where the input field may be driven by either a laser or microwave generator, imposing a nonequilibrium boundary condition on the propagating photons \cite{pozar,roy}.  In quantum optomechanical studies photon gases may be enclosed in cavities with time-dependent geometry such as from vibrating walls, \cite{metaphotonics}.    In another domain and since much longer, plasma physics has dealt with the problem of understanding the origin of suprathermal tails \cite{papers} and high-energy cosmic radiation as a result of the scattering of electrons with turbulent electromagnetic fields \cite{fermi, sturrock,brin}.  Finally, in Early Universe cosmology, the dynamical origin of the main features of the cosmic background radiation (CMB) remains of central importance, especially to understand (possible) deviations from homogeneity \cite{backscatter} or from the Planck Law \cite{arcade1,arcade2,edges,arca}.\\
+Time-dependent and nonequilibrium dynamics of photons are of increasing interest in a wide range of subjects. Quantum electromagnetic fields can be manipulated  to produce photonic lattices (spatial network of coupled photon modes) where time-dependent driving leads to a breaking of time-reversal invariance (synthetic magnetic field) \cite{koch,fang,roushan}.  Same thing for wave guides where the input field may be driven by either a laser or microwave generator, imposing a nonequilibrium boundary condition on the propagating photons \cite{pozar,roy}.  In quantum optomechanical studies photon gases may be enclosed in cavities with time-dependent geometry such as from vibrating walls, \cite{metaphotonics}.    In another domain and since much longer, plasma physics has dealt with the problem of understanding the origin of suprathermal tails \cite{supra1} and high-energy cosmic radiation as a result of the scattering of electrons with turbulent electromagnetic fields \cite{fermi, sturrock,brin}.  Finally, in Early Universe cosmology, the dynamical origin of the main features of the cosmic background radiation (CMB) remains of central importance, especially to understand (possible) deviations from homogeneity \cite{backscatter} or from the Planck Law \cite{arcade1,arcade2,edges,arca}.\\
 As understood from the pioneering days of statistical mechanics and in analogy with Brownian motion, we may expect that the studies mentioned above benefit from modeling fluctuations, i.e., to identify the random motion in photon frequency space. For example, considering a mesoscopic level of description, we become able to insert nonequilibrium effects on the single-photon level allowing to discover meaningful modifications of the Planck Law.\\
 
 In the present paper  we derive a (stochastic) diffusion process for a tagged photon, that can be seen as the diffusion limit of a multi-photon hopping dynamics in reciprocal space.  Stimulated emission results in the nonlinearity of the Markov diffusion process.\\ 
@@ -470,13 +410,8 @@ assume isotropy: in function of the dimensionless $x = \hbar \omega / k_B T$, th
 g(x) \dd x = \frac{2V}{(2\pi)^3} \left( \frac{k_B T}{\hbar c} \right)^3 4\pi 
 x^2 \dd x
 \] 
-From here we define the spectral number density, related to the number of photons around a certain energy: 
-\begin{equation}\label{eq:snd}
-u(y,x) = g(x) n(y,x) = V \frac{1}{\pi^2} \left( \frac{k_B T}{\hbar c} \right)^3 
-x^2 n(y,x)
-\end{equation}
-Integrating yields the total number of photons
-\[ N_y = \int_0^\infty \dd{x} u(y,x)
+From here we can integrate the photon occupation number to get the total number of photons
+\[ N_y = \int_0^\infty \dd{x} g(x) n(y,x)
  \]
 That allows to write the spectral probability density
 \begin{equation}\label{eq:spd}
@@ -522,8 +457,7 @@ in which case $Z=8$.  On the other hand, as $Z$ goes to zero, we recover the Wie
 As a final comment we note that the Kompaneets equation is positivity preserving \cite{positivity}. That is important because any solution of the equation will retain its sign, suggesting indeed to interpret this equation as of Fokker-Planck type. 
 
 % Als ik hier een \\ tussenzet compileert het niet op het ITF
-\section{Mesoscopics of Compton scattering:\\ Kompaneets stochastic 
-process}\label{ksp}	
+\section{Mesoscopics of Compton scattering:   Kompaneets stochastic process}\label{ksp}	
 
 When considering a single Compton scattering event, the transition rates are fully determined by the incident electron and photon momenta together with energy-momentum conservation. However, in the presence of repeated scattering, treating the electron as a classical particle and the photon as a boson, the transition rates must account for stimulated emission, \textit{i.e.}, transitions are enhanced if photons are present in the final state. Mathematically, we work on a symmetrized Fock space  \cite{kadanoff}, where transition rates (between incoming  $|\text{i}\rangle$ and final states $|\text{f}\rangle$) have an additional term coming from the matrix element
 \begin{equation}
@@ -553,7 +487,7 @@ n_{\vb{k}}(\vb{K}) = \sum_{i} \delta_{ \vb{k}, \vb{k}_i}
 \]
 (with the Kronecker delta) counts the number of photons at $\vb{k}$.  It realizes the stimulated emission in the process.  The rest of the rates is taken as usual,
 \[
-w(\vb{k},\vb{a}\delta) = D( \vb{k} + \frac{\vb{a} \delta}{2} ) 
+w(\vb{k},\vb{a}\delta) = D\left( \vb{k} + \frac{\vb{a} \delta}{2} \right)
 \exp\left\{-\frac{\beta}{2}\left(U(\vb{k} + \vb{a} \delta) - 
 U(\vb{k})\right)\right\}
 \]
@@ -762,8 +696,6 @@ previous time step. Then, after the Euler-Maruyama step, the histogram is
 updated accordingly.
 It is also important to mention here that we need to specify the initial occupation field $n_0(x)$, which determines the probability density $\rho_0(x)$ from which the initial $x_0$ is drawn.  The step from $n_0$ to $\rho_0$ requires specifying $Z$ in \eqref{eq:spd}.  In other words, there can be two different evolutions even when the initial $\rho_0$ are identical, if there is a different $Z$.\\
 
-
-
 Fig.~\ref{fig:spd-kompaneets} shows the results of our implementation \eqref{kp-ito2} for convergence to the Planck law. The dashed line shows the expected theoretical result, given by the stationary 
 solution of the Kompaneets equation \eqref{ke} ($Z=1$ in \eqref{kp}).
 
@@ -892,14 +824,13 @@ A second  change is to add an extra diffusion (changing \eqref{diffusion}) where
 \end{equation} 
 Observe that \eqref{aeke} remains a continuity equation, photon-number preserving just like Kompaneets. It means that $Z_y$ in \eqref{eq:spd} for the density of the nonequilibrium extension \eqref{aeke} is also a time-independent prefactor, depending only on the environment temperature and the (constant) number of photons per volume.\\
 Interpreting similarly as before the above equation as a Fokker-Planck type 
-equation and identifying for simplicity $y\to t$ again, we find the associated Langevin equation in the Itô-interpretation
+equation, we find the associated Langevin equation in the Itô-interpretation
 \begin{equation}\label{ekp}
-	\dot{x} = 2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(t,x)\right) + \sqrt{2D(x)}\, \xi_t
+	\dot{x} = 2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(y,x)\right) + \sqrt{2D(x)}\, \xi_y
 \end{equation}
-where $\xi_t$ is a standard white noise as before. According to \eqref{genp}, we have in this case
+where $\xi_y$ is a standard white noise as before. According to \eqref{genp}, we have in this case
 \begin{align}
-B(x,\rho_t) = 2\frac{D(x)}{x} + \partial_xD(x) - 
-D(x)g(x)\left(1+n(y,x)\right) 
+B(x,\rho_y) = 2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(y,x)\right) 
 \label{edrift}
 \end{align}
 with drift and diffusion given by expression \eqref{ext-dri}.
@@ -939,20 +870,22 @@ simply clamping the occupation numbers of the lowest frequencies to the Planck
 distribution, as explained in Section \ref{rbdc}. Specifically, we look at the 
 lowest 1\% of the frequency range, which in our case consists of the lowest two 
 bins, and compare the empirical occupation number with value expected from the 
-Planck distribution. In case there is an excess, the right amount of particles 
+Planck distribution. In case there is an excess, the surplus amount of particles 
 are randomly chosen and removed from the simulation. On the other hand, if 
 there is a deficit, particles are added, randomly distributed over the bin, to 
 make up the difference.\\ 
 Notice that as particles are being added to or removed from the ensemble, the 
-value of $Z$ will change, i.e, it becomes time-dependent $Z=Z_t$.
+value of $Z$ will change, i.e, it becomes time-dependent $Z=Z_y$.
 
 \subsection{Adding low-frequency diffusion}
 
-We first take $c = 0.1$, leaving $b=0$. A spurious difficulty arises for nonzero $c$, as the given diffusion and drift 
-coefficients diverge near the origin. To remedy this, we implement a cutoff in the simulation,
-where the extra diffusion term is taken to go linearly to zero as $x$ goes 
-below $0.1$ (i.e. 1\% of the relevant frequency range), as it is nonphysical 
-for the activity to remain the same all the way to zero frequency anyway.
+We first take $c = 0.1$, leaving $b=0$. A spurious difficulty arises for 
+nonzero $c$, as the given diffusion and drift coefficients diverge near the 
+origin. To remedy this, we implement a cutoff $x_0$ in the simulation, which we 
+take to be $0.1$ (i.e.\;1\% of the relevant frequency range), where the extra 
+diffusion term is taken to go linearly to zero as $x$ goes below this cutoff, 
+as it is nonphysical for the activity to remain the same all the way to zero 
+frequency anyway.
 
 Simulating with initially \num{2e5} particles, Fig~\ref{fig:spd-c} shows the 
 resulting frequency histogram of the simulation for a total time of $5$ with 
@@ -967,9 +900,9 @@ mind we define\\
 h(x) = \int_0^x \dd x' \begin{cases}
 \frac{1}{1+c / x'^3} & \text{for $x'>x_0$} \\
 1 & \text{for $x' < x_0$}
-\end{cases}
+\end{cases}.
 \]
-where the cutoff in our case is taken to be $x_0 = 0.1 = 2 \dd x$. Then, the stationary distribution appears very well described as
+Then, the stationary distribution appears very well described as
 \begin{equation}\label{supsim}
  n_\text{st}(x) = \frac{1}{\exp(h(x)) - 1} 
  \end{equation}
@@ -988,12 +921,17 @@ frequencies.
 
 \begin{figure}
 	\includegraphics[width=0.8\linewidth]{{temp N-1e5.70 dx-0.05 t-100 dt-0.0001 ic-planck c-0.1000 brems}.pdf}
-	\caption{Profile of effective temperature (comparing with Planckian) as in 
-	Fig.~\ref{fig:spd-c} }\label{fig:T}
+	\caption{Profile of effective temperature as in Fig.~\ref{fig:spd-c} 
+	}\label{fig:T}
 \end{figure}
 
-Fig.~\ref{fig:T} plots the effective temperature as function of frequency by 
-comparing with a Planckian.
+We define an effective temperature $T_\text{eff}(x)$ as a function of the 
+frequency, derived from the empirical occupation number at this frequency by 
+inverting the Planck distribution, $n_{\text{Pl},T_\text{eff}}(x) = 1/ 
+\left(\exp(x/T_\text{eff})-1\right)$. Because of our choice of units, this will 
+be expressed as a ratio to the temperature of the background electron gas. 
+Fig.~\ref{fig:T} plots this effective temperature for the stationary 
+distribution.
 
 \subsection{Adding frequency-dependent drift}
 
@@ -1036,11 +974,6 @@ modifications match very well with the theoretical stationary solution
 \eqref{supsim}, but slight deviations are expected due to the inclusion of 
 reaction mechanisms.
 
-
- 
-
-
- 
 \begin{appendix}
 
 \section{It\^o's lemma and the Kompaneets process}\label{itoder}
@@ -1052,7 +985,7 @@ then, $f$ itself is a random variable and, moreover, if $\vb{X}_t$ follows the s
 \end{equation*}
 where $\vb{\Xi}_t$ is a three-dimensional white noise as before.
 
-Itô's lemma \cite{itolemma} states that $f$ satisfies the stochastic differential equation
+Itô's lemma states that $f$ satisfies the stochastic differential equation
 \begin{equation}\label{ilem}
 	\dot{f} (t, \vb{X}_t)= \frac{\partial f}{\partial t}+ \left(\nabla_{\vb{X}}f\right)\cdot\vb{B} +\frac{1}{2}\mathrm{Tr}\left[\vb{Q}^T_t\left(H_Xf\right)\vb{Q}_t\right] + \left(\nabla_{\vb{X}}f\right)^T\vb{Q}_t\, \vb{\Xi}_t
 \end{equation}
@@ -1097,6 +1030,7 @@ finally, substitute back in \eqref{ilem}, writing quantities in terms of the dim
 
 \end{appendix}
 
+\bibliographystyle{unsrt}
 \bibliography{langevin-kompaneets}
 
 \end{document}
