@@ -19,6 +19,7 @@
 \usepackage{physics}
 \usepackage{siunitx}
 \usepackage{textcomp}
+\usepackage{grffile}
 
 \def\fr{\frac}
 \def\th{\theta}
@@ -457,7 +458,7 @@ in which case $Z=8$.  On the other hand, as $Z$ goes to zero, we recover the Wie
 As a final comment we note that the Kompaneets equation is positivity preserving \cite{positivity}. That is important because any solution of the equation will retain its sign, suggesting indeed to interpret this equation as of Fokker-Planck type. 
 
 % Als ik hier een \\ tussenzet compileert het niet op het ITF
-\section{Mesoscopics of Compton scattering:\\ Kompaneets stochastic 
+\section{Mesoscopics of Compton scattering: Kompaneets stochastic 
 process}\label{ksp}	
 
 When considering a single Compton scattering event, the transition rates are fully determined by the incident electron and photon momenta together with energy-momentum conservation. However, in the presence of repeated scattering, treating the electron as a classical particle and the photon as a boson, the transition rates must account for stimulated emission, \textit{i.e.}, transitions are enhanced if photons are present in the final state. Mathematically, we work on a symmetrized Fock space  \cite{kadanoff}, where transition rates (between incoming  $|\text{i}\rangle$ and final states $|\text{f}\rangle$) have an additional term coming from the matrix element
@@ -924,17 +925,24 @@ frequencies.
 
 \begin{figure}
 	\includegraphics[width=0.8\linewidth]{{temp N-1e5.70 dx-0.05 t-100 dt-0.0001 ic-planck c-0.1000 brems}.pdf}
-	\caption{Profile of effective temperature as in Fig.~\ref{fig:spd-c} 
+	\caption{Profile of effective temperature corresponding to Fig. 4 and 
+	defined in \eqref{effT}. The very-low frequency regime is dominated by the 
+	{\it ad hoc} cut-off and procedures replacing Bremsstrahlung and double 
+	Compton scattering, as explained in the text.  For low frequency $1<x<5$ 
+	the effective temperature is significantly higher than the Planck-value.
 	}\label{fig:T}
 \end{figure}
 
 We define an effective temperature $T_\text{eff}(x)$ as a function of the 
 frequency, derived from the empirical occupation number at this frequency by 
-inverting the Planck distribution, $n_{\text{Pl},T_\text{eff}}(x) = 1/ 
-\left(\exp(x/T_\text{eff})-1\right)$. Because of our choice of units, this will 
-be expressed as a ratio to the temperature of the background electron gas. 
-Fig.~\ref{fig:T} plots this effective temperature for the stationary 
-distribution.
+inverting the Planck distribution,
+\begin{equation}\label{effT}
+n_{\text{Pl},T_\text{eff}}(x) = \frac{1}{\exp(x/T_\text{eff})-1}
+\end{equation}
+
+Because of our choice of units, this will be expressed as a ratio to the 
+temperature of the background electron gas.  Fig.~\ref{fig:T} plots this 
+effective temperature for the stationary distribution.
 
 \subsection{Adding frequency-dependent drift}
 
@@ -1033,7 +1041,7 @@ finally, substitute back in \eqref{ilem}, writing quantities in terms of the dim
 
 \end{appendix}
 
-\bibliographystyle{unsrt}
+\bibliographystyle{abbrv}
 \bibliography{langevin-kompaneets}
 
 \end{document}
