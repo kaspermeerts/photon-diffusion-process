@@ -350,10 +350,10 @@ As understood from the pioneering days of statistical mechanics and in analogy w
 
 In the present paper  we derive a (stochastic) diffusion process for a tagged photon, that can be seen as the diffusion limit of a multi-photon hopping dynamics in reciprocal space.  Stimulated emission results in the nonlinearity of the Markov diffusion process.\\ 
   We first apply our construction to build a Kompaneets process, {\it i.e.}, the stochastic (single-photon) dynamics that has the well-known Kompaneets equation as its nonlinear Fokker-Planck equation.
-That new fluctuation dynamics  is the counterpart to the analysis of Kompaneets in \cite{kompa} and makes our first main result: the derivation of the frequency diffusion process for a tagged photon in a plasma dominated by Compton scattering.  Similarly, many other processes such as double Compton and  \textit{Bremsstrahlung} can be considered, and thanks to our setup, are easily added to the dynamics, turning it into a fully nonlinear reaction-diffision dynamics.  Not only does that process complement (in some precise sense) the Kompaneets equation, it allows also to see beyond and leading to our second main contribution.  A possible avenue indeed that gets opened, is the implementation and exploration of nonequilibrium effects modifying the Planck law, via physically motivated interventions on the single-photon level. Our work explores how changing drift and adding diffusion may change the low-frequency distribution, where the relaxation times in the Kompaneets process are largest, hence most vulnerable to nonequilibrium amendments.\\
+That new fluctuation dynamics  is the counterpart to the analysis of Kompaneets in \cite{kompa} and makes our first main result: the derivation of the frequency diffusion process for a tagged photon in a plasma dominated by Compton scattering.  Similarly, many other processes such as double Compton and  \textit{Bremsstrahlung} can be considered, and thanks to our setup, are easily added to the dynamics, turning it into a fully nonlinear reaction-diffision dynamics.  Not only does that process complement (in some precise sense) the Kompaneets equation, it allows also to see beyond, leading to our second main contribution.  A possible avenue indeed that gets opened, is the implementation and exploration of nonequilibrium effects modifying the Planck law, via physically motivated interventions on the single-photon level. Our work explores how changing drift and adding diffusion may change the low-frequency distribution, where the relaxation times in the Kompaneets process are largest, hence most vulnerable to nonequilibrium amendments.\\
 As a final remark, it should be noted in all these cases that we start from a multi-photon diffusion process in frequency space.  It means to include the stimulated emission in the reactivities. That presents a nontrivial aspect in both the theoretical and computational analysis, leading finally to important nonlinearities in the corresponding Fokker-Planck equation. However, our results indicate that the processes simulate indeed the Kompaneets equation and its extensions, in the sense that the empirical density of photons follows these equations.\\
 
-\textbf{Plan of the paper:}  In the next section we describe the Kompaneets equation for relaxation to the Planck law via Compton scattering.  In Section \ref{ksp} we introduce the Kompaneets {\it process}, describing the hopping of photons in reciprocal space.  Its diffusion limit for a tagged photon gives a nonlinear Markov process, described in Eq. \eqref{kp-ito2}.   That simulation is explained in Section \ref{simul}, where the results are shown in terms of the time-dependence of the spectral density. We confirm the validity of the simulation scheme by verifying relaxation to the Planck law along the Kompaneets equation. There, we also show the appearance of a condensate when the number of photons is taken to be large enough, an effect already observed in \cite{levermore}. Other non photon-number preserving radiation processes are added in Section 
+In the next section we describe the Kompaneets equation for relaxation to the Planck law via Compton scattering.  In Section \ref{ksp} we introduce the Kompaneets {\it process}, describing the hopping of photons in reciprocal space.  Its diffusion limit for a tagged photon gives a nonlinear Markov process, described in Eq. \eqref{kp-ito2}.   That simulation is explained in Section \ref{simul}, where the results are shown in terms of the time-dependence of the spectral density. We confirm the validity of the simulation scheme by verifying relaxation to the Planck law along the Kompaneets equation. There, we also show the appearance of a condensate when the number of photons is taken to be large enough, an effect already observed in \cite{levermore}. Other non photon-number preserving radiation processes are added in Section 
 \ref{rbdc}. Bremsstrahlung and double Compton scattering are described there as low-frequency corrections. These are reactive mechanisms to control photon-number that can be handled and taken effectively in the simulation.   Section \ref{extk-sec} discusses more general photon-number processes, extending the Kompaneets process to implement two types of low-frequency modifications, either in the drift or in the diffusion. They are nonequilibrium features in the photon dynamics, effectively implementable on the single-photon level that we simulate. Finally, in Section \ref{simex}, we explain the simulation details for that extension (including reactive mechanisms). That illustrates in great detail how nonequilibrium features change the stationary solution to enhance low-frequency occupation (yielding there a higher effective temperature). 
 
 
@@ -377,18 +377,18 @@ The Kompaneets equation
 For simplicity it is convenient to use the dimensionless counterpart of \eqref{ke} in order to introduce (in the next Section) the Kompaneets {\it process}, which describes the hopping of photons in reciprocal space.\\ 
 The dynamics of the average photon occupation number $n(t, x)$ at dimensionless frequency $x= \hbar \omega/k_B T$ in a thermal environment with temperature $T$, is obtained from equation \eqref{ke} as
 \begin{equation}\label{ake}
-x^2\frac{\partial n}{\partial y}(y,x) = \frac{\partial }{\partial x}x^4\left\{
+x^2\frac{\partial n}{\partial t}(t,x) = \frac{\partial }{\partial x}x^4\left\{
 \frac{\partial n}{\partial x}(y,x) + 
 \left[1+n(y,x)\right]n(y,x)\right\}
 \end{equation}
 where we have defined the dimensionless Compton optical depth
-\[y = \frac{ k_B T }{m_e c^2} n_e \sigma_T c \, t =  \frac{ t}{\tau_C}\]
+\[y = \frac{ k_B T }{m_e c^2} n_e \sigma_T c \, t =  \frac{ t}{\tau_C}.\]
 Here, $\tau_C$ is the  characteristic time in which photons change their frequency due to Compton scattering with thermal electrons,
 \begin{equation}\label{shift}
 \left\langle\frac{1}{2\tau}\left(\frac{\Delta\omega}{\omega}\right)^2\right\rangle\approx \frac{ k_B T }{m_e c^2}\; \frac 1{\tau}= \frac{1}{\tau_C}
 \end{equation}
-where $\tau = \ell/c$ is the average collision rate, related 
-to the mean free path of photons $\ell=(n_e\sigma_T)^{-1}$.\\
+where $\tau = l/c$ is the average collision rate, related 
+to the mean free path of photons $l=(n_e\sigma_T)^{-1}$. For simplicity, we will take our units such that $\tau_C = 1$, identifing $y$ with $t$.\\
 Note that the
 \begin{equation}\label{cc}
 n_\mu(x) = \frac 1{e^{x+\mu}-1}, \qquad \mu\geq 0
@@ -412,21 +412,21 @@ g(x) \dd x = \frac{2V}{(2\pi)^3} \left( \frac{k_B T}{\hbar c} \right)^3 4\pi
 x^2 \dd x
 \] 
 From here we can integrate the photon occupation number to get the total number of photons
-\[ N_y = \int_0^\infty \dd{x} g(x) n(y,x)
+\[ N_t = \int_0^\infty \dd{x} g(x) n(t,x)
  \]
 That allows to write the spectral probability density
 \begin{equation}\label{eq:spd}
-\rho(y,x) = \frac{V}{N_y} \frac{1}{\pi^2} \left(\frac{k_B T}{\hbar c}\right)^3 
-x^2 n(y,x) = \frac{x^2 n(y,x)}{2\zeta(3) Z_y},
+\rho(t,x) = \frac{V}{N_t} \frac{1}{\pi^2} \left(\frac{k_B T}{\hbar c}\right)^3 
+x^2 n(t,x) = \frac{x^2 n(t,x)}{2\zeta(3) Z_t},
 \end{equation}
 where $2\zeta(3) = \int_0^\infty \dd x \, x^2/(e^x-1) \simeq 2.404$.
 By using the normalization of the spectral probability density while integrating \eqref{eq:spd} over $x$, we can write
 \begin{equation}\label{zy}
-Z_y =  \frac 1{2\zeta(3)}\,\int_0^\infty \dd x\, x^2 n(y,x) \propto  \frac{N_y}{V} \left(\frac{\hbar c}{k_B T}\right)^3
+Z_t =  \frac 1{2\zeta(3)}\,\int_0^\infty \dd x\, x^2 n(t,x) \propto  \frac{N_t}{V} \left(\frac{\hbar c}{k_B T}\right)^3
 \end{equation}
 which is a possibly time-dependent parameter, depending on the temperature and 
 proportional to the number of photons per volume. Since the Kompaneets equation (still without reaction mechanism)
-is photon-number preserving, $Z_y=Z$ is time-independent and yields for the 
+is photon-number preserving, $Z_t=Z$ is time-independent and yields for the 
 stationary $n_\mu$ in \eqref{cc},
 \[
 Z = \frac{\text{Li}_3 (e^{-\mu})}{\zeta(3)}
@@ -434,12 +434,12 @@ Z = \frac{\text{Li}_3 (e^{-\mu})}{\zeta(3)}
 with Li$_3$ the polylogarithm of order 3.
 In that notation, the Kompaneets equation \eqref{ake} becomes
 \begin{equation}\label{kp}
-\frac{\partial \rho}{\partial y} (y,x) = -\frac{\partial}{\partial x}\left[\left(4x- x^2\left(1+2\zeta(3) Z\,\frac{\rho(y,x)}{x^2}\right)\right)\rho(y,x)\right] + \frac{\partial^2}{\partial x^2}\left[x^2 \rho(y,x)\right]
+\frac{\partial \rho}{\partial t} (t,x) = -\frac{\partial}{\partial x}\left[\left(4x- x^2\left(1+2\zeta(3) Z\,\frac{\rho(t,x)}{x^2}\right)\right)\rho(t,x)\right] + \frac{\partial^2}{\partial x^2}\left[x^2 \rho(t,x)\right]
 \end{equation}
 Observe still that  $Z$
 can be interpreted as the ratio of the actual photon spectral density to that 
 of the Planck distribution corresponding to the same temperature.  For the 
-Bose-Einstein distribution $n(y,x)= n_\text{BE}(x) = n_0(x) = 1 / (e^x - 1)$, 
+Bose-Einstein distribution $n(t,x)= n_\text{BE}(x) = n_0(x) = 1 / (e^x - 1)$, 
 the photon number equals
 \[
 N_\text{BE} = 2 \zeta(3) \frac{V}{\pi^2} \left( \frac{k_B T}{\hbar c} \right)^3
@@ -616,13 +616,13 @@ We get to our main result.
 Assume that the process is isotropic to suppose that $D$ and $U$ only 
 depend on the radial component $x$ with ${\mbf{k}} = x/(\beta\hbar 
 c)\mbf{\hat{x}}$.  We keep referring to $x = \beta \hbar \omega$ as the dimensionless frequency.\\
-We apply Itô's lemma to \eqref{3dsde}, with calculation in Appendix \ref{itoder}, to end up with
+We apply It\^o's lemma to \eqref{3dsde}, with calculation in Appendix \ref{itoder}, to end up with
 \begin{equation} \label{kp-ito2}
-\dot x	=  2\frac{{D}(x)}{x}+ \partial_xD(x) - \beta {D}(x) \partial_x U(x)(1+n(t,x))  + \sqrt{2{D}(x)}\, \xi_t
+\dot x	=  2\frac{{D}(x)}{x}+ \partial_xD(x) - D(x) \partial_x U(x)(1+n(t,x))  + \sqrt{2{D}(x)}\, \xi_t
 \end{equation}
 where $\xi_t$ is again standard white noise.  That It\^o-stochastic process \eqref{kp-ito2} is what we call the Kompaneets process, and its construction and simulation (in the next Section) is our first main result.  It is the (nonlinear) Langevin dynamics associated to the Kompaneets equation \eqref{kp} in the case where 
 \begin{equation}\label{uu}
-\beta U(x) = x,\qquad D(x) = x^2
+U(x) = x,\qquad D(x) = x^2
 \end{equation}
 Note the dependence on the photon occupation field $n(t,x)$.  What we have here is a mean-field nonlinear Markov process for the tagged photon, 
 where the field $n(t,x)$  represents the empirical occupations \cite{kolokoltsov, frank}; see also \cite{funaki}.  It 
@@ -662,9 +662,9 @@ present in the same volume if the occupation number were to follow a
 Bose-Einstein distribution. We can then at any point in time invert 
 \eqref{eq:spd} yielding the empirical occupation number
 \begin{equation*}
-n_t^E(x) = 2\zeta(3) Z \frac{\rho_t^E(x)}{x^2}
+n_t^E(x) = 2\zeta(3) Z \frac{\rho_t^E(x)}{x^2}.
 \end{equation*}
-where the previous variable $y$ is identified with $t$ for simplicity.\\
+\\
  We simulate an ensemble of around $N_E\simeq 10^5$ particles, fixing the total 
 time $\simeq 100$ and using a timestep of $\dd t = 10^{-4}$. The timestep was 
 chosen to be low enough that lowering it did not appreciably change the 
@@ -687,9 +687,9 @@ u_i
 \end{equation}
 The above equation corresponds to the choices 
 \begin{align}
-	&B(x,\rho_t) =4x - x^2(1+n_t(x))
+	&B(x,\rho_t) =4x - x^2(1+n_t(x))&\text{with}&&n_t(x) = 2\zeta(3)Z\frac{\rho_t(x)}{x^2}
 	\label{drift}\\ 
-	&D(x) =x^2 \label{diffusion}
+	&D(x) =x^2 &&&\label{diffusion}
 \end{align}
 for drift and diffusion in \eqref{genp}, respectively (equivalent of \eqref{uu}).  Note here that at low frequencies, $x\ll 1$, there is almost no activity when also $x^2 n_t(x)\ll 1$. 
 At each iteration $i$, we update the frequency according to \eqref{emalg}. Note 
@@ -706,7 +706,7 @@ solution of the Kompaneets equation \eqref{ke} ($Z=1$ in \eqref{kp}).
 To check how much the obtained histogram deviates from the theoretical 
 prediction, we computed the excess $\rho_\text{NUM}(x) - \rho_\text{BE}(x)$, where 
 $\rho_\text{NUM}(x)$ is the histogram found by letting the process evolve until time 
-$=10$ or $10^5$ timesteps.  Our simulations show that, in the worst case, the 
+$=10$, corresponding to $10^5$ timesteps.  Our simulations show that, in the worst case, the 
 results have a precision of order \num{e-3}. This happens around $x=0$. At 
 larger frequencies good agreement is found with our result and the theoretical 
 prediction.
@@ -761,20 +761,20 @@ the origin (though not shown here).
  
 Double Compton scattering and  Bremsstrahlung are additional radiation processes, physically similar in controlling 
 emission and absorption of photons. Since the number of photons is not conserved in this case, we can regard them as mechanisms to control the photon number density. \\
-Both can be implemented as stochastic processes but we skip the derivations.  We refer to \cite{emrmodel, longair}, where the analysis  leads to the master equation that was first obtained by Kompaneets \cite{kompa}.\\
+Both can be implemented as stochastic processes but we skip the derivations.  We refer to \cite{emrmodel, longair}, where the analysis that leads to the master equation was first obtained by Kompaneets (Eq.\;(18) in \cite{kompa}).\\
 
-The Bremsstrahlung process resembles a chemical reaction, where photons are produced by electrons as they are deflected by nuclei. Kompaneets was the first to give the exact expression of the Bremsstrahlung kinetic equation (Eq. (18) in \cite{kompa}). Here, we use that expression to write in a slightly different manner
+The Bremsstrahlung process resembles a chemical reaction, where photons are produced by electrons as they are deflected by nuclei. Here, we use the expression derived by Kompaneets to write in a slightly different manner
 \begin{equation}
-\left(\frac{\partial n}{\partial y}\right)_\text{B} = \frac{\tau_C}{\tau_B(x)} 
-\left( \frac{1}{e^x-1} - n(y,x)\right)
+\left(\frac{\partial n}{\partial t}\right)_\text{B} = \frac{\tau_C}{\tau_B(x)} 
+\left( \frac{1}{e^x-1} - n(t,x)\right)
 \end{equation}
 where we have used $\tau_C$, the characteristic Compton timescale of 
 \eqref{shift}, to make the comparison with the frequency dependent timescale 
 $\tau_B(x)$ of  Bremsstrahlung. Notice how there is no diffusion or drift, 
 Bremsstrahlung instead provides a pointwise convergence of the occupation 
 numbers towards the Bose-Einstein distribution.\\
-Assuming for a moment that all nuclei are single protons, which means their 
-density matches that of the electrons, we have
+If we temporarily reinstate units, and assuming for a moment that all nuclei are single protons, which means their 
+density matches that of the electrons, we find that
 \begin{equation}\label{brem}
 \frac{\tau_C}{\tau_B(x)} = \frac{9\alpha n_e}{8} \sqrt{\frac{\pi}{2} 
 \left(\frac{m_e c^2}{k_B T}\right)^3} \left( \frac{\hbar c}{k_B T}\right)^3 
@@ -805,12 +805,12 @@ As proposed in \cite{paper}, the Kompaneets equation can be extended to include 
 
 On the level of the Kompaneets equation, the nonequilibrium extension is taken to be
 \begin{equation}\label{extk}
-\frac{\partial n}{\partial y}=\frac{1}{x^2}\frac{\partial}{\partial x} x^4 \left\{  \frac{\partial n}{\partial x} (y,x) +  (1+bx^k)[1+n(y,x)]n(y,x)\right\} + \frac{c}{x^2}\frac{\partial}{\partial x} x \left\{  \frac{\partial n}{\partial x} (y,x)\right\}
+\frac{\partial n}{\partial t}=\frac{1}{x^2}\frac{\partial}{\partial x} x^4 \left\{  \frac{\partial n}{\partial x} (t,x) +  (1+bx^k)[1+n(t,x)]n(t,x)\right\} + \frac{c}{x^2}\frac{\partial}{\partial x} x \left\{  \frac{\partial n}{\partial x} (t,x)\right\}
 \end{equation}
 parametrized by positive constants $b,c$ and $k$.
 As before, we have changed to dimensionless variables.  That makes a special case of a more general extended Kompaneets equation
 \begin{equation}\label{aeke}
-	x^2 \frac{\partial n}{\partial y}(y,x) = \frac{\partial}{\partial x} x^2 D(x)\left\{  \frac{\partial n}{\partial x} (y,x) +  g(x)[1+n(y,x)]n(y,x)\right\}
+	x^2 \frac{\partial n}{\partial t}(t,x) = \frac{\partial}{\partial x} x^2 D(x)\left\{  \frac{\partial n}{\partial x} (t,x) +  g(x)[1+n(t,x)]n(t,x)\right\}
 \end{equation}
 for
  \begin{equation}\label{ext-dri}
@@ -818,53 +818,32 @@ D(x)= x^2 + \frac c{x},\qquad  g(x)=\frac{1 + bx^k}{1+cx^{-3}}
 \end{equation}
 Obviously, the case $c=b=0$ recovers the standard Kompaneets equation.  
 The change in the drift where to the energy function $U(\omega) = \hbar\omega$ (for the standard Kompaneets process) an extra potential $\sim \omega^{k+1}$ is added, is motivated by the search for higher order drivings where the force  may depend on the frequency. One is to change the drift, where we imagine a driving that depends on the frequency instead of a constant ``force" as in the Kompaneets process.  Obviously, we do not assume photon-photon scattering, which is extremely weak in vacuum \cite{silveira}. The drift can however be realized by employing strong light-matter coupling, resulting in strong effective energy exchanges (and dissipation) on single-photon level \cite{roy2}.  In other words, we change \eqref{uu}  (or \eqref{drift}) and replace the constant $U'$ with a frequency-dependent force $g$.\\
-A second  change is to add an extra diffusion (changing \eqref{diffusion}) where the diffusion constant no longer has the features of Compton scattering, but gets modified at low frequencies. By making $c\neq 0$ an extra diffusion has been added in frequency space where the diffusivity decays with frequency, certainly unlike Compton-type processes.  Obviously, the dependence $c/x$ in \eqref{ext-dri} should not be taken literally all the way to $x\downarrow 0$ but an appropriate cut-off will be installed in the simulation (in the next section). In general, while interested in low-frequency effects, we are not interested in the very-low frequency-behavior $x\downarrow 0$. The extra diffusive term (the last term in \eqref{extk}) was also introduced in \cite{arca}, motivated by hints of low-frequency modifications in the Planck law, as observed from ARCADE data \cite{arcade1,arcade2} and EDGES experiment \cite{edges}. The idea is to drastically increase the activity of low-frequency photons, which are otherwise largely untouched in Compton scattering.  Or, in other words, to decrease the activity of high-energy photons.  The latter was motivated by a mechanism similar to stochastic turbulence.  One should think here of the analogue of creating suprathermal tails in electron velocity distributions by their Rutherford scattering against turbulent fields \cite{supra1,banerjee}.  From the Coulomb interaction, high energy electrons are least scattered.  Similarly, low-frequency photons are least affected by Compton scattering and that allows them to become abundant by nonequilibrium effects, breaking detailed balance with respect to the Planck law.\\
+A second  change is to add an extra diffusion (changing \eqref{diffusion}) where the diffusion constant no longer has the features of Compton scattering, but gets modified at low frequencies. By making $c\neq 0$ an extra diffusion has been added in frequency space where the diffusivity decays with frequency, certainly unlike Compton-type processes.  Obviously, the dependence $c/x$ in \eqref{ext-dri} should not be taken literally all the way to $x\downarrow 0$ but an appropriate cutoff will be installed in the simulation (in the next section). In general, while interested in low-frequency effects, we are not interested in the very-low frequency-behavior $x\downarrow 0$. The extra diffusive term (the last term in \eqref{extk}) was also introduced in \cite{arca}, motivated by hints of low-frequency modifications in the Planck law, as observed from ARCADE 2 data \cite{arcade1,arcade2} and EDGES experiment \cite{edges}. The idea is to drastically increase the activity of low-frequency photons, which are otherwise largely untouched in Compton scattering.  Or, in other words, to decrease the activity of high-energy photons.  The latter was motivated by a mechanism similar to stochastic turbulence.  One should think here of the analogue of creating suprathermal tails in electron velocity distributions by their Rutherford scattering against turbulent fields \cite{supra1,banerjee}.  From the Coulomb interaction, high energy electrons are least scattered.  Similarly, low-frequency photons are least affected by Compton scattering and that allows them to become abundant by nonequilibrium effects, breaking detailed balance with respect to the Planck law.\\
 
 
 
- A rearrangement is in order to rewrite \eqref{aeke} in terms of the spectral density $\rho(y,x)$, defined in the exact same way as \eqref{eq:spd}, yielding
+ A rearrangement is in order to rewrite \eqref{aeke} in terms of the spectral density $\rho(t,x)$, defined in the exact same way as \eqref{eq:spd}, yielding
 \begin{equation}\label{sc}
-	\frac{\partial}{\partial y} \rho(y,x) = - \frac{\partial}{\partial x} \left[ \left(2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(y,x)\right)\right)\rho(y,x)\right] + \frac{\partial^2}{\partial x^2}[D(x)\rho(y,x)]
+	\frac{\partial}{\partial t} \rho(t,x) = - \frac{\partial}{\partial x} \left[ \left(2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(t,x)\right)\right)\rho(t,x)\right] + \frac{\partial^2}{\partial x^2}[D(x)\rho(t,x)]
 \end{equation} 
-Observe that \eqref{aeke} remains a continuity equation, photon-number preserving just like Kompaneets. It means that $Z_y$ in \eqref{eq:spd} for the density of the nonequilibrium extension \eqref{aeke} is also a time-independent prefactor, depending only on the environment temperature and the (constant) number of photons per volume.\\
+Observe that \eqref{aeke} remains a continuity equation, photon-number preserving just like Kompaneets. It means that $Z_t$ in \eqref{eq:spd} for the density of the nonequilibrium extension \eqref{aeke} is also a time-independent prefactor, depending only on the environment temperature and the (constant) number of photons per volume.\\
 Interpreting similarly as before the above equation as a Fokker-Planck type 
-equation and identifying for simplicity $y\to t$ again, we find the associated Langevin equation in the Itô-interpretation
+equation, we find the associated Langevin equation in the Itô-interpretation
 \begin{equation}\label{ekp}
-	\dot{x} = 2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(y,x)\right) + \sqrt{2D(x)}\, \xi_y
+	\dot{x} = 2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(t,x)\right) + \sqrt{2D(x)}\, \xi_t
 \end{equation}
-where $\xi_y$ is a standard white noise as before. According to \eqref{genp}, we have in this case
+where $\xi_t$ is a standard white noise as before. According to \eqref{genp}, we have in this case
 \begin{align}
-B(x,\rho_y) = 2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(y,x)\right) 
+B(x,\rho_t) = 2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(t,x)\right) 
 \label{edrift}
 \end{align}
-with drift and diffusion given by expression \eqref{ext-dri}.
+with drift and diffusion given by expression \eqref{ext-dri}, and $n(t,x)$ derived from $\rho(t,x)$ as before.
 
 To be compared with \eqref{kp-ito2}, the above equation defines the \textit{extended Kompaneets process} and makes our second main result: it is the fluctuating single-photon dynamics that takes into account physically interesting nonequilibrium features.  Note that a stationary solution to \eqref{extk} can be found, of the form
 \begin{equation}\label{eq:stationary}
 n_\text{st}(x;b,c;k) = \frac{1}{\exp\left(\int_{x_0}^x \dd s \, \frac{1+bs^k}{1+cs^{-3}}\right) - 1} 
 \end{equation}
 where $x_0$ is the cutoff for the extra diffusion, as we expect for a realistic situation. That solution is only valid for $x>x_0$. For $x\leq x_0$ the details of the cutoff should enter in the exponent as to make $n_\text{st}$ well defined. When adding radiative processes to \eqref{sc} at low frequencies such as Bremsstrahlung (see Section \ref{rbdc}), the stationary solution differs from \eqref{eq:stationary} as well.
-
-
-%
-%A stationary solution of  equation \eqref{extk} is given when the current vanishes, \textit{i.e.},
-%\begin{equation}
-%\left( 1 + cx^{-3}\right)\frac{\dd n_{st}}{\dd x}(x) + \left(1+bx^k\right)(1+n_{st}(x))n_{st}(x)=0
-%\end{equation}
-%we can solve this equation using separation of variables, yielding 
-%
-%This stationary solution can exhibit an interesting behavior, which is the crossing with the Planck spectrum as it can be observed from our simulations for some values of $c,b$ and $k$. The crossing happens for values of parameters and $x$ in which the Bose-Einstein occupation number coincides with the stationary one, that is
-%
-%\begin{align}
-%	&\frac{1}{\exp\left(\int_{x_0}^{x^*} \dd s \, \frac{1+bs^k}{1+cs^{-3}}\right) - 1}  = \frac{1}{\exp(x^*) - 1}\nonumber\\
-%	\implies& x^* = \int_{x_0}^{x^*} \dd s \, \frac{1+bs^k}{1+cs^{-3}}
-%\end{align}
-%for a crossing at $x^*$. We can numerically solve above equation by considering specific values of parameters $c,b,k$ and cut-off $x_0$. 
-%
-%\textbf{to be analyzed and complemented if necessary}
-
-
-
 
 \section{Simulation of the extended Kompaneets process}\label{simex}
 
@@ -927,7 +906,7 @@ frequencies.
 	\includegraphics[width=0.8\linewidth]{{temp_N-1e5.70_dx-0.05_t-100_dt-0.0001_ic-planck_c-0.1000_brems}.pdf}
 	\caption{Profile of effective temperature corresponding to Fig. 4 and 
 	defined in \eqref{effT}. The very-low frequency regime is dominated by the 
-	{\it ad hoc} cut-off and procedures replacing Bremsstrahlung and double 
+	{\it ad hoc} cutoff and procedures replacing Bremsstrahlung and double 
 	Compton scattering, as explained in the text.  For low frequency $1<x<5$ 
 	the effective temperature is significantly higher than the Planck-value.
 	}\label{fig:T}
@@ -991,12 +970,12 @@ reaction mechanisms.
 
 Suppose we have a (possibly) time-dependent function of the random variable $\vb{X}_t$
 \[f=f(t,\vb{X}_t) \]
-then, $f$ itself is a random variable and, moreover, if $\vb{X}_t$ follows the stochastic differential equation \begin{equation*}
+then, $f$ itself is a random variable. Suppose also that$\vb{X}_t$ follows the stochastic differential equation \begin{equation*}
 	\dot{\vb{X}}_t=\vb{B}(\vb{X}_t) + \vb{Q}_t(\vb{X}_t)\vb{\Xi}_t
 \end{equation*}
 where $\vb{\Xi}_t$ is a three-dimensional white noise as before.
 
-Itô's lemma states that $f$ satisfies the stochastic differential equation
+Then, Itô's lemma states that $f$ satisfies the stochastic differential equation
 \begin{equation}\label{ilem}
 	\dot{f} (t, \vb{X}_t)= \frac{\partial f}{\partial t}+ \left(\nabla_{\vb{X}}f\right)\cdot\vb{B} +\frac{1}{2}\mathrm{Tr}\left[\vb{Q}^T_t\left(H_Xf\right)\vb{Q}_t\right] + \left(\nabla_{\vb{X}}f\right)^T\vb{Q}_t\, \vb{\Xi}_t
 \end{equation}
@@ -1041,7 +1020,7 @@ finally, substitute back in \eqref{ilem}, writing quantities in terms of the dim
 
 \end{appendix}
 
-\bibliographystyle{abbrv}
+\bibliographystyle{ieeetr}
 \bibliography{langevin-kompaneets}
 
 \end{document}
