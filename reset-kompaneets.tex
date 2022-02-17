@@ -1,0 +1,590 @@
+\documentclass[a4paper,12pt,reqno,superscriptaddress,nofootinbib]{revtex4}
+%\documentclass{article}
+\usepackage[centertags]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{newlfont}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{euscript}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+%\usepackage[normalem]{ulem} % for strikeout text with \sout
+\usepackage{color}
+\usepackage{soul}
+
+
+%=== TO BE PUT BACK! ===
+%\usepackage{floatrow}
+%\usepackage{caption}
+
+
+%\usepackage{tikz}
+\usepackage{pgf}
+\usetikzlibrary{positioning,fit,calc}
+%\usetikzlibrary{positioning}
+\usetikzlibrary{arrows,automata}
+\usepackage{wrapfig}
+\usepackage{amscd}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{subfig}
+\usepackage{siunitx}
+
+%=== TEMPORARY ===
+\usepackage{changes}
+
+
+% THEOREM-LIKE ENVIRONMENTS -----------------------------------------
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+\newtheorem{notes}[theorem]{Notes}
+\newtheorem{example}[theorem]{Example}
+
+
+
+% \MATHOPERATOR -----------------------------------------------------
+
+\DeclareMathOperator{\ex}{Ex} \DeclareMathOperator{\ext}{Ext}
+\DeclareMathOperator{\Int}{Int} \DeclareMathOperator{\supp}{Supp}
+\DeclareMathOperator{\const}{Const}
+\newcommand{\re}{\Re\,}
+\newcommand{\im}{\Im\,}
+
+\newcommand{\HH}{\mathsf{H}}
+\newcommand{\PP}{\mathsf{P}}
+\newcommand{\RR}{\mathsf{R}}
+
+% GREEK - 2 letters ------------------------------------------------
+
+\let\al=\alpha %\let\be=\beta
+\let\de=\delta \let\ep=\epsilon
+\let\ve=\varepsilon \let\vp=\varphi \let\ga=\gamma \let\io=\iota
+\let\ka=\kappa \let\la=\lambda \let\om=\omega \let\vr=\varrho
+\let\si=\sigma \let\vs=\varsigma \let\th=\theta \let\vt=\vartheta
+\let\ze=\zeta \let\up=\upsilon
+
+\let\De=\Delta \let\Ga=\chi \let\La=\Lambda \let\Om=\Omega
+\let\Th=\Theta \let\Up=\Upsilon
+
+% \MATHCAL - \ca ----------------------------------------------------
+
+
+\newcommand{\be}{\begin{equation}}
+	\newcommand{\en}{\end{equation}}
+\def\fr{\frac}
+\def\th{\theta}
+\def\al{\alpha}
+\def\om{\omega}
+\def\ka{\kappa}
+\def\ii{\textrm i}
+\def\ee{\textrm e}
+\def\e{\textrm e}
+\def\vp{\varphi}
+\def\sgn{{\textrm{sgn}}}
+\def\ud{\textrm{d}}
+\def\bn{{\boldsymbol \nabla}}
+\def\setR{\mathbb{R}}
+
+\let\lam=\lambda
+\let\si=\sigma \let\vs=\varsigma \let\th=\theta \let\vt=\vartheta
+\let\ze=\zeta \let\up=\upsilon
+
+\let\De=\Delta \let\Ga=\Gamma \let\La=\Lambda \let\Om=\Omega
+\let\Th=\Theta \let\Up=\Upsilon
+\let\om=\omega
+
+
+
+\newcommand{\caA}{{\mathcal A}}
+\newcommand{\caB}{{\mathcal B}}
+\newcommand{\caC}{{\mathcal C}}
+\newcommand{\caD}{{\mathcal D}}
+\newcommand{\caE}{{\mathcal E}}
+\newcommand{\caF}{{\mathcal F}}
+\newcommand{\caG}{{\mathcal G}}
+\newcommand{\caH}{{\mathcal H}}
+\newcommand{\caI}{{\mathcal I}}
+\newcommand{\caJ}{{\mathcal J}}
+\newcommand{\caK}{{\mathcal K}}
+\newcommand{\caL}{{\mathcal L}}
+\newcommand{\caM}{{\mathcal M}}
+\newcommand{\caN}{{\mathcal N}}
+\newcommand{\caO}{{\mathcal O}}
+\newcommand{\caP}{{\mathcal P}}
+\newcommand{\caQ}{{\mathcal Q}}
+\newcommand{\caR}{{\mathcal R}}
+\newcommand{\caS}{{\mathcal S}}
+\newcommand{\caT}{{\mathcal T}}
+\newcommand{\caU}{{\mathcal U}}
+\newcommand{\caV}{{\mathcal V}}
+\newcommand{\caW}{{\mathcal W}}
+\newcommand{\caX}{{\mathcal X}}
+\newcommand{\caY}{{\mathcal Y}}
+\newcommand{\caZ}{{\mathcal Z}}
+
+\newcommand{\bR}{\mathbb{R}}
+
+% \MATHBB - \bb -----------------------------------------------------
+
+\newcommand{\bba}{{\mathbb a}}
+\newcommand{\bbb}{{\mathbb b}}
+\newcommand{\bbc}{{\mathbb c}}
+\newcommand{\bbd}{{\mathbb d}}
+\newcommand{\bbe}{{\mathbb e}}
+\newcommand{\bbf}{{\mathbb f}}
+\newcommand{\bbg}{{\mathbb g}}
+\newcommand{\bbh}{{\mathbb h}}
+\newcommand{\bbi}{{\mathbb i}}
+\newcommand{\bbj}{{\mathbb j}}
+\newcommand{\bbk}{{\mathbb k}}
+\newcommand{\bbl}{{\mathbb l}}
+\newcommand{\bbm}{{\mathbb m}}
+\newcommand{\bbn}{{\mathbb n}}
+\newcommand{\bbo}{{\mathbb o}}
+\newcommand{\bbp}{{\mathbb p}}
+\newcommand{\bbq}{{\mathbb q}}
+\newcommand{\bbr}{{\mathbb r}}
+\newcommand{\bbs}{{\mathbb s}}
+\newcommand{\bbt}{{\mathbb t}}
+\newcommand{\bbu}{{\mathbb u}}
+\newcommand{\bbv}{{\mathbb v}}
+\newcommand{\bbw}{{\mathbb w}}
+\newcommand{\bbx}{{\mathbb x}}
+\newcommand{\bby}{{\mathbb y}}
+\newcommand{\bbz}{{\mathbb z}}
+
+\newcommand{\bbA}{{\mathbb A}}
+\newcommand{\bbB}{{\mathbb B}}
+\newcommand{\bbC}{{\mathbb C}}
+\newcommand{\bbD}{{\mathbb D}}
+\newcommand{\bbE}{{\mathbb E}}
+\newcommand{\bbF}{{\mathbb F}}
+\newcommand{\bbG}{{\mathbb G}}
+\newcommand{\bbH}{{\mathbb H}}
+\newcommand{\bbI}{{\mathbb I}}
+\newcommand{\bbJ}{{\mathbb J}}
+\newcommand{\bbK}{{\mathbb K}}
+\newcommand{\bbL}{{\mathbb L}}
+\newcommand{\bbM}{{\mathbb M}}
+\newcommand{\bbN}{{\mathbb N}}
+\newcommand{\bbO}{{\mathbb O}}
+\newcommand{\bbP}{{\mathbb P}}
+\newcommand{\bbQ}{{\mathbb Q}}
+\newcommand{\bbR}{{\mathbb R}}
+\newcommand{\bbS}{{\mathbb S}}
+\newcommand{\bbT}{{\mathbb T}}
+\newcommand{\bbU}{{\mathbb U}}
+\newcommand{\bbV}{{\mathbb V}}
+\newcommand{\bbW}{{\mathbb W}}
+\newcommand{\bbX}{{\mathbb X}}
+\newcommand{\bbY}{{\mathbb Y}}
+\newcommand{\bbZ}{{\mathbb Z}}
+
+\newcommand{\opunit}{\text{1}\kern-0.22em\text{l}}
+\newcommand{\funit}{\mathbf{1}}
+
+% \MATHFRAK - \fr ---------------------------------------------------
+
+\newcommand{\ong}{\backsimeq}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\CC}{\mathbb C}
+%\newcommand{\de}{\text{d}}
+\newcommand{\dt}{\text{d}t}
+\newcommand{\dx}{\text{d}x}
+\newcommand{\dV}{\text{d}V}
+\newcommand{\dr}{\text{d}r}
+\newcommand{\ds}{\text{d}s}
+\newcommand{\BE}{\text{BE}}
+\newcommand{\een}{\mathds{1}}
+\newcommand{\id}{\textrm{d}}
+
+
+
+\newcommand{\fra}{{\mathfrak a}}
+\newcommand{\frb}{{\mathfrak b}}
+\newcommand{\frc}{{\mathfrak c}}
+\newcommand{\frd}{{\mathfrak d}}
+\newcommand{\fre}{{\mathfrak e}}
+\newcommand{\frf}{{\mathfrak f}}
+\newcommand{\frg}{{\mathfrak g}}
+\newcommand{\frh}{{\mathfrak h}}
+\newcommand{\fri}{{\mathfrak i}}
+\newcommand{\frj}{{\mathfrak j}}
+\newcommand{\frk}{{\mathfrak k}}
+\newcommand{\frl}{{\mathfrak l}}
+\newcommand{\frm}{{\mathfrak m}}
+\newcommand{\frn}{{\mathfrak n}}
+\newcommand{\fro}{{\mathfrak o}}
+\newcommand{\frp}{{\mathfrak p}}
+\newcommand{\frq}{{\mathfrak q}}
+\newcommand{\frr}{{\mathfrak r}}
+\newcommand{\frs}{{\mathfrak s}}
+\newcommand{\frt}{{\mathfrak t}}
+\newcommand{\fru}{{\mathfrak u}}
+\newcommand{\frv}{{\mathfrak v}}
+\newcommand{\frw}{{\mathfrak w}}
+\newcommand{\frx}{{\mathfrak x}}
+\newcommand{\fry}{{\mathfrak y}}
+\newcommand{\frz}{{\mathfrak z}}
+
+\newcommand{\frA}{{\mathfrak A}}
+\newcommand{\frB}{{\mathfrak B}}
+\newcommand{\frC}{{\mathfrak C}}
+\newcommand{\frD}{{\mathfrak D}}
+\newcommand{\frE}{{\mathfrak E}}
+\newcommand{\frF}{{\mathfrak F}}
+\newcommand{\frG}{{\mathfrak G}}
+\newcommand{\frH}{{\mathfrak H}}
+\newcommand{\frI}{{\mathfrak I}}
+\newcommand{\frJ}{{\mathfrak J}}
+\newcommand{\frK}{{\mathfrak K}}
+\newcommand{\frL}{{\mathfrak L}}
+\newcommand{\frM}{{\mathfrak M}}
+\newcommand{\frN}{{\mathfrak N}}
+\newcommand{\frO}{{\mathfrak O}}
+\newcommand{\frP}{{\mathfrak P}}
+\newcommand{\frQ}{{\mathfrak Q}}
+\newcommand{\frR}{{\mathfrak R}}
+\newcommand{\frS}{{\mathfrak S}}
+\newcommand{\frT}{{\mathfrak T}}
+\newcommand{\frU}{{\mathfrak U}}
+\newcommand{\frV}{{\mathfrak V}}
+\newcommand{\frW}{{\mathfrak W}}
+\newcommand{\frX}{{\mathfrak X}}
+\newcommand{\frY}{{\mathfrak Y}}
+\newcommand{\frZ}{{\mathfrak Z}}
+
+% \BOLDSYMBOL - \bs -------------------------------------------------
+
+\newcommand{\bsa}{{\boldsymbol a}}
+\newcommand{\bsb}{{\boldsymbol b}}
+\newcommand{\bsc}{{\boldsymbol c}}
+\newcommand{\bsd}{{\boldsymbol d}}
+\newcommand{\bse}{{\boldsymbol e}}
+\newcommand{\bsf}{{\boldsymbol f}}
+\newcommand{\bsg}{{\boldsymbol g}}
+\newcommand{\bsh}{{\boldsymbol h}}
+\newcommand{\bsi}{{\boldsymbol i}}
+\newcommand{\bsj}{{\boldsymbol j}}
+\newcommand{\bsk}{{\boldsymbol k}}
+\newcommand{\bsl}{{\boldsymbol l}}
+\newcommand{\bsm}{{\boldsymbol m}}
+\newcommand{\bsn}{{\boldsymbol n}}
+\newcommand{\bso}{{\boldsymbol o}}
+\newcommand{\bsp}{{\boldsymbol p}}
+\newcommand{\bsq}{{\boldsymbol q}}
+\newcommand{\bsr}{{\boldsymbol r}}
+\newcommand{\bss}{{\boldsymbol s}}
+\newcommand{\bst}{{\boldsymbol t}}
+\newcommand{\bsu}{{\boldsymbol u}}
+\newcommand{\bsv}{{\boldsymbol v}}
+\newcommand{\bsw}{{\boldsymbol w}}
+\newcommand{\bsx}{{\boldsymbol x}}
+\newcommand{\bsy}{{\boldsymbol y}}
+\newcommand{\bsz}{{\boldsymbol z}}
+
+\newcommand{\bsA}{{\boldsymbol A}}
+\newcommand{\bsB}{{\boldsymbol B}}
+\newcommand{\bsC}{{\boldsymbol C}}
+\newcommand{\bsD}{{\boldsymbol D}}
+\newcommand{\bsE}{{\boldsymbol E}}
+\newcommand{\bsF}{{\boldsymbol F}}
+\newcommand{\bsG}{{\boldsymbol G}}
+\newcommand{\bsH}{{\boldsymbol H}}
+\newcommand{\bsI}{{\boldsymbol I}}
+\newcommand{\bsJ}{{\boldsymbol J}}
+\newcommand{\bsK}{{\boldsymbol K}}
+\newcommand{\bsL}{{\boldsymbol L}}
+\newcommand{\bsM}{{\boldsymbol M}}
+\newcommand{\bsN}{{\boldsymbol N}}
+\newcommand{\bsO}{{\boldsymbol O}}
+\newcommand{\bsP}{{\boldsymbol P}}
+\newcommand{\bsQ}{{\boldsymbol Q}}
+\newcommand{\bsR}{{\boldsymbol R}}
+\newcommand{\bsS}{{\boldsymbol S}}
+\newcommand{\bsT}{{\boldsymbol T}}
+\newcommand{\bsU}{{\boldsymbol U}}
+\newcommand{\bsV}{{\boldsymbol V}}
+\newcommand{\bsW}{{\boldsymbol W}}
+\newcommand{\bsX}{{\boldsymbol X}}
+\newcommand{\bsY}{{\boldsymbol Y}}
+\newcommand{\bsZ}{{\boldsymbol Z}}
+
+\newcommand{\scS}{{\mathscr S}}
+\newcommand{\scD}{{\mathscr D}}
+
+
+\newcommand{\bsalpha}{{\boldsymbol \alpha}}
+\newcommand{\bsbeta}{{\boldsymbol \beta}}
+\newcommand{\bsgamma}{{\boldsymbol \gamma}}
+\newcommand{\bsdelta}{{\boldsymbol \delta}}
+\newcommand{\bsepsilon}{{\boldsymbol \epsilon}}
+\newcommand{\bsmu}{{\boldsymbol \mu}}
+\newcommand{\bsomega}{{\boldsymbol \omega}}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\pzo}{\mathpzc{o}}
+\newcommand{\pzO}{\mathpzc{O}}
+
+
+% ABBREVIATION ------------------------------------------------------
+
+\newcommand{\fig}{Fig.\;}
+\newcommand{\cf}{cf.\;}
+\newcommand{\eg}{e.g.\;}
+\newcommand{\ie}{i.e.\;}
+
+% MISCELLANEOUS -----------------------------------------------------
+
+\newcommand{\un}[1]{\underline{#1}}
+\newcommand{\defin}{\stackrel{\text{def}}{=}}
+\newcommand{\bound}{\partial}
+\newcommand{\sbound}{\hat{\partial}}
+\newcommand{\rel}{\,|\,}
+\newcommand{\pnt}{\rightsquigarrow}
+\newcommand{\pa}{_\bullet}
+\newcommand{\nb}[1]{\marginpar{\tiny {#1}}}
+\newcommand{\pair}[1]{\langle{#1}\rangle}
+\newcommand{\0}{^{(0)}}
+\newcommand{\1}{^{(1)}}
+\newcommand{\2}{^{(2)}}
+\newcommand{\tot}{_{\text{TOT}}}
+\newcommand{\out}{_{\text{OUT}}}
+\newcommand{\con}{_{\text{con}}}
+%\newcommand{\id}{\textrm{d}}
+\newcommand{\can}{\text{can}}
+\newcommand{\tomean}{\stackrel{1}{\to}}
+\newcommand{\rev}{_{\text{REV}}}
+\newcommand{\irr}{_{\text{IRR}}}
+
+\DeclareMathOperator{\cnst}{const}
+\def\Z{\mathcal Z}
+\def\cL{\mathscr L}
+\def\cH{\mathscr H}
+\def\cA{\mathcal A}
+\def\R{\mathbb R}
+\def\S{\mathcal S}
+\def\mbf{\mathbf }
+
+\def\dbar{{\mathchar'26\mkern-12mu d}}
+
+\long\def\red#1{{\color{red}#1}}
+\renewcommand\div{\mathop\mathrm{div}}
+
+
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+	\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+	{\box0\lower0.4pt\box2}}
+
+\let\a=\alpha %\let\be=\beta
+\let\de=\delta \let\ep=\epsilon
+\let\ve=\varepsilon \let\vp=\varphi \let\ga=\gamma \let\io=\iota
+\let\ka=\kappa  \let\om=\omega \let\vr=\varrho
+\let\si=\sigma \let\vs=\varsigma \let\th=\theta \let\vt=\vartheta
+\let\ze=\zeta \let\up=\upsilon
+\let\be=\beta
+
+\let\De=\Delta \let\Ga=\Gamma \let\La=\Lambda \let\Om=\Omega
+\let\Th=\Theta
+
+% \MATHCAL - \ca ----------------------------------------------------
+
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+
+% ABBREVIATION ------------------------------------------------------
+
+\def\bea{\begin{eqnarray}}
+	\def\eea{\end{eqnarray}}
+\def\ba{\begin{array}}
+	\def\ea{\end{array}}
+\def\n{\nonumber}
+\def\c{\mathscr}
+\def\la{\langle}
+\def\ra{\rangle}
+
+\def\o{\omega}
+
+
+\newcommand{\wdr}[1]{\noindent  \bf{\emph{\color{blue}Remark by W:} {#1} \emph{\color{blue}EOR}} \normalfont}
+
+
+%===============================================
+\begin{document}
+	\title{Resetting photons}	
+	\author{Guilherme Eduardo Freire Oliveira, Christian Maes and Kasper Meerts\\ {\it Instituut voor Theoretische Fysica, KU Leuven}}
+
+\begin{abstract}
+Starting from a frequency diffusion process for a tagged photon which simulates relaxation to the Planck law,  we introduce a resetting where photons lower their frequency at random times.
+We consider two versions, one where the resetting to low frequency is independent of the existing frequency and a second case where the reduction in frequency scales with the original frequency.  The result is a nonlinear Markov process where the stationary distribution modifies the Planck law by abundanace of low frequency occupation. The physical relevance of such photon resetting processes can be found in explorations of nonequilibrium effects, e.g. via random expansions of a confined plasma or photon gas. 
+\end{abstract}
+\maketitle
+
+\tableofcontents
+\section{Introduction}
+Resetting has been introduced and added to diffusion processes for a variety of reasons since its original conception, \cite{evans}.  Typically, optimizing search strategies have been the underlying motivation, but one can also imagine physical resettings.  By physical resettings we mean the result of a time-dependent potential, for which there are random moments of confinement, or the random appearance in certain locatons of attractors, or the random contraction of an enclosed volume.  In the present paper, we investigate a new scenario where resetting is applied in frequency space of photons.  In that way we also explore physically motivated nonequilibrium effects on the Planck distribution.\\
+
+Resetting photons to a lower frequency refers to reducing the wave vector (in the reciprocal lattice), which, in real space, refers to an expansion.  The physical mechanism we imagine here is that of a confined plasma where at random moments the confinement is lifted....
+
+\section{The Kompaneets process}
+
+\subsection{Kompaneets equation}
+As reference process we consider a fluctuation dynamics which realizes the Kompaneets equation as its nonlinear Fokker-Planck equation.  Here the physical realization is
+relaxation towards equilibrium of a photon gas in contact with a nondegenerate, nonrelativistic electron bath in thermal equilibrium at temperature $T$.  We concentrate here on Compton scattering as main mechanism  In 1957 Kompaneets \cite{kompa}  stared from a semi-classical Boltzmann equation to arrive at an equation for $n(t,\omega)$, the occupation number distribution function  at frequency $\omega$ of the photon gas at time $t$:
+\begin{equation}\label{ke}
+\omega^2\frac{\partial n}{\partial t}(t,\omega)= \frac{n_e\sigma_T 
+	c}{m_e c^2}\frac{\partial }{\partial \omega}\omega^4\left\{k_B T 
+\frac{\partial n}{\partial \omega}(t,\omega) + 
+\hbar\left[1+n(t,\omega)\right]n(t,\omega)\right\}
+\end{equation}
+The constant $\sigma_T$ is the Thomson total cross section, and $n_e,m_e$ are  the density and mass of the electrons, respectively.
+Note the stimulated emission (induced Compton scattering, \cite{liedahl, blandford})  in the  nonlinearity (in the second term) of \eqref{ke}.  Stationarity is achieved when $n(t,\omega)$ follows the Bose-Einstein distribution.  
+
+The Kompaneets equation remains essential for the dynamical understanding of the cosmic microwave backgrond and related Sunyaev-Zeldovich effect \cite{sunyaeveffect,sunyaev}.
+We refer to excellent reviews \cite{practical,gui,zeldovich} for more detaile. We skip here the many possible extensions and generalizations; see e.g. \cite{buet, pitrou,barbosa, brown, itoh, itoh2, cooper, kohyama1, kohyama2, kohyama3,paper}.\\
+
+A dimensionless Kompaneets equation  employs an average photon occupation number $n(t, x)$ at dimensionless frequency $x= \hbar \omega/k_B T$,
+\begin{equation}\label{ake}
+x^2\frac{\partial n}{\partial y}(y,x) = \frac{\partial }{\partial x}x^4\left\{
+\frac{\partial n}{\partial x}(y,x) + 
+\left[1+n(y,x)\right]n(y,x)\right\}
+\end{equation}
+with dimensionless Compton optical depth
+\[y = \frac{ k_B T }{m_e c^2} n_e \sigma_T c \, t\coloneqq \frac{ t}{\tau_C}\]
+where $\tau_C$ is  the  characteristic time in which photons update their frequency as the result of Compton scattering with thermal electrons.  Note here that the scattering can be interpreted as a Doppler shift
+\begin{equation}\label{shift}
+\left\langle\frac{1}{2\tau}\left(\frac{\Delta\omega}{\omega}\right)^2\right\rangle\approx \frac{ k_B T }{m_e c^2} n_e \sigma_T c= \frac{1}{\tau_C}
+\end{equation} 
+for $\tau = \ell/c$ ,  the average collision rate in terms of the mean free path of photons $\ell=(n_e\sigma_T)^{-1}$.\\
+
+The Kompaneets equation \eqref{ke} can be rewritten still in terms of the photon density.  Here we assume confinement of photons in a box of volume $V$ with periodic boundary conditions.  The density of states is
+\[
+g(\vb{k}) \dd^3 \vb{k} = \frac{2V}{(2\pi)^3} \dd^3 \vb{k} = \frac{2V}{(2\pi)^3} 
+4\pi k^2 \dd k
+\]
+where $\vb{k}$ is the wave vector.  Under isotropy, which we will always assume, and for $x = \hbar \omega / k_B T$,
+\[
+g(x) \dd x = \frac{2V}{(2\pi)^3} \left( \frac{k_B T}{\hbar c} \right)^3 4\pi 
+x^2 \dd x
+\] 
+It allows to define the spectral number density, i.e., the number of photons with energy between $E$ and $E+\dd E$ as 
+\begin{equation}\label{eq:snd}
+u(y,x) = g(x) n(y,x) = V \frac{1}{\pi^2} \left( \frac{k_B T}{\hbar c} \right)^3 
+x^2 n(y,x)
+\end{equation}
+The total number of photons is then
+\[ N = \int_0^\infty \dd{x} u(y,x)
+ \]
+and the spectral probability density equals
+\begin{equation}\label{eq:spd}
+\rho(y,x) = \frac{V}{N} \frac{1}{\pi^2} \left(\frac{k_B T}{\hbar c}\right)^3 
+x^2 n(y,x) = \frac{x^2 n(y,x)}{2\zeta(3) Z}
+\end{equation}
+We put $\zeta(3) = 1/2 \int_0^\infty \id x x^2/(e^x-1) \simeq 1.202$
+so that $Z$ depends on the temperature and is proportional 
+to the number of photons per volume, and serves to normalize $\rho$,  It can be interpreted as the ratio of the photon density to that 
+of the Planck distribution corresponding to the same temperature.
+ When $n(y,x)= n_{BE}(x) = 1 / (\exp(x) - 1)$ (Bose-Einstein distribution) the photon number 
+equals
+\[
+N_{BE} = 2 \zeta(3) \frac{V}{\pi^2} \left( \frac{k_B T}{\hbar c} \right)^3
+\]
+corresponding to a spectral probability density with $Z = 1, \rho_{BE}(x) = \frac{x^2 n_{BE}(x)}{2\zeta(3)}$.\\
+Then,  in terms of the photon spectral density \eqref{eq:spd}, the Kompaneets equation \eqref{ake} becomes
+\begin{equation}\label{kp}
+\frac{\partial \rho}{\partial y} (y,x) = -\frac{\partial}{\partial x}\left[\left(4x- x^2\left(1+2\zeta(3) Z\,\frac{\rho(y,x)}{x^2}\right)\right)\rho(y,x)\right] + \frac{\partial^2}{\partial x^2}\left[x^2 \rho(y,x)\right]
+\end{equation}
+Note that for 
+$Z\rightarrow 0$, the Wien distribution $\rho_\text{Wien}(x) = x^2 e^{-x}/2$ becomes stationary, which gives less weight to low frequency compared to the Planck law.
+
+\subsection{Stochastic process}
+Tthe Kompaneets equation is \textbf{positivity} preserving \cite{positivity}. It allows therefore a probabilistic interpretation as nonlinear Fokker-Planck equation.  That was explicitly realized in \cite{fre}.\\
+
+We constructed there the tagged photon diffusion process,
+\begin{equation} \label{kp-ito2}
+\dot x	= \frac{\dd {B}}{\dd x}(x) - \beta {B}(x) {U'}(x)(1+n(x,t)) +   2\frac{{B}(x)}{x} + \sqrt{2{B}(x)}\, \xi_t
+\end{equation}
+where $\xi_t$ is standard white noise.  That It\^o stochastic process \eqref{kp-ito2} is our Kompaneets process, a (nonlinear)Langevin dynamics associated to the Kompaneets equation \eqref{kp} in   the case where
+\[
+U(x) = x,\qquad B(x) = x^2
+\]  
+One can interpret it as a mean-field Markov process for the tagged photon, where the field $n(t,x)$  represents the empirical occupations, followinf the ideas of e.g,  the McKean-Vlasov equation \cite{VM}.  The specific mult-photon diffusion limit was discussed in \cite{freq}.\\
+  We remark that the white noise can lead to (unphysical) negative values of $x$.  The {\it ad hoc} remedy is to puch by hand (in the simulation) the frequecny value positive, effectively using a boundary condition at $x=0$.   Physically speaking, reaction processes such as Bremsstrahlung and double Compton scattering control the photon number density but we ignore here the detailed implementation of these processes.\\
+  
+  As an illustration of the soundness of the process... we reproduce here....
+  
+\begin{figure}
+	\includegraphics{{spd_N-1e7.00_dx-0.05_t-3_dt-0.0001_ic-uniform}.pdf}
+	\caption{Result of Kompaneets, for three units of time.  Needs indication of what in axes.  Mention maximum excess of 1/1000.  Mention very fastg prethermalization, slow final thermalization --- low frequency going like $x$.}
+	\label{fig:spd-kompaneets}
+\end{figure}
+
+%\begin{figure}
+%	\includegraphics{{excess N-1e7.00 dx-0.05 t-10 dt-0.0001 ic-uniform}.pdf}
+%	\caption{and its excess after ten units of time}
+%	\label{fig:excess-kompaneets}
+%\end{figure}
+If we lower $Z$ to, say, $0.1$, the frequency distribution instead converges to 
+the Wien (Boltzmann) distribution, as seen in Fig.~\ref{fig:spd-boltzmann}.
+
+\begin{figure}
+	\includegraphics{{spd_N-1e5.00_dx-0.05_t-5_dt-0.001_ic-uniform_Z-0.10}.pdf}
+	\caption{Wien distribution, going like $x^2$ at low frequency.  Only fast thermalization because no low frequency activity.}
+	\label{fig:spd-boltzmann}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{{spd_N-1e5.00_dx-0.05_t-10_dt-0.001_ic-uniform_Z-2.00_brems}.pdf}
+	\caption{injection of particles not correct yet, uniform initial 
+	condition,initially twice the Planckian particle number, condensate gets 
+	absorbed}
+\end{figure}
+
+\section{Resetting Kompaneets process}
+
+\subsection{Process}
+Physical motivation plus definiton of two versions of resettings.
+
+\subsection{Discussion of results}
+
+
+
+
+\section {Conclusions}\label{con}
+
+
+
+
+
+\bibliography{lang_komprefs}
+
+\end{document}
