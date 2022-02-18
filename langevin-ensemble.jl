@@ -27,6 +27,24 @@ mutable struct Epdf
 	end
 end
 
+struct Sim
+	epdf::Epdf
+	dt::Float64
+	
+	b::Float64
+	k::Float64
+	
+	c::Float64
+	
+	brems::Bool
+	
+	reset::Bool
+	rate::Float64	
+	divisor::Float64
+end
+
+
+
 function update!(epdf::Epdf)
 	fill!(epdf.bins, 0)
 	for x in epdf.xs
@@ -88,22 +106,7 @@ function init!(epdf::Epdf, ic)
 	update!(epdf)
 end
 
-struct Sim
-	epdf::Epdf
-	dt::Float64
-	
-	b::Float64
-	k::Float64
-	
-	c::Float64
-	
-	brems::Bool
-	
-	reset::Bool
-	rate::Float64	
-end
-
-function tick!(sim::Sim, i)
+function tick!(sim::Sim, i, t)
 	epdf = sim.epdf
 	dx = epdf.d
 	x = epdf.xs[i]
@@ -116,10 +119,10 @@ function tick!(sim::Sim, i)
 	epdf.xs[i] = x + drift*dt + diffusion*randn()*sqrt(dt)
 
 	if epdf.xs[i] < epdf.min
-		#@printf "Underflow %.2f\n" epdf.xs[i]
+		@printf "Underflow %.2f t %.4f\n" epdf.xs[i] t
 		epdf.xs[i] = rand()*2*dx
 	elseif epdf.xs[i] > epdf.max
-		#@printf "Overflow  %.2f\n" epdf.xs[i]
+		@printf "Overflow  %.2f t %.4f\n" epdf.xs[i] t
 		epdf.xs[i] = x - rand()*2*dx
 	end
 	
@@ -171,7 +174,7 @@ function trajectory(sim::Sim, tf)
 	steps = 0
 	while t < tf
 		Threads.@threads for j in 1:sim.epdf.num_ensemble
-			tick!(sim, j)
+			tick!(sim, j, t)
 		end
 		
 		update!(sim.epdf)
@@ -182,11 +185,11 @@ function trajectory(sim::Sim, tf)
 			end
 		end
 		
-		if false && sim.reset
+		if sim.reset
 			resets = 0
 			for i in eachindex(sim.epdf.xs)
 				if rand() < sim.dt*sim.rate
-					sim.epdf.xs[i] /= 2
+					sim.epdf.xs[i] /= sim.divisor
 					resets += 1
 				end
 			end
@@ -226,6 +229,7 @@ function trajectory(sim::Sim, tf)
 	return
 end
 
+
 cd("data")
 foreach(rm,
 	filter(
@@ -234,33 +238,36 @@ foreach(rm,
 	)
 )
 
-const Z = 1.10
-const num_particles = round(Int, 1_00_000*Z)
+const Z = 0.90
+const num_particles = round(Int, 1_111_111*Z)
 const dx = 0.05
-const dt = 0.0001
+const dt = 0.001
 const ic = "hotplanck"
 const b = 0.000
 const k = 0.000
 const c = 0.000
 const brems = false
 const tf = 100.0
-const reset = false
-const rate = 0.1
+const reset = true
+const rate = 0.01
+const divisor = 10
+
+@assert !(brems && reset)
 
 sim = Sim(
 	Epdf(0.0, 20.0, dx, num_particles, Z, ic),
 	dt,
-	b, k, c, brems, reset, rate)
+	b, k, c, brems, reset, rate, divisor)
 
 paramstring = ""
-paramstring *= b == 0.0 ? "" : @sprintf(" b-%.4f k-%.4f", b, k)
-paramstring *= c == 0.0 ? "" : @sprintf(" c-%.4f", c)
-paramstring *= Z == 1.0 ? "" : @sprintf(" Z-%.4f", Z)
+paramstring *= b == 0.0 ? "" : @sprintf("_b-%.4f_k-%.4f", b, k)
+paramstring *= c == 0.0 ? "" : @sprintf("_c-%.4f", c)
+paramstring *= Z == 1.0 ? "" : @sprintf("_Z-%.4f", Z)
 paramstring *= !brems ?   "" : " brems"
-paramstring *= !reset ?   "" : @sprintf(" reset rate-%4f", rate)
+paramstring *= !reset ?   "" : @sprintf("_reset_rate-%4f_divisor-%f", rate, divisor)
 
 open("params.txt", "w") do io
-	@printf(io, "N-1e%.2f dx-%g t-%g dt-%g ic-%s%s", log10(num_particles), dx, tf, dt, ic, paramstring)
+	@printf(io, "N-1e%.2f_dx-%g_t-%g_dt-%g_ic-%s%s", log10(num_particles), dx, tf, dt, ic, paramstring)
 end
 
 @time trajectory(sim, tf)
