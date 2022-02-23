@@ -558,6 +558,26 @@ step with a probability $r \Delta t$. The timestep $\Delta t$ is chosen such
 that this product is much smaller than 1, making sure that the probability of 
 two resets happening in the same timestep remains negligible.
 
+One particular difficulty here lies in the fact that these dynamics are quite 
+prone to the formation of condensates. In particular, the Planck distribution 
+at zero chemical potential is on the knife-edge of this phenomenon, if there is 
+any excess in particles, a non-zero probability flux will come into being at 
+the origin, leading to a Dirac delta mass at $x=0$. More precisely, letting $f 
+= x^2 n$, the Kompaneets equation takes the form
+\begin{align*}
+\dot{f} = \partial_x j &&\text{with}&&j = x^2 f'-2xf+x^2 f+f^2.
+\end{align*}
+If we substitute $f=\frac{x^2}{e^x - 1} + \delta$ we find that $j = \delta^2 + 
+O(x)$, hence no probability can be allowed near $x=0$ to first order. To remedy 
+this, we assume the photon gas is slightly rarefied, having a particle density 
+that is 90\% that of a photon gas following the Planck distribution at the same 
+temperature. This is also the distribution with which we compare the results of 
+the simulation
+\begin{align}
+\rho(x) = \frac{1}{0.9\cdot2\zeta(3)}\frac{1}{e^{x+\mu}-1}&&\text{with $\mu 
+\approx 0.08$}
+\end{align}
+
 \begin{figure}
 \begin{subfigure}{\textwidth}
 \includegraphics[width=0.48\textwidth]{{spd_N-1e5.95_t-10_Z-0.9000_reset_rate-0.1000_divisor-10.00}.pdf}\hfill%
