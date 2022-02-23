@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt,reqno,superscriptaddress,nofootinbib]{revtex4}
+\documentclass[a4paper,12pt,reqno,superscriptaddress,nofootinbib]{article}
 %\documentclass{article}
 \usepackage[centertags]{amsmath}
 \usepackage{amsfonts}
@@ -11,32 +11,14 @@
 \usepackage{euscript}
 \usepackage{graphicx}
 \usepackage{enumerate}
-\setlength{\marginparwidth}{2cm}
-\usepackage{todonotes}
-%\usepackage[normalem]{ulem} % for strikeout text with \sout
 \usepackage{color}
-\usepackage{soul}
+\usepackage[margin=1in]{geometry}
 
 
-%=== TO BE PUT BACK! ===
-%\usepackage{floatrow}
-%\usepackage{caption}
-
-
-%\usepackage{tikz}
-\usepackage{pgf}
-\usetikzlibrary{positioning,fit,calc}
-%\usetikzlibrary{positioning}
-\usetikzlibrary{arrows,automata}
-\usepackage{wrapfig}
-\usepackage{amscd}
 \usepackage{hyperref}
 \usepackage{physics}
-\usepackage{subfig}
+\usepackage{subcaption}
 \usepackage{siunitx}
-
-%=== TEMPORARY ===
-\usepackage{changes}
 
 
 % THEOREM-LIKE ENVIRONMENTS -----------------------------------------
@@ -430,13 +412,7 @@
 \def\la{\langle}
 \def\ra{\rangle}
 
-\def\o{\omega}
 
-
-\newcommand{\wdr}[1]{\noindent  \bf{\emph{\color{blue}Remark by W:} {#1} \emph{\color{blue}EOR}} \normalfont}
-
-
-%===============================================
 \begin{document}
 	\title{Resetting photons}	
 	\author{Guilherme Eduardo Freire Oliveira, Christian Maes and Kasper Meerts\\ {\it Instituut voor Theoretische Fysica, KU Leuven}}
@@ -541,38 +517,119 @@ One can interpret it as a mean-field Markov process for the tagged photon, where
   As an illustration of the soundness of the process... we reproduce here....
   
 \begin{figure}
-	\includegraphics{{spd_N-1e7.00_dx-0.05_t-3_dt-0.0001_ic-uniform}.pdf}
+	\includegraphics{{spd_N-1e6.00_dx-0.05_t-3_dt-0.0001_ic-hotplanck}.pdf}
 	\caption{Result of Kompaneets, for three units of time.  Needs indication of what in axes.  Mention maximum excess of 1/1000.  Mention very fastg prethermalization, slow final thermalization --- low frequency going like $x$.}
 	\label{fig:spd-kompaneets}
-\end{figure}
-
-%\begin{figure}
-%	\includegraphics{{excess N-1e7.00 dx-0.05 t-10 dt-0.0001 ic-uniform}.pdf}
-%	\caption{and its excess after ten units of time}
-%	\label{fig:excess-kompaneets}
-%\end{figure}
-If we lower $Z$ to, say, $0.1$, the frequency distribution instead converges to 
-the Wien (Boltzmann) distribution, as seen in Fig.~\ref{fig:spd-boltzmann}.
-
-\begin{figure}
-	\includegraphics{{spd_N-1e5.00_dx-0.05_t-5_dt-0.001_ic-uniform_Z-0.10}.pdf}
-	\caption{Wien distribution, going like $x^2$ at low frequency.  Only fast thermalization because no low frequency activity.}
-	\label{fig:spd-boltzmann}
-\end{figure}
-
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.7\linewidth]{{spd_N-1e5.00_dx-0.05_t-10_dt-0.001_ic-uniform_Z-2.00_brems}.pdf}
-	\caption{injection of particles not correct yet, uniform initial 
-	condition,initially twice the Planckian particle number, condensate gets 
-	absorbed}
 \end{figure}
 
 \section{Resetting Kompaneets process}
 
 \subsection{Process}
 Physical motivation plus definiton of two versions of resettings.
+
+We will consider the same dynamics as before, adding Poissonian resetting with 
+a constant rate. We introduce the resetting rate $r$. Three methods are 
+introduced for resetting, the so-called "division" method, where the energy of 
+the photon is divided by a constant factor $d$, the "uniform" method, where the 
+photon's energy is reset to a random value uniformly distributed between 0 and 
+a cutoff $x_0$, and finally the "exponential" method, where the new energy of 
+the photon follows an exponential distribution with scale $x_0$.
+
+\textbf{Kasper:} Is there a point in having multiple methods? Looking at figure 
+\ref{fig:comparison}, with the right tuning of parameters all three methods of 
+resetting give identical results. The choices of the scale, interval and 
+divisor are such that the expected value of a photon after resetting is the 
+same, $0.05$ in this case.
+
+This implies that the position of the photon is updated by the following 
+stochastic rules, in an infinitesimal interval $\dd t$ we have
+\begin{align}\label{eq:resetted-ito}
+x(t + \dd t) &= x(t) + D(x,t,n_t) \dd t + \sqrt{2{B}(x)}\, \xi_t \sqrt{\dd 
+t}&&\text{with probability $(1-r)\dd t$}\\\nonumber
+&= \begin{cases}x(t) / d &\text{"division" method}\\
+x\sim \operatorname{Uniform}(0,x_0)&\text{"uniform" method}\\
+x\sim \operatorname{Exp}(x_0)&\text{"exponential" method}\\ 
+\end{cases}&&\text{with probability $r \dd t$}
+\end{align}
+
+To simulate these dynamics, we revisit the procedure from (cite vorige paper?).  
+Adding to this, at every timestep, for every particle, we perform the resetting 
+step with a probability $r \Delta t$. The timestep $\Delta t$ is chosen such 
+that this product is much smaller than 1, making sure that the probability of 
+two resets happening in the same timestep remains negligible.
+
+\begin{figure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e5.95_t-10_Z-0.9000_reset_rate-0.1000_divisor-10.00}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e5.95_t-10_Z-0.9000_reset_rate-0.1000_divisor-10.00}.pdf}
+\caption{$r=\num{e-1}$, $d=10$, simulation stopped}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0100_divisor-10.00}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0100_divisor-10.00}.pdf}
+\caption{$r=\num{e-2}$, $d=10$}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0100_divisor-100.00}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0100_divisor-100.00}.pdf}
+\caption{$r=\num{e-2}$, $d=100$, simulation stopped}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0100_divisor-1000.00}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0100_divisor-1000.00}.pdf}
+\caption{$r=\num{e-2}$, $d=1000$, simulation stopped}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0010_divisor-1000.00}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0010_divisor-1000.00}.pdf}
+\caption{$r=\num{e-3}$, $d=1000$}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0001_divisor-1000.00}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0001_divisor-1000.00}.pdf}
+\caption{$r=\num{e-4}$, $d=1000$}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0100_interval-0.10}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0100_interval-0.10}.pdf}
+\caption{$r=\num{e-2}$, $x_0=0.1$, simulation stopped}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0010_interval-0.10}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0010_interval-0.10}.pdf}
+\caption{$r=\num{e-3}$, $x_0=0.1$}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0001_interval-0.10}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e5.95_t-10_Z-0.9000_reset_rate-0.0001_interval-0.10}.pdf}
+\caption{$r=\num{e-4}$, $x_0=0.1$}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e6.95_t-10_Z-0.9000_reset_rate-0.0010_interval-0.10}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e6.95_t-10_Z-0.9000_reset_rate-0.0010_interval-0.10}.pdf}
+\caption{$r=\num{e-3}$, "interval", $x_0=0.1$}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e6.95_t-10_Z-0.9000_reset_rate-0.0010_scale-0.05}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e6.95_t-10_Z-0.9000_reset_rate-0.0010_scale-0.05}.pdf}
+\caption{$r=\num{e-3}$, "exponential", $x_0=0.05$}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.48\textwidth]{{spd_N-1e6.95_t-10_Z-0.9000_reset_rate-0.0010_divisor-60.00}.pdf}\hfill%
+\includegraphics[width=0.48\textwidth]{{excess_N-1e6.95_t-10_Z-0.9000_reset_rate-0.0010_divisor-60.00}.pdf}
+\caption{$r=\num{e-4}$, $d=60$}
+\end{subfigure}
+\caption{Comparison between methods}\label{fig:comparison}
+\end{figure}
 
 \subsection{Discussion of results}
 
@@ -585,6 +642,7 @@ Physical motivation plus definiton of two versions of resettings.
 
 
 
-\bibliography{lang_komprefs}
+\bibliographystyle{abbrv}
+\bibliography{langevin-kompaneets}
 
 \end{document}

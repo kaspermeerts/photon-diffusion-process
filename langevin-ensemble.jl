@@ -41,6 +41,8 @@ struct Sim
 	reset::Bool
 	rate::Float64	
 	divisor::Float64
+	interval::Float64
+	scale::Float64
 end
 
 
@@ -122,8 +124,8 @@ function tick!(sim::Sim, i, t)
 		@printf "Underflow %.2f t %.4f\n" epdf.xs[i] t
 		epdf.xs[i] = rand()*2*dx
 	elseif epdf.xs[i] > epdf.max
-		@printf "Overflow  %.2f t %.4f\n" epdf.xs[i] t
-		epdf.xs[i] = x - rand()*2*dx
+		#@printf "Overflow  %.2f t %.4f\n" epdf.xs[i] t
+		epdf.xs[i] = x - rand()*10*dx
 	end
 	
 	return
@@ -186,11 +188,17 @@ function trajectory(sim::Sim, tf)
 		end
 		
 		if sim.reset
-			resets = 0
 			for i in eachindex(sim.epdf.xs)
 				if rand() < sim.dt*sim.rate
-					sim.epdf.xs[i] /= sim.divisor
-					resets += 1
+						if method == "division"
+							sim.epdf.xs[i] /= sim.divisor
+						elseif method == "interval"
+							sim.epdf.xs[i] = rand()*sim.interval
+						elseif method == "exponential"
+							sim.epdf.xs[i] = randexp()*sim.scale
+						else
+							throw("No such method")
+						end
 				end
 			end
 			update!(sim.epdf)
@@ -230,7 +238,7 @@ function trajectory(sim::Sim, tf)
 end
 
 
-cd("data")
+cd("data2")
 foreach(rm,
 	filter(
 		endswith(".dat"),
@@ -239,35 +247,52 @@ foreach(rm,
 )
 
 const Z = 0.90
-const num_particles = round(Int, 1_111_111*Z)
+const num_particles = round(Int, 10_000_000*Z)
 const dx = 0.05
 const dt = 0.001
-const ic = "hotplanck"
+const ic = "planck"
 const b = 0.000
 const k = 0.000
 const c = 0.000
 const brems = false
-const tf = 100.0
+const tf = 10.0
 const reset = true
-const rate = 0.01
-const divisor = 10
+const rate = 0.001
+const method = "exponential"
+const divisor = 60
+const interval = 2dx
+const scale = dx
 
-@assert !(brems && reset)
+#@assert !(brems && reset)
 
 sim = Sim(
 	Epdf(0.0, 20.0, dx, num_particles, Z, ic),
 	dt,
-	b, k, c, brems, reset, rate, divisor)
+	b, k, c, brems, reset, rate, divisor, interval, scale)
 
 paramstring = ""
+paramstring *= dx == 0.05 ? "" : @sprintf("_dx-%g", dx)
+paramstring *= dt == 0.001 ? "" : @sprintf("_dt-%g", dt)
+paramstring *= ic == "planck" ? "" : @sprintf("_ic-%s", ic)
 paramstring *= b == 0.0 ? "" : @sprintf("_b-%.4f_k-%.4f", b, k)
 paramstring *= c == 0.0 ? "" : @sprintf("_c-%.4f", c)
 paramstring *= Z == 1.0 ? "" : @sprintf("_Z-%.4f", Z)
-paramstring *= !brems ?   "" : " brems"
-paramstring *= !reset ?   "" : @sprintf("_reset_rate-%4f_divisor-%f", rate, divisor)
+paramstring *= !brems ?   "" : "_brems"
+if reset
+	paramstring *= @sprintf("_reset_rate-%.4f", rate)
+	if method == "division"
+		paramstring *= @sprintf("_divisor-%.2f", divisor)
+	elseif method == "interval"
+		paramstring *= @sprintf("_interval-%.2f", interval)
+	elseif method == "exponential"
+		paramstring *= @sprintf("_scale-%.2f", scale)
+	else
+		throw("No such method")
+	end
+end
 
 open("params.txt", "w") do io
-	@printf(io, "N-1e%.2f_dx-%g_t-%g_dt-%g_ic-%s%s", log10(num_particles), dx, tf, dt, ic, paramstring)
+	@printf(io, "N-1e%.2f_t-%g%s", log10(num_particles), tf, paramstring)
 end
 
 @time trajectory(sim, tf)
