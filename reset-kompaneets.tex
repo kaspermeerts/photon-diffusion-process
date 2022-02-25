@@ -535,6 +535,23 @@ photon's energy is reset to a random value uniformly distributed between 0 and
 a cutoff $x_0$, and finally the "exponential" method, where the new energy of 
 the photon follows an exponential distribution with scale $x_0$.
 
+For a justification of the mechanisms underlying this resetting we turn our 
+attention towards two phenomena: the metric expansion of space and the Doppler 
+effect. From the beginning of the lepton era to recombination space has 
+expanded millionfold, and from recombination until now the scale factor has 
+increased by another factor of one thousand. In the highly symmetric FLRW 
+solution of the Einstein field equations, this scale factor has risen 
+continuously and homogeneously. Moving away from this highly idealized 
+solution, we can imagine more localized, abrupt increases, applying only to a 
+fraction of photons.  As a photon's frequency is inversely proportional to the 
+scale factor, this would in effect be a stochastic division of photon 
+frequencies by some large factor. This process is reminiscent of the shift in 
+frequency due to the Doppler, and in fact mathematically and conceptually this 
+process is identical to that of Doppler shifts from expanding matter. In this 
+regard, one can also consider a cavity with randomly, quickly receding walls.  
+Any photon catching up to these walls would again undergo a downwards shift in 
+frequency.
+
 \textbf{Kasper:} Is there a point in having multiple methods? Looking at figure 
 \ref{fig:comparison}, with the right tuning of parameters all three methods of 
 resetting give identical results. The choices of the scale, interval and 
@@ -565,7 +582,7 @@ any excess in particles, a non-zero probability flux will come into being at
 the origin, leading to a Dirac delta mass at $x=0$. More precisely, letting $f 
 = x^2 n$, the Kompaneets equation takes the form
 \begin{align*}
-\dot{f} = \partial_x j &&\text{with}&&j = x^2 f'-2xf+x^2 f+f^2.
+\dot{f} = -\partial_x j &&\text{with}&&j = 2xf -x^2 f'-x^2 f-f^2.
 \end{align*}
 If we substitute $f=\frac{x^2}{e^x - 1} + \delta$ we find that $j = \delta^2 + 
 O(x)$, hence no probability can be allowed near $x=0$ to first order. To remedy 
