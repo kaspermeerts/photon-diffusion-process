@@ -9,3 +9,4 @@
 *.blg
 *.bbl
 *.fdb_latexmk
+*.synctex.gz

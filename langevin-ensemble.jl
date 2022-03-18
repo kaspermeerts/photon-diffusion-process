@@ -45,8 +45,6 @@ struct Sim
 	scale::Float64
 end
 
-
-
 function update!(epdf::Epdf)
 	fill!(epdf.bins, 0)
 	for x in epdf.xs
@@ -79,6 +77,14 @@ function dump_occupation(t, epdf::Epdf)
 				epdf.min + ((i-1) + 1/2) * epdf.d, '\t',
 				epdf.bins[i] / (epdf.num_ensemble_planck * epdf.d) * 2zeta(3) / (((i-1)+1/2) *epdf.d)^2
 			)
+		end
+	end
+end
+
+function dump_positions(epdf::Epdf)
+	open(@sprintf("xs.dat"), "w") do io
+		for x in epdf.xs
+			println(io, x)
 		end
 	end
 end
@@ -118,17 +124,28 @@ function tick!(sim::Sim, i, t)
 	
 	diffusion = sqrt(2*(x^2 + (x < x0 ? c*x/x0^2 : c/x)))
 	
-	epdf.xs[i] = x + drift*dt + diffusion*randn()*sqrt(dt)
+	epdf.xs[i] = x + drift*sim.dt + diffusion*randn()*sqrt(sim.dt)
 
 	if epdf.xs[i] < epdf.min
 		@printf "Underflow %.2f t %.4f\n" epdf.xs[i] t
-		epdf.xs[i] = rand()*2*dx
+		sample = 20rand()
+		while 0.27 * rand() > 1/(2*zeta(3)) * sample^2 / (exp(sample)-1)
+			sample = 20rand()
+		end
+		epdf.xs[i] = sample
+
 	elseif epdf.xs[i] > epdf.max
 		#@printf "Overflow  %.2f t %.4f\n" epdf.xs[i] t
 		epdf.xs[i] = x - rand()*10*dx
 	end
 	
-	return
+	if x < 2dx < epdf.xs[i]
+		return +1
+	elseif epdf.xs[i] < 2dx < x
+		return -1
+	end
+	
+	return 0
 end
 
 function do_brems!(sim::Sim, bin)
@@ -167,16 +184,20 @@ function trajectory(sim::Sim, tf)
 
 	t = 0.0
 	t_step = 1.0
-	t_goal = 0t_step
+	t_goal = 0.0*t_step
+	passages = Threads.Atomic{Int}(0)
+	resets = 0
 	
 	times = [t]
-	particle_ns = [num_particles]
+	particle_ns = [sim.epdf.num_ensemble]
 
 	start_time = time()
 	steps = 0
 	while t < tf
+		# XXX
+		t_workaround = t
 		Threads.@threads for j in 1:sim.epdf.num_ensemble
-			tick!(sim, j, t)
+			Threads.atomic_add!(passages, tick!(sim, j, t_workaround))
 		end
 		
 		update!(sim.epdf)
@@ -190,15 +211,16 @@ function trajectory(sim::Sim, tf)
 		if sim.reset
 			for i in eachindex(sim.epdf.xs)
 				if rand() < sim.dt*sim.rate
-						if method == "division"
-							sim.epdf.xs[i] /= sim.divisor
-						elseif method == "interval"
-							sim.epdf.xs[i] = rand()*sim.interval
-						elseif method == "exponential"
-							sim.epdf.xs[i] = randexp()*sim.scale
-						else
-							throw("No such method")
-						end
+					if method == "division"
+						sim.epdf.xs[i] /= sim.divisor
+					elseif method == "interval"
+						sim.epdf.xs[i] = rand()*sim.interval
+					elseif method == "exponential"
+						sim.epdf.xs[i] = randexp()*sim.scale
+					else
+						throw("No such method")
+					end
+					resets +=1
 				end
 			end
 			update!(sim.epdf)
@@ -211,7 +233,11 @@ function trajectory(sim::Sim, tf)
 			eta = (tf - t) / (t - 0) * elapsed
 			total = (tf - 0) / (t - 0) * elapsed
 			epdf = sim.epdf
-			@printf("%2.2f / %2.2f ETA %5d %g out of %g: %.2f%% of Planckian value\n", t, tf, eta, epdf.num_ensemble, epdf.num_ensemble_planck, 100*epdf.num_ensemble/epdf.num_ensemble_planck)
+			current = passages[] / (epdf.num_ensemble * t_step)
+
+			@printf("%2.2f / %2.2f ETA %5d %g out of %g: %.2f%% | p: %d r: %d\n", t, tf, eta, epdf.num_ensemble, epdf.num_ensemble_planck, 100*epdf.num_ensemble/epdf.num_ensemble_planck, passages[], resets)
+			passages[] = 0
+			resets = 0
 			dump_hist(t, epdf)
 			dump_occupation(t, epdf)
 			open("n.dat", "w") do io
@@ -219,6 +245,8 @@ function trajectory(sim::Sim, tf)
 					println(io, times[i], '\t', particle_ns[i] / epdf.num_ensemble_planck)
 				end
 			end
+
+			dump_positions(epdf)
 		end
 		push!(times, t)
 		push!(particle_ns, sim.epdf.num_ensemble)
@@ -233,21 +261,17 @@ function trajectory(sim::Sim, tf)
 			println(io, times[i], '\t', particle_ns[i] / sim.epdf.num_ensemble_planck)
 		end
 	end
+
+	dump_positions(sim.epdf)
 	
 	return
 end
 
+const ratestep = 0 #parse(Int, ARGS[1])
+const divisorstep = 0 #parse(Int, ARGS[2])
 
-cd("data2")
-foreach(rm,
-	filter(
-		endswith(".dat"),
-		readdir()
-	)
-)
-
-const Z = 0.90
-const num_particles = round(Int, 10_000_000*Z)
+const Z = 1.0
+const num_particles = round(Int, 1__000*Z)
 const dx = 0.05
 const dt = 0.001
 const ic = "planck"
@@ -255,24 +279,24 @@ const b = 0.000
 const k = 0.000
 const c = 0.000
 const brems = false
-const tf = 10.0
+const tf = 20.0
 const reset = true
-const rate = 0.001
-const method = "exponential"
-const divisor = 60
+const rate = 1e-3
+const method = "division"
+const divisor = 300
 const interval = 2dx
 const scale = dx
 
-#@assert !(brems && reset)
+@assert !(brems && reset)
 
-sim = Sim(
+const sim = Sim(
 	Epdf(0.0, 20.0, dx, num_particles, Z, ic),
 	dt,
 	b, k, c, brems, reset, rate, divisor, interval, scale)
 
 paramstring = ""
 paramstring *= dx == 0.05 ? "" : @sprintf("_dx-%g", dx)
-paramstring *= dt == 0.001 ? "" : @sprintf("_dt-%g", dt)
+paramstring *= sim.dt == 0.001 ? "" : @sprintf("_dt-%g", sim.dt)
 paramstring *= ic == "planck" ? "" : @sprintf("_ic-%s", ic)
 paramstring *= b == 0.0 ? "" : @sprintf("_b-%.4f_k-%.4f", b, k)
 paramstring *= c == 0.0 ? "" : @sprintf("_c-%.4f", c)
@@ -291,9 +315,23 @@ if reset
 	end
 end
 
+dirname = @sprintf("data-r-%d-d-%d", ratestep, divisorstep)
+mkpath(dirname)
+cd(dirname)
+foreach(rm,
+	filter(
+		endswith(".dat"),
+		readdir()
+	)
+)
+
 open("params.txt", "w") do io
 	@printf(io, "N-1e%.2f_t-%g%s", log10(num_particles), tf, paramstring)
 end
 
 @time trajectory(sim, tf)
+
+open("nearzero.txt", "w") do io
+	println(io, filter(x -> x < 0.01, sim.epdf.xs) |> length)
+end
 
