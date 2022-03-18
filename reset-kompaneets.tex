@@ -20,6 +20,8 @@
 \usepackage{subcaption}
 \usepackage{siunitx}
 
+\graphicspath{{./reset-plots/}}
+
 
 % THEOREM-LIKE ENVIRONMENTS -----------------------------------------
 
@@ -565,28 +567,37 @@ To verify this, we perform three simulations, one for each method, with a resett
 
 \begin{figure}
 	\includegraphics[width=\textwidth]{spd_compare.pdf}
-	\caption{Comparison between three methods of resetting, overlaid on top of the Planck distribution (dotted straight line). All three simulations had the same resetting rate of $r=\num{4e-3}$, and the resetting parameters taken to be $x_0 = 0.02$ and $d=135$}\label{fig:compare}
+	\caption{Comparison between three methods of resetting, overlaid on top of the Planck distribution (dotted straight line). All three simulations had the same resetting rate of $r=0.01$, and the resetting parameters taken to be $d=200$, $x_0\approx0.027$ and $\lambda_0\approx74$, giving approximate equal first moments of $\langle x \rangle = 0.0135...$}\label{fig:compare}
 \end{figure}
 
 That motivates  using only one resetting protocol, which is taken to be the ``division'' one. In order to explore the effects of the various parameters, we take $r=\num{2e-3}, \num{4e-3}$ and $d=160,320$. Pictures of the frequency probability distribution are showing in Fig.\ref{fig:gridplot}. We notice the presence of a non-zero amount of photons at frequency zero, rejoining the Planck distribution either gradually or with a strong jump downwards first.
 
 \begin{figure}
 	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{plot-r-2-d-4.pdf}
-		\caption{$r=\num{2e-3}$, $d=160$}
+		\includegraphics[width=\textwidth]{spd_r001_d100.pdf}
+		\caption{$r=0.01$, $d=100$}
 	\end{subfigure}\hfill
 	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{plot-r-2-d-5.pdf}
-		\caption{$r=\num{2e-3}$, $d=320$}
+		\includegraphics[width=\textwidth]{spd_r001_d200.pdf}
+		\caption{$r=0.01$, $d=200$}
 	\end{subfigure}
 	
 	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{plot-r-3-d-4.pdf}
-		\caption{$r=\num{4e-3}$, $d=160$}
+		\includegraphics[width=\textwidth]{spd_r010_d100.pdf}
+		\caption{$r=0.10$, $d=200$}
 	\end{subfigure}\hfill
 	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{plot-r-3-d-5.pdf}
-		\caption{$r=\num{4e-3}$, $d=320$}
+		\includegraphics[width=\textwidth]{spd_r010_d200.pdf}
+		\caption{$r=0.10$, $d=200$}
+	\end{subfigure}
+
+	\begin{subfigure}{0.48\textwidth}
+		\includegraphics[width=\textwidth]{spd_r050_d100.pdf}
+		\caption{$r=0.50$, $d=100$}
+	\end{subfigure}\hfill
+	\begin{subfigure}{0.48\textwidth}
+		\includegraphics[width=\textwidth]{spd_r050_d200.pdf}
+		\caption{$r=0.50$, $d=200$}
 	\end{subfigure}
 	\caption{blabla}\label{fig:gridplot}
 \end{figure}
