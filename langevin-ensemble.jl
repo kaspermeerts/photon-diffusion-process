@@ -3,6 +3,8 @@ using Random
 using SpecialFunctions
 using StaticArrays
 
+
+
 mutable struct Epdf
 	xs::Vector{Float64}
 	bins::Vector{Int}
@@ -82,6 +84,7 @@ function dump_occupation(t, epdf::Epdf)
 end
 
 function dump_positions(epdf::Epdf)
+	return
 	open(@sprintf("xs.dat"), "w") do io
 		for x in epdf.xs
 			println(io, x)
@@ -96,11 +99,11 @@ function init!(epdf::Epdf, ic)
 		elseif ic == "boltzmann"
 			epdf.xs[i] = randexp() + randexp() + randexp()
 		elseif ic == "planck" || ic == "hotplanck"
-			temperature = ic == "hotplanck" ? 2 : 1
+			temperature = ic == "hotplanck" ? 3 : 1
 			F(x) = 1/(2zeta(3)*temperature) * (x/temperature)^2 / (exp(x/temperature) - 1)
 			sample = 0.0
 			while !(rand() < F(sample) / 0.26)
-				sample = 20rand()
+				sample = temperature*10rand()
 			end
 			epdf.xs[i] = sample
 		elseif ic == "squared"
@@ -127,7 +130,7 @@ function tick!(sim::Sim, i, t)
 	epdf.xs[i] = x + drift*sim.dt + diffusion*randn()*sqrt(sim.dt)
 
 	if epdf.xs[i] < epdf.min
-		@printf "Underflow %.2f t %.4f\n" epdf.xs[i] t
+		#@printf "Underflow %.2f t %.4f\n" epdf.xs[i] t
 		sample = 20rand()
 		while 0.27 * rand() > 1/(2*zeta(3)) * sample^2 / (exp(sample)-1)
 			sample = 20rand()
@@ -183,7 +186,7 @@ end
 function trajectory(sim::Sim, tf)
 
 	t = 0.0
-	t_step = 1.0
+	t_step = 0.50
 	t_goal = 0.0*t_step
 	passages = Threads.Atomic{Int}(0)
 	resets = 0
@@ -197,7 +200,7 @@ function trajectory(sim::Sim, tf)
 		# XXX
 		t_workaround = t
 		Threads.@threads for j in 1:sim.epdf.num_ensemble
-			Threads.atomic_add!(passages, tick!(sim, j, t_workaround))
+			tick!(sim, j, t_workaround)
 		end
 		
 		update!(sim.epdf)
@@ -233,9 +236,9 @@ function trajectory(sim::Sim, tf)
 			eta = (tf - t) / (t - 0) * elapsed
 			total = (tf - 0) / (t - 0) * elapsed
 			epdf = sim.epdf
-			current = passages[] / (epdf.num_ensemble * t_step)
+			#current = passages[] / (epdf.num_ensemble * t_step)
 
-			@printf("%2.2f / %2.2f ETA %5d %g out of %g: %.2f%% | p: %d r: %d\n", t, tf, eta, epdf.num_ensemble, epdf.num_ensemble_planck, 100*epdf.num_ensemble/epdf.num_ensemble_planck, passages[], resets)
+			@printf("%2.2f / %2.2f ETA %5d %g out of %g: %.2f%%\n", t, tf, eta, epdf.num_ensemble, epdf.num_ensemble_planck, 100*epdf.num_ensemble/epdf.num_ensemble_planck) # , passages[], resets)
 			passages[] = 0
 			resets = 0
 			dump_hist(t, epdf)
@@ -267,25 +270,22 @@ function trajectory(sim::Sim, tf)
 	return
 end
 
-const ratestep = 0 #parse(Int, ARGS[1])
-const divisorstep = 0 #parse(Int, ARGS[2])
-
 const Z = 1.0
-const num_particles = round(Int, 1__000*Z)
-const dx = 0.05
+const num_particles = round(Int, 10_000_000*Z)
+const dx = 0.001
 const dt = 0.001
-const ic = "planck"
+const ic = "hotplanck"
 const b = 0.000
 const k = 0.000
 const c = 0.000
 const brems = false
-const tf = 20.0
-const reset = true
-const rate = 1e-3
+const tf = 10.0
+const reset = false
+const rate = 0 # parse(Float64, ARGS[1]) #0.1
 const method = "division"
-const divisor = 300
-const interval = 2dx
-const scale = dx
+const divisor = 0 #parse(Int, ARGS[2]) # 200
+const interval = 2*2.7/divisor
+const scale = 2.7/divisor
 
 @assert !(brems && reset)
 
@@ -315,7 +315,7 @@ if reset
 	end
 end
 
-dirname = @sprintf("data-r-%d-d-%d", ratestep, divisorstep)
+dirname = @sprintf("data-kompaneets")
 mkpath(dirname)
 cd(dirname)
 foreach(rm,

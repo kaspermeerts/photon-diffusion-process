@@ -1,5 +1,6 @@
-\documentclass[a4paper,12pt,reqno,superscriptaddress,nofootinbib]{article}
-%\documentclass{article}
+%\documentclass[a4paper,12pt,reqno,superscriptaddress,nofootinbib]{article}
+\documentclass[a4paper,12pt,reqno,superscriptaddress,nofootinbib]{revtex4}
+
 \usepackage[centertags]{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -17,6 +18,7 @@
 
 \usepackage{hyperref}
 \usepackage{physics}
+\usepackage{caption}
 \usepackage{subcaption}
 \usepackage{siunitx}
 
@@ -417,7 +419,7 @@
 
 \begin{document}
 	\title{Resetting photons}	
-	\author{Guilherme Eduardo Freire Oliveira, Christian Maes and Kasper Meerts\\ Instituut voor Theoretische Fysica, KU Leuven}
+	\author{Guilherme Eduardo Freire Oliveira$^1$, Christian Maes$^2$ and Kasper Meerts$^{2}$\\ $^1$Departamento de Física, Universidade Federal de Minas Gerais \\ $^2$Instituut voor Theoretische Fysica, KU Leuven}
 
 \begin{abstract}
 Starting from a frequency diffusion process for a tagged photon which simulates relaxation to the Planck law, we introduce a resetting where photons lower their frequency at random times.
@@ -425,22 +427,22 @@ We consider two versions, one where the resetting to low frequency is independen
 \end{abstract}
 \maketitle
 
-\tableofcontents
+%\tableofcontents
 \section{Introduction}
-Resetting has been introduced and added to diffusion processes for a variety of reasons since its original conception, \cite{evans}.  Typically, optimizing search strategies has been the underlying motivation, but one can also imagine physical resettings.  By physical resettings we mean the result of a time-dependent potential, for which there are random moments of confinement, or the random appearance in certain locations of attractors, or the random contraction/expansion of an enclosed volume.  In the present paper, we investigate a new scenario where resetting is applied in frequency space of photons.  In that way we also explore physically motivated nonequilibrium effects on the Planck distribution.  At the same time, we give substance to resetting for nonlinear diffusions, \cite{przem}.\\
+Resetting has been introduced and added to diffusion processes for a variety of reasons since its original conception, \cite{tong,evans1,evans2,evans3}.  Typically, optimizing search strategies has been the underlying motivation, but one can also imagine physical resettings.  By physical resettings we mean the result of a time-dependent potential, for which there are random moments of confinement, or the random appearance in certain locations of attractors, or the random contraction/expansion of an enclosed volume.  In the present paper, we investigate a new scenario where resetting is applied in frequency space of photons.  In that way we explore physically motivated nonequilibrium effects on the Planck distribution, while also adding physical substance to the application of resetting for nonlinear diffusions, \cite{przem}.\\
 
 Resetting photons to a lower frequency refers to reducing the wave vector (in the reciprocal lattice), which, in real space, refers to an expansion. One physical mechanism we can imagine here is that of a confined plasma where the confinement is continually lifted at random moments. On the other hand, repeated inelastic scatterings of photons inside a cavity with the electrons in the wall can also provide a source for resetting behavior. We can picture that photons instantaneously lose their energy to electrons, which is rapidly dissipated to an external bath. 
-Mathematically, the photon frequency may take various forms: we will focus on a resetting in terms of a Doppler shift where the frequency gets divided $\nu\rightarrow \nu/d$ by some number $d$ (divisor).  We will discuss other resetting procedures corresponding to different physical mechanisms, but they yield the same effects, as we will see.\\
-To incorporate that resetting of photon frequency  $\nu$, we use a nonlinear Markov process for a tagged photon in a plasma where the main mechanism is Compton scattering.  (Other radiation processes are easy to add but are not considered here.)  The nonlinearity of the Markov process follows from the stimulated emission and the corresponding Fokker-Planck equation is the well-know Kompaneets equation.  The latter descibes relaxation to the Planck radiation law, $\propto \nu^2(\exp[\hbar\nu/(k_BT)]-1)^{-1}$.  Resetting of the frequency is added however on the level of the stochastic dynamics.  To avoid condensation of the photons at zero momentum, we apply a thermal push-back: when the tagged photon reaches zero frequency, it is re-distributed following the Planck law. The lattter may be due other sources of black-body radiation but is here used to conserve total photon number, creating a current in frequency space.\\
+Mathematically, the photon frequency may take various forms: we will focus on a resetting in terms of a Doppler shift where the frequency gets divided $\omega \rightarrow \omega/d$ by some number $d$ (divisor).  We can imagine (and we will introduce) other resetting procedures corresponding to different physical mechanisms, but they yield pretty much the same effects, as we will see.\\
+To incorporate that resetting of photon frequency  $\omega$, we use a nonlinear Markov process for a tagged photon in a plasma where the main mechanism is Compton scattering. (Other radiation processes are easily added but are not considered here.)  The nonlinearity of the Markov process follows from the stimulated emission and the corresponding (nonlinear) Fokker-Planck equation is the well-known Kompaneets equation \cite{kompa}.  The latter describes relaxation to the Planck radiation law, $\propto \omega^2 / (\exp[\hbar\omega/(k_BT)]-1)$. Although true that in certain cases, e.g. for photons inside optomechanical cavities, Compton scattering may play little role, it is very useful to first start from a setup where radiation relaxes to thermal equilibrium as within the context of the Kompaneets equation. Therefore the idea of resetting is sound also in there, where for example an erratic expansion of the universe may lead to a stochastic Doppler shift of photon frequency (e.g. in the primordial plasma). Resetting of the frequency is added however on the level of the stochastic dynamics.  To avoid condensation of the photons at zero momentum, we apply a thermal push-back: when the tagged photon reaches zero frequency, it is re-distributed following the Planck law. That may be due to other sources of black-body radiation but here is used only to conserve total photon number, creating a current in frequency space.\\
 
-In the next Section we recall the elements of the Kompaneets process (without resetting) in the context of elastic Compton scattering with thermal electrons.  In Section \ref{res} we introduce the resetting mechanisms and their physical motivation.  The simulations are discussed in Section \ref{sim} and we obtain nonequilibrium photon distributions.  The abundance at low frequencies is not surprising, but interesting for understanding possible scenarios of breaking the Planck distribution of the cosmic microwave background.  Such (speculative) conclusions are presented in the final Section \ref{con}. 
+In the next section we recall the elements of the Kompaneets process (without resetting) in the context of elastic Compton scattering with thermal electrons.  In Section \ref{res} we introduce the resetting mechanisms and their physical motivation.  The simulations are discussed in Section \ref{sim} and we obtain nonequilibrium photon distributions.  The abundance at low frequencies is not surprising, but interesting for understanding possible scenarios of breaking the Planck distribution of the cosmic microwave background, while preserving almost perfectly the moderate to larger frequency regime of the Planck law.  More (speculative) conclusions and possible applications are presented in the final Section \ref{con}. 
 
 \section{The Kompaneets process}
 
-As reference process we consider a fluctuation dynamics which realizes the Kompaneets equation as its nonlinear Fokker-Planck equation \cite{paper2}.
+As reference process we consider a fluctuation dynamics which realizes the Kompaneets equation as its nonlinear Fokker-Planck equation. In fact, that process was recently introduced in \cite{paper2}, but here we briefly revisit the setup.
 
 \subsection{Kompaneets equation}
-Relaxation towards equilibrium of a photon gas in contact with a nondegenerate, nonrelativistic electron bath in thermal equilibrium at temperature $T$ can be achieved via  Compton scattering.  For a dilute plasma, described by a semi-classical Boltzmann equation, Kompaneets thus arrived at an equation for the (average) occupation number $n(\tau,\omega)$ at frequency $\omega$ of the photon gas at time $\tau$, \cite{kompa}:
+Relaxation towards equilibrium of a photon gas in contact with a nondegenerate, nonrelativistic electron bath in thermal equilibrium at temperature $T$ can be achieved via Compton scattering. Starting from the semi-classical Boltzmann-Uehling-Uhlenbeck equation for a dilute plasma, Kompaneets thus arrived at an equation for the (average) occupation number $n(\tau,\omega)$ at frequency $\omega$ of the photon gas at time $\tau$, \cite{kompa}:
 \begin{equation}\label{ke}
 \omega^2\frac{\partial n}{\partial \tau}(\tau,\omega)= \frac{n_e\sigma_T 
 	c}{m_e c^2}\frac{\partial }{\partial \omega}\omega^4\left\{k_B T 
@@ -448,9 +450,9 @@ Relaxation towards equilibrium of a photon gas in contact with a nondegenerate, 
 \hbar\left[1+n(\tau,\omega)\right]n(\tau,\omega)\right\}
 \end{equation}
 The constant $\sigma_T$ is the Thomson total cross section, and $n_e,m_e$ are  the density and mass of the electrons, respectively.
-The stimulated emission or induced Compton scattering, \cite{liedahl, blandford}) is present in the  nonlinearity of the second term) in \eqref{ke}. Stationarity is achieved when $n(t,\omega)$ becomes the Bose-Einstein distribution with chemical potential $\mu$.
+The induced Compton scattering due to stimulated emission, \cite{liedahl, blandford}, is present in the nonlinearity of the second term in \eqref{ke}. Stationarity is achieved when $n(\tau,\omega)$ becomes the Bose-Einstein distribution with chemical potential $\mu$.
 
-The Kompaneets equation yields a good understanding of the dynamical origina of cosmic microwave background and the related Sunyaev-Zeldovich effect \cite{sunyaeveffect,sunyaev}.  Excellent reviews include \cite{practical,gui,zeldovich}. Extensions and generalizations are e.g. obtained in \cite{buet, pitrou,barbosa, brown, itoh, itoh2, cooper, kohyama1, kohyama2, kohyama3,paper}.\\
+The Kompaneets equation yields a good understanding of the dynamical origin of cosmic microwave background and the related Sunyaev-Zeldovich effect \cite{sunyaeveffect,sunyaev}.  Excellent reviews include \cite{practical,gui,zeldovich}. Extensions and generalizations are e.g. obtained in \cite{buet, pitrou,barbosa, brown, itoh, itoh2, cooper, kohyama1, kohyama2, kohyama3,paper}.\\
 
 To have a dimensionless Kompaneets equation we use $x= \hbar \omega/k_B T$, to rewrite \eqref{ke} as
 \begin{equation}\label{ake}
@@ -458,62 +460,68 @@ x^2\frac{\partial n}{\partial t}(t,x) = \frac{\partial }{\partial x}x^4\left\{
 \frac{\partial n}{\partial x}(t,x) + 
 \left[1+n(t,x)\right]n(t,x)\right\}
 \end{equation}
-We also changed the time-variable into the dimensionless Compton optical depth
-\[t = \frac{ k_B T }{m_e c^2} n_e \sigma_T c \, \tau\coloneqq \frac{ \tau_c}{\tau_C}\]
-where $\tau_C$  is related to the Doppler shift
+The time-variable is also changed into the dimensionless Compton optical depth
+\[
+t = \frac{ k_B T }{m_e c^2} n_e \sigma_T c \, \tau\coloneqq \frac{ \tau}{\tau_C}
+\]
+In fact, if we consider $\tau_c = \ell/c$, the time-scale of collisions obtained from the mean free path of photons $\ell=(n_e\sigma_T)^{-1}$, then $\tau_C$ is related to the Doppler shift, having
 \begin{equation}\label{shift}
 \left\langle\frac{1}{2\tau_c}\left(\frac{\Delta\omega}{\omega}\right)^2\right\rangle\approx \frac{ k_B T }{m_e c^2} n_e \sigma_T c= \frac{1}{\tau_C}
 \end{equation} 
-for the collision time-scale $\tau_c = \ell/c$ obtained from the mean free path of photons $\ell=(n_e\sigma_T)^{-1}$.\\
+for its variance.\\
 
-The Kompaneets equation \eqref{ake} can also be written for the photon density.  For photons in a box of volume $V$ with periodic boundary conditons, the spectral probability density equals
+For our purposes, the Kompaneets equation \eqref{ake} must be written for the photon density. The spectral probability density for photons in a box of volume $V$ with periodic boundary conditions equals
 \begin{equation}\label{eq:spd}
 \rho(t,x) = \frac{V}{N} \frac{1}{\pi^2} \left(\frac{k_B T}{\hbar c}\right)^3 
 x^2 n(t,x)% = \frac{x^2 n(y,x)}{2\zeta(3) Z}
 \end{equation}
 where $N$ is the total number of photons.\\
-When $n(t,x)= n_{BE}(x) = 1 / (\exp(x) - 1)$ (Bose-Einstein distribution) the photon number 
+In terms of the photon spectral density \eqref{eq:spd}, the Kompaneets equation \eqref{ake} becomes
+\begin{equation}\label{kp}
+\frac{\partial \rho}{\partial t} (t,x) = -\frac{\partial}{\partial x}\left[\left(4x- x^2\left(1+2\zeta(3) \,\frac{\rho(t,x)}{x^2}\right)\right)\rho(t,x)\right] + \frac{\partial^2}{\partial x^2}\left[x^2 \rho(t,x)\right]
+\end{equation}
+When $n(t,x)= n_\text{BE}(x) = 1 / (\exp(x) - 1)$ (Bose-Einstein distribution) the photon number 
 equals
 \[
 N_{BE} = 2 \zeta(3) \frac{V}{\pi^2} \left( \frac{k_B T}{\hbar c} \right)^3
 \]
-with $\zeta(3) = 1/2 \int_0^\infty \id x x^2/(e^x-1) \simeq 1.202$, and the spectral probability density is $ \rho_{BE}(x) = \frac{x^2 n_{BE}(x)}{2\zeta(3)}$.\\
-Then,  in terms of the photon spectral density \eqref{eq:spd}, the Kompaneets equation \eqref{ake} becomes
-\begin{equation}\label{kp}
-\frac{\partial \rho}{\partial t} (t,x) = -\frac{\partial}{\partial x}\left[\left(4x- x^2\left(1+2\zeta(3) \,\frac{\rho(t,x)}{x^2}\right)\right)\rho(t,x)\right] + \frac{\partial^2}{\partial x^2}\left[x^2 \rho(t,x)\right]
-\end{equation}
+with $\zeta(3) = 1/2 \int_0^\infty \id x x^2/(e^x-1) \simeq 1.202$, and the spectral probability density is $ \rho_\text{BE}(x) = \frac{x^2 n_\text{BE}(x)}{2\zeta(3)}$, stationary equilibrium solution to \eqref{kp}.
 
 
 \subsection{Tagged photon stochastic process}
-The Kompaneets equation is positivity preserving \cite{positivity}. It allows therefore a probabilistic interpretation as nonlinear Fokker-Planck equation. That was explicitly realized in \cite{fre}, and we refer to it as the Kompaneets process. \\
-We constructed there the tagged photon diffusion process,
+The Kompaneets equation is positivity preserving, \cite{positivity}. It allows therefore a probabilistic interpretation as nonlinear Fokker-Planck equation. That was explicitly realized in \cite{paper2}, and we refer to the corresponding stochastic dynamics of a tagged photon as the Kompaneets process. \\
+A more general  tagged photon diffusion process is
 \begin{equation} \label{kp-ito2}
-\dot x	= \frac{\dd {B}}{\dd x}(x) - \beta {B}(x) {U'}(x)(1+n(t,x)) +   2\frac{{B}(x)}{x} + \sqrt{2{B}(x)}\, \xi_t
+\dot x	=2\frac{{D}(x)}{x} + D'(x) - \beta{D}(x) {U'}(x)(1+n(t,x))    + \sqrt{2{D}(x)}\, \xi_t
 \end{equation}
-where $\xi_t$ is standard white noise.  Note that we need to know the particle number to use the relation \eqref{eq:spd} for finding the occupation number $n(t,x)$ from the density $\rho(t,x)$.   In our case, particle number is conserved.\\
-The It\^o stochastic process \eqref{kp-ito2} is our Kompaneets process, a (nonlinear) Langevin dynamics associated to the Kompaneets equation \eqref{kp} in the case where
+where $\xi_t$ is standard white noise.  Note that we need to know the particle number to use the relation \eqref{eq:spd} and thus find the occupation number $n(t,x)$ from the density $\rho(t,x)$.   In our case, particle number is conserved.\\
+The It\^o stochastic process \eqref{kp-ito2} is our Kompaneets process in the case where
 \[
-U(x) = x,\qquad B(x) = x^2
-\]  
-Even without explicit boundary conditions, there is no probability flux through the origin $\nu=0$, meaning that negative frequencies are not observed. On the other hand and physically speaking, reaction processes such as Bremsstrahlung or double Compton scattering control the photon number density, picking up and absorbing photons with low-enough frequencies, but we ignore the detailed implementation of these processes in the present work.\\
+\beta U(x) = x,\qquad D(x) = x^2
+\]
+we also define the drift term, which from \eqref{kp-ito2} we see it corresponds to
+\[B(t,x,n_t)=2\frac{{D}(x)}{x} + D'(x) - \beta{D}(x) {U'}(x)(1+n(t,x))\]
+with choices for $U(x)$ and $D(x)$ as above.  That process for those choices is thus the (nonlinear) Langevin dynamics associated to the Kompaneets equation \eqref{kp}.
+
+Even without explicit boundary conditions, there is no probability flux through the origin $\omega=0$, meaning that negative frequencies are not observed. On the other hand and physically speaking, reaction processes such as {\it Bremsstrahlung} or double Compton scattering control the photon number density, picking up and absorbing photons with low-enough frequencies.  We ignore however the detailed implementation of these radiative processes in the present work.\\
   
 As an illustration of the soundness of the process, we reproduce here the results obtained from the simulation of the stochastic equation \eqref{kp} using the Euler-Maruyama algorithm \cite{toral}. To implement stimulated emission, which makes a nontrivial aspect both in the simulation and theory, we consider an ensemble of $N$ processes, using the empirical histogram of frequencies to update the drift term at each timestep accordingly. The details of the implementation including reactive mechanisms together with a more comprehensive discussion can be found in \cite{paper2}. From Fig.\ref{fig:spd-kompaneets} we see relaxation towards Planck law in time, confirming the validity of the implementation scheme.
   
 \begin{figure}
-	\includegraphics{{spd_N-1e6.00_dx-0.05_t-3_dt-0.0001_ic-hotplanck}.pdf}
-	\caption{Result of Kompaneets, for three units of time.  Needs indication of what in axes.  Mention maximum excess of 1/1000.  Mention very fastg prethermalization, slow final thermalization --- low frequency going like $x$.}
+	\includegraphics[width=0.8\textwidth]{{kompaneets-plot}.pdf}
+	\caption{Frequency distribution for the Kompaneets process for $t=0.0,0.5,1.0,1.5$ and $2.0$. The initial condition is a ``hot Planck Law" at a temperature three times the temperature $T$ used in the dynamics, corresponding to the rescale $x\to x/3$ of the dimensionless frequency. There is a fast pre-thermalization for the moderate and high frequencies, followed by a slower relaxation at the lower frequency scale.  See more details in \cite{paper2}.}
 	\label{fig:spd-kompaneets}
 \end{figure}
 
-\section{Resetting Kompaneets process}\label{res}
+\section{Resetting the Kompaneets process}\label{res}
 
 We start from the Kompaneets process defined in the previous section and add Poissonian resetting with 
 a constant rate. The resetting rate is denoted by $r$. Three methods are 
 introduced for resetting, the so-called ``division'' method, where the energy of 
 the photon is divided by a constant factor $d$, the ``uniform'' method, where the 
 photon's energy is reset to a random value uniformly distributed between 0 and 
-a cutoff $2x_0$, and finally the ``exponential'' method, where the new energy of 
-the photon follows an exponential distribution with scale $x_0$.
+a cutoff $x_0$, and finally the ``exponential'' method, where the new energy of 
+the photon follows an exponential distribution with scale $1/\lambda_0$.
 
 For a justification of the mechanisms underlying this resetting we turn our 
 attention towards two phenomena: the metric expansion of space and the Doppler 
@@ -524,8 +532,8 @@ continuously and homogeneously. Moving away from this highly idealized
 solution, we can imagine more localized, abrupt increases, applying only to a 
 fraction of photons.  As a photon's frequency is inversely proportional to the 
 scale factor, that in effect is a stochastic division of photon 
-frequencies by some large factor. The process is reminiscent of the shift in 
-frequency due to the Doppler, and in fact mathematically and conceptually that is identical to that of Doppler shifts from expanding matter.\\
+frequencies by some large factor. \textbf{The process is reminiscent of the shift in 
+frequency due to the Doppler, and in fact mathematically and conceptually that is identical to that of Doppler shifts from expanding matter}.\\
  In this 
 regard, one can also consider a cavity with randomly, quickly receding walls.  
 Any photon catching up to these walls would again undergo a downwards shift in 
@@ -534,95 +542,101 @@ frequency.
 The above  implies that the position of the photon is updated by the following 
 stochastic rules: in an infinitesimal interval $\dd t$ we have
 \begin{align}\label{eq:resetted-ito}
-x(t + \dd t) &= x(t) + D(x,t,n_t) \dd t + \sqrt{2{B}(x)}\, \xi_t \sqrt{\dd 
-t}&&\text{with probability $(1-r)\dd t$}\\\nonumber
+x(t + \dd t) &= x(t) + B(t,x,n_t) \dd t + \sqrt{2{D}(x)\dd t}\, \xi_t &&\text{with probability $(1-r)\dd t$}\\\nonumber
 &= \begin{cases}x(t) / d &\text{``division'' method}\\
 x\sim \operatorname{Uniform}(0,x_0)&\text{``uniform'' method}\\
 x\sim \operatorname{Exp}(\lambda_0)&\text{``exponential'' method}\\ 
 \end{cases}&&\text{with probability $r \dd t$}
 \end{align}
 
-The resetting protocol, therefore, requires the specification of two parameters: the resetting rate $r$, which controls the strength of resetting, i.e., larger $r$ produces larger population of reset photons in the stationary distribution; and the protocol parameter $\{d,x_0,\lambda_0\}$, which controls the range in frequency space where the reset photon is placed. In that sense, the protocol parameter, acts similarly to a ``cutoff''.\\
+The resetting protocol, therefore, requires the specification of two parameters: the resetting rate $r$, which controls the strength of resetting, i.e., larger $r$ produces larger population of reset photons in the stationary distribution; and the protocol parameter $\{d,x_0,\lambda_0\}$, which controls the range in frequency space where the reset photon is placed. In that sense, the protocol parameter, acts similarly to a ``cutoff''.  It is natural to choose $r \leq 0.1$ as the Kompaneets process has itself a relaxation time of order one, which is one order faster then.\\
+
+
 Finally, we avoid condensation of photons at zero frequency by a thermal push-back.  In other words, whenever the tagged photon reaches zero frequency, it is getting a new frequency distributed according to the Planck law.  In that way, we create a frequency current, where the resetting drives to lower frequency and the thermal push-back induces higher frequencies (when needed).  As physical realization of that thermal push-back we may imagine other sources of black-body realization that supplement the photon gas to keep the same photon number and reach a stationary (nontrivial) distribution.
 
-To simulate these dynamics, we revisit the procedure from \cite{paper2}.  
-Adding to this, at every timestep, for every particle, we perform the resetting step with a probability $r \Delta t$. The timestep $\Delta t$ is chosen such  that this product is much smaller than 1, making sure that the probability of two resets happening in the same timestep remains negligible.
+\section{Simulation results and discussion}\label{sim}
 
-\section{Simulation result and discussion}\ref{sim}
+To simulate these dynamics, we revisit the procedure from \cite{paper2}. We consider an ensemble of \num{e7} particles, which are binned in frequency space with a width of \num{e-3}. We run the simulation until $t = 10$, with a timestep $\Delta t$ of \num{e-3}. Adding to this, at every timestep and for every particle, we perform the resetting step with a probability $r \Delta t$; see \eqref{eq:resetted-ito}. The timestep $\Delta t$ is chosen such  that this product is much smaller than 1, making sure that the probability of two resets happening to the same particle in the same timestep remains negligible.\\
 
-\subsection{Discussion of results}
+The results of such a simulation are shown in Fig.~\ref{fig:fullplanck}. With the average time between resets for a given photon being much smaller than the characteristic timescale of the stochastic process, it comes to no surprise that the deviations from the Planck law are mostly contained around the origin. After all, as we saw also in Fig.~\ref{fig:spd-kompaneets}, relaxation to the Planck law takes a time of order 1, while the resetting rate $r\leq 0.1$. In Fig.~\ref{fig:fullplanck} we typically see no difference between the resetting and no resetting for reaching the Planck distribution, and we could be tempted to think that Planck is realized at all frequencies. We therefore zoom in to the lower frequencies (where relaxation in the Kompaneets process is slowest), showing $x$ only from $0$ to $0.5$ (which is about 5\% of the full frequency range).\\
 
-With the average time between resets for a given photon being hundreds to thousands of times the characteristic timescale of the stochastic process, it comes to no surprise that the deviations from the Planck law are small and mostly contained around the origin. We therefore zoom in to the lower frequencies, only showing $x$ from $0$ to $0.2$ (which is about 2\% of the full frequency range)
+\begin{figure}
+	\includegraphics{fullplanck.pdf}
+	\caption{Stationary distribution for a resetting rate of \num{e-2} and a divisor \num{100}. For comparison, the dotted line gives the Planck distribution}\label{fig:fullplanck}
+\end{figure}
 
-A first thing to observe, is that the different resetting procedures yield similar qualitative behavior by tuning properly the parameters $\{d,x_0,\lambda_0\}$.  This happens whenever the average photon frequency under the resetting distribution for different resetting protocols matches. According to our definitions for the ``uniform'' and ``exponential'' methods we have the following averages after a resetting event,
+A first aspect to observe, is that the different resetting procedures in \eqref{eq:resetted-ito} yield similar qualitative behavior by tuning properly the parameters $\{d,x_0,\lambda_0\}$.  This happens whenever the average photon frequency under the resetting distribution for different resetting protocols matches. According to our definitions for the ``uniform'' and ``exponential'' methods we have the following averages after many resetting events,
 \begin{align*}\langle x \rangle_{\text{Uni}} = \frac{x_0}{2} &&\text{and}&& \langle x \rangle_\text{Exp} = \frac{1}{\lambda_0}\end{align*}
-while for the ``division'' protocol, we can to a high degree of accuracy assume the photon right before resetting is distributed according to the Planck distribution, which gives it an average frequency of
+while for the ``division'' protocol, because the timescale of resetting is smaller than the timescale of the relaxation towards the Planck law, we can to a high degree of accuracy assume the photon right before resetting to be distributed according to the Planck distribution, which gives it an average frequency of
 \[\langle x \rangle_\text{Planck} = \int_0^{\infty}\dd x\,  x\rho_\text{Planck}(x) \approx 2.701...\]
-where the Planck distribution is $\rho_\text{Planck}(x) = \frac{1}{2\zeta(3)}\frac{1}{e^{x}-1}$. Then after the division'' resetting event, the expected photon frequency is
+where the Planck distribution is $\rho_\text{Planck}(x) = \frac{1}{2\zeta(3)}\frac{1}{e^{x}-1}$. Then after many ``division'' resetting events, the expected photon frequency is
 \[\langle x\rangle_{\text{Div}}=\frac{\langle x \rangle_\text{Planck}}{d} \]
 
-If, for the same given rate, the parameters are tuned such that these first moments coincide, we expect the different resetting protocols to produce the same behavior on average whenever
-\[\langle x \rangle_\text{Uni} = \langle x \rangle_\text{Exp}=\langle x\rangle_{\text{Div}} \implies \frac{x_0}{2}=\frac{1}{\lambda_0} = \frac{\langle x \rangle_\text{Planck}}{d}.\] (\textbf{K:} why is this sufficient? because thermalization is a thousand times faster than resetting for an individual photon?)
-To verify this, we perform three simulations, one for each method, with a resetting rate of \num{4e-3}, and the parameters chosen such that $\langle x \rangle$ after resetting equals $0.01$. We observe excellent agreement between the simulations as seen in Fig.\ref{fig:compare}.\\
+If, for the same given rate, the parameters are tuned such that these first moments coincide, we may expect the different resetting protocols to produce the same behavior on average whenever
+\[\langle x \rangle_\text{Uni} = \langle x \rangle_\text{Exp}=\langle x\rangle_{\text{Div}} \implies \frac{x_0}{2}=\frac{1}{\lambda_0} = \frac{\langle x \rangle_\text{Planck}}{d}
+\]
+To verify that, we perform three simulations, one for each method, with a resetting rate of $r=$\num{0.01}, and the parameters chosen such that $\langle x \rangle$ after resetting equals $\approx 0.014...$. We indeed observe a reasonable agreement between the simulations as seen in Fig.\ref{fig:compare}.\\
 
 \begin{figure}
 	\includegraphics[width=\textwidth]{spd_compare.pdf}
-	\caption{Comparison between three methods of resetting, overlaid on top of the Planck distribution (dotted straight line). All three simulations had the same resetting rate of $r=0.01$, and the resetting parameters taken to be $d=200$, $x_0\approx0.027$ and $\lambda_0\approx74$, giving approximate equal first moments of $\langle x \rangle = 0.0135...$}\label{fig:compare}
+	\caption{Comparison between three methods of resetting, overlaid on top of the Planck distribution (dotted straight line). All three simulations had the same resetting rate of $r=0.01$, and the resetting parameters taken to be $d=200$, $x_0\approx0.027$ and $\lambda_0\approx74$, giving approximate equal first moments of $\langle x \rangle = 0.014...$}\label{fig:compare}
 \end{figure}
-
-That motivates  using only one resetting protocol, which is taken to be the ``division'' one. In order to explore the effects of the various parameters, we take $r=\num{2e-3}, \num{4e-3}$ and $d=160,320$. Pictures of the frequency probability distribution are showing in Fig.\ref{fig:gridplot}. We notice the presence of a non-zero amount of photons at frequency zero, rejoining the Planck distribution either gradually or with a strong jump downwards first.
 
 \begin{figure}
-	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{spd_r001_d100.pdf}
-		\caption{$r=0.01$, $d=100$}
-	\end{subfigure}\hfill
-	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{spd_r001_d200.pdf}
-		\caption{$r=0.01$, $d=200$}
-	\end{subfigure}
-	
-	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{spd_r010_d100.pdf}
-		\caption{$r=0.10$, $d=200$}
-	\end{subfigure}\hfill
-	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{spd_r010_d200.pdf}
-		\caption{$r=0.10$, $d=200$}
-	\end{subfigure}
-
-	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{spd_r050_d100.pdf}
-		\caption{$r=0.50$, $d=100$}
-	\end{subfigure}\hfill
-	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{spd_r050_d200.pdf}
-		\caption{$r=0.50$, $d=200$}
-	\end{subfigure}
-	\caption{blabla}\label{fig:gridplot}
+	\subcaptionbox{$r=0.02$}{\includegraphics[width=0.48\textwidth]{zoomplot-r002.pdf}}\hfill%
+	\subcaptionbox{$r=0.05$}{\includegraphics[width=0.48\textwidth]{zoomplot-r005.pdf}}
+	\subcaptionbox{$r=0.10$}{\includegraphics[width=0.48\textwidth]{zoomplot-r010.pdf}}\hfill%
+	\subcaptionbox{$r=0.20$}{\includegraphics[width=0.48\textwidth]{zoomplot-r020.pdf}}
+	\caption{Stationary distributions for various rates. As the curves move down, the divisor ranges through $25,50,100,200$ and finally $400$}\label{fig:exploration}
 \end{figure}
-
-To quantify the size of the condensate near the origin, we count the number of particles with a frequency less than 0.01 (for comparison, this is 0.1\% of the support of the Planck distribution). Given the fact that our simulation consists of an ensemble of \num{1000000} particles, numerical integration of the Planck distribution tells us that in absence of resetting we can expect approximately 20 particles in this area. We plot the sizes of the condensates for various rates and divisors in figures \ref{fig:near-divisors} and \ref{fig:near-rates}. Take note that these are log-log plots. We find that for a given divisor, the relation between the number of particles near the origin and rate is close to a power-law, with an empirical exponent of about $2/3$. On the other hand, fixing the rate and varying the divisor we notice that the size of the condensate appears to rise like a power law as well (with empirical exponent $1/3$), before dropping again for higher divisors. We expect this to be a result of the high divisor bringing photons to close to zero frequency, (\textbf{K:} remark the Bremsstrahlung cross section diverges?), at which point they are very likely to be absorbed.
-
-The expected stationary solution $\rho_Z(x)$ in the absence of resetting is also shown in the figures. We observe some general behavior: for fixed $r$, we populate lower frequencies by increasing $d$; while for fixed $d$, resetting strength is attenuated by decreasing $r$. In all those cases, deviations from the equilibrium distribution is seen only in the low-frequency regime, leading to a steady nonequilibrium state in the stationary spectral density $\rho_Z(x)$.
-
-An important point is made by noting the formation of a condensate whenever $d$ or $r$ is increased enough. By tuning the parameters $r$ and $d$ separately, that condensate is found to be continuously formed in the $(r,d)$-plane, i.e., an abrupt transition to the condensation behavior is not found. That behavior indeed marks the appearance of a nonzero probability flux through origin, but we expect the condensate to be absorbed by including reactive mechanisms such as Bremsstrahlung or double Compton \cite{paper2}. Alternatively, reducing the $Z$ parameter as to diminish the effect of stimulated emission in the drift term appearing in \eqref{label} also prevent the condensate from forming as it is checked from the simulations.
+%\begin{figure}
+%	\begin{subfigure}{0.48\textwidth}
+%		\includegraphics[width=\textwidth]{spd_r001_d100.pdf}
+%		\caption{$r=0.01$, $d=100$}
+%	\end{subfigure}\hfill
+%	\begin{subfigure}{0.48\textwidth}
+%		\includegraphics[width=\textwidth]{spd_r001_d200.pdf}
+%		\caption{$r=0.01$, $d=200$}
+%	\end{subfigure}
+%	
+%	\begin{subfigure}{0.48\textwidth}
+%		\includegraphics[width=\textwidth]{spd_r010_d100.pdf}
+%		\caption{$r=0.10$, $d=200$}
+%	\end{subfigure}\hfill
+%	\begin{subfigure}{0.48\textwidth}
+%		\includegraphics[width=\textwidth]{spd_r010_d200.pdf}
+%		\caption{$r=0.10$, $d=200$}
+%	\end{subfigure}
+%	
+%	\begin{subfigure}{0.48\textwidth}
+%		\includegraphics[width=\textwidth]{spd_r050_d100.pdf}
+%		\caption{$r=0.50$, $d=100$}
+%	\end{subfigure}\hfill
+%	\begin{subfigure}{0.48\textwidth}
+%		\includegraphics[width=\textwidth]{spd_r050_d200.pdf}
+%		\caption{$r=0.50$, $d=200$}
+%	\end{subfigure}
+%	\caption{Zooming in on low frequency for simulations with $10^7$ particles. The transition to the Planck law (dashed line) occurs for $x>0.2$ here.}\label{fig:gridplot}
+%\end{figure}
 
 \begin{figure}
-		\includegraphics[width=\textwidth]{near-divisors.pdf}
-		\caption{Condensate size in function of the rate for various divisors}\label{fig:near-divisors}
+	\includegraphics[width=\textwidth]{near-divisors.pdf}
+	\caption{Condensate size in function of the rate for various divisors. $N_0$ is the number of photons with frequency $< 0.01$.}\label{fig:near-divisors}
 \end{figure}
-\begin{figure}
-		\includegraphics[width=\textwidth]{near-rates.pdf}
-		\caption{Condensate size in function of the divisor for various rates}\label{fig:near-rates}
-\end{figure}
+%\begin{figure}
+%	\includegraphics[width=\textwidth]{near-rates.pdf}
+%	\caption{Condensate size in function of the divisor for various rates.  The decrease for divisor $d>500$ is due to the thermal push back to the Planck distribution when the frequencies gets too small. As before, $N_0$ is the number of photons with frequency $<0.1$. \textbf{WE DONOTNEED THE BLUE AND PURPLECURVES}}\label{fig:near-rates}
+%\end{figure}
 
-The effects of resetting are negligible in the equilibrium distribution if $r$ is reduced (see Fig.\ref{label}). The threshold is found to be $r\lessapprox 10^{-3}$ for the range of parameters considered here.
+That motivates using only one resetting protocol, which is taken to be the ``division'' one. In order to explore the effects of the various parameters, we take $r=0.02,0.05,0.10,0.20$, varifying the divisor from 25 to 400. Pictures of the frequency probability distribution are shown in Fig.\ref{fig:exploration}. We notice the presence of a non-zero amount of photons at frequency zero, rejoining the Planck distribution either gradually or with a strong jump downwards first. Intriguingly the intercept with the $y$-axis seems to be independent of the divisor.
+
+To quantify the size of the condensate near the origin, we count the number of particles with a frequency less than 0.01 (for comparison, this is 0.1\% of the support of the Planck distribution). Given the fact that our simulation consists of an ensemble of \num{10000000} particles, numerical integration of the Planck distribution tells us that in absence of resetting we can expect approximately 200 particles in this area. We plot the sizes of the condensates for various rates and divisors in Figs~\ref{fig:near-divisors} (log-log plots). The curves for different divisors overlap reasonably well (do we need to mention the powerlaw having an exponent of exactly 0.5? The Kompaneets flux is $(2-x)x\rho(x) - x^2 \rho'(x) - 2\zeta(3) \rho(x)^2$, which near the origin is $-2\zeta(3)\rho(0)^2$. This has to match the resetting flux, which is simply $r$, which would imply that $\rho(0) \approx \sqrt{\frac{r}{2\zeta(3)}}$ I have included this in the plot, and though it's close, it's not entirely accurate. I can remove if need be.)
 
 \section {Conclusions}\label{con}
+We have applied a frequency resetting mechanism to a tagged photon undergoing Compton scattering from a thermal matter environment.  The frequency is Doppler shifted at random moments by imagining abrupt increases of the scale factor, e.g. in an FLRW-scenario with cosmic expansion ``in fits and starts'' applied to the primordial plasma before recombination. Alternatively, we may consider optomechanical setups where a cavity  randomly and  quickly expands. Strongly inelastic scattering with matter can also provide a source for resetting, but further studies on the exact mechanisms must be carried. The result of this resetting is naturally felt mostly at low frequencies while the Planck law is almost perfectly preserved at moderate to high frequencies.  It may be an observable effect for certain parameters and we feel particularly encouraged by the preliminary results of observation and analysis of the ARCADE-data; see \cite{arca,arcade1,arcade2,edges}.  The jury is still out however whether deviations from the Planck law would be really there in the cosmic microwave background.  Whether quantum optical experiments (in our labs on Earth) as well can reproduce the obtained predictions is an open question and exciting challenge.\\
+It is also observed in the present work that the effects of resetting are negligible in the stationary distribution when $r\lessapprox 10^{-3}$ for the range of other parameters considered here.\\
 
-
-\bibliographystyle{abbrv}
+%\bibliographystyle{abbrv}
 \bibliography{langevin-kompaneets}
 
 \end{document}
