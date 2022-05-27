@@ -642,6 +642,7 @@ Suppose the following It\^o stochastic differential equation for $X_t\in \bbR$,
 \begin{equation}\label{genp}
 	\dot {X}_t = B(X_t)  +  \sqrt{2D(X_t)}\;\xi_t,\qquad t\geq 0
 \end{equation}
+
 with standard white noise $\xi_t$. Then, the Euler-Maruyama algorithm reads
 \begin{equation*}\label{em}
 X_{t_{i+1}}=X_{t_i} + B(X_{t_i})\Delta t + \sqrt{2D(X_{t_i})} \Delta W_i + 
@@ -698,18 +699,30 @@ previous time step. Then, after the Euler-Maruyama step, the histogram is
 updated accordingly.
 It is also important to mention here that we need to specify the initial occupation field $n_0(x)$, which determines the probability density $\rho_0(x)$ from which the initial $x_0$ is drawn.  The step from $n_0$ to $\rho_0$ requires specifying $Z$ in \eqref{eq:spd}.  In other words, there can be two different evolutions even when the initial $\rho_0$ are identical, if there is a different $Z$.\\
 
+To validate the correctness of our (somewhat heuristic) derivation, we compare the empirical spectral probability density obtained by our process to a numerical integration of the Kompaneets process. The results are shown in fig.~\ref{fig:spd-compare} and show a clear agreement between the two. The initial condition as described in the caption, a sum of two Gaussians, is not supposed to be physical but was purposefully chosen to better visually highlight the accordance.
 
+%Fig.~\ref{fig:spd-kompaneets} shows the results of our implementation \eqref{kp-ito2} for convergence to the Planck law. The dashed line shows the expected theoretical result, given by the stationary solution of the Kompaneets equation \eqref{ke} ($Z=1$ in \eqref{kp}).
 
-Fig.~\ref{fig:spd-kompaneets} shows the results of our implementation \eqref{kp-ito2} for convergence to the Planck law. The dashed line shows the expected theoretical result, given by the stationary 
-solution of the Kompaneets equation \eqref{ke} ($Z=1$ in \eqref{kp}).
+To quantitatively check how much the obtained histogram deviates from the 
+theoretical prediction, we can for every time $t$ compute the excess 
+$\rho_\text{NUM}(t,x) - \rho_\text{BE}(t,x)$, where $\rho_\text{NUM}(t,x)$ is 
+the numerical integration of the Kompaneets equations. Our simulations show 
+that over the entire frequency range the results have a precision on the order 
+of \num{e-3}.
 
-To check how much the obtained histogram deviates from the theoretical 
-prediction, we computed the excess $\rho_\text{NUM}(x) - \rho_\text{BE}(x)$, where 
-$\rho_\text{NUM}(x)$ is the histogram found by letting the process evolve until time 
-$=10$, corresponding to $10^5$ timesteps.  Our simulations show that, in the worst case, the 
-results have a precision of order \num{e-3}. This happens around $x=0$. At 
-larger frequencies good agreement is found with our result and the theoretical 
-prediction.
+\begin{figure}
+	\includegraphics[width=0.49\textwidth]{{evolution-plot-process.pdf}}\hfill%
+	\includegraphics[width=0.49\textwidth]{{evolution-plot-numerical.pdf}}
+	\caption{The spectral probability density $\rho_t$ in function of the 
+	dimensionless frequency $x$ with plots for $t=0.05,0.5$ and $\num{5e0}$, 
+	respectively dotted, dashed and solid. We compare the Kompaneets process 
+	\eqref{kp-ito2} on the left with a numerical solution of the Kompaneets 
+	equation on the right. The initial condition (not shown here) was taken to 
+	be a sum of two Gaussians centered around $x=2$ and $x=6$ with standard 
+	deviations of respectively 2 and 1, and weights of respectively $1/3$ and 
+	$2/3$.}
+	\label{fig:spd-compare}
+\end{figure}
 
 \begin{figure}
 	\includegraphics[width=0.8\textwidth]{{spd_N-1e6.00_dx-0.05_t-3_dt-0.0001_ic-hotplanck}.pdf}
@@ -800,7 +813,7 @@ the Bose-Einstein distribution for a given volume and temperature.
 
 \section{Extension of the Kompaneets process}\label{extk-sec}
 
-It is well known that the Boltzmann equation, the traditional point of departure to obtain \eqref{ke}, may wash out certain nonequilibrium degrees of freedom of the electron bath: any isotropic distribution \cite{barbosa,brown,brown2, peebles} for the bath which respects a further constraint \cite{paper} yields the Kompaneets equation with a suitable redefinition of the temperature.\\
+It is well known that the Boltzmann equation, the traditional point of departure to obtain \eqref{ke}, may wash out certain nonequilibrium degrees of freedom of the electron bath: any isotropic distribution \cite{barbosa,brown,brown2, peebles} for the bath (which respects a mild constraint on the decay rate towards zero at infinity)\cite{paper} yields the Kompaneets equation with a suitable redefinition of the temperature.\\
 As proposed in \cite{paper}, the Kompaneets equation can be extended to include more general diffusivities and a possible driving.   In the present section we directly interfere with the Kompaneets process to add nonequilibrium features to the photon process, leaving aside for a moment the specific origin.  There will in fact be two main directions of nonequilibrium, effectively introduced in a generalized Kompaneets equation.\\
 
 On the level of the Kompaneets equation, the nonequilibrium extension is taken to be

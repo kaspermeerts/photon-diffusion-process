@@ -110,6 +110,8 @@ function init!(epdf::Epdf, ic)
 			epdf.xs[i] = 6*cbrt(rand())
 		elseif ic == "invexp"
 			epdf.xs[i] = rand()
+		elseif ic == "doublegauss"
+			epdf.xs[i] = rand() < 1/3 ? randn()/2 + 2 : randn() + 6
 		else
 			throw("No such ic")
 		end
@@ -186,7 +188,7 @@ end
 function trajectory(sim::Sim, tf)
 
 	t = 0.0
-	t_step = 0.50
+	t_step = 0.1
 	t_goal = 0.0*t_step
 	passages = Threads.Atomic{Int}(0)
 	resets = 0
@@ -197,6 +199,30 @@ function trajectory(sim::Sim, tf)
 	start_time = time()
 	steps = 0
 	while t < tf
+	
+		if t >= t_goal
+			t_goal += t_step
+			elapsed = time() - start_time
+			eta = (tf - t) / (t - 0) * elapsed
+			total = (tf - 0) / (t - 0) * elapsed
+			epdf = sim.epdf
+			#current = passages[] / (epdf.num_ensemble * t_step)
+
+			@printf("%2.2f / %2.2f ETA %5d %g out of %g: %.2f%%\n", t, tf, eta, epdf.num_ensemble, epdf.num_ensemble_planck, 100*epdf.num_ensemble/epdf.num_ensemble_planck) # , passages[], resets)
+			passages[] = 0
+			resets = 0
+			dump_hist(t, epdf)
+			dump_occupation(t, epdf)
+			open("n.dat", "w") do io
+				for i in eachindex(times)
+					println(io, times[i], '\t', particle_ns[i] / epdf.num_ensemble_planck)
+				end
+			end
+
+			dump_positions(epdf)
+		end
+	
+	
 		# XXX
 		t_workaround = t
 		Threads.@threads for j in 1:sim.epdf.num_ensemble
@@ -230,27 +256,7 @@ function trajectory(sim::Sim, tf)
 		end
 				
 		t += sim.dt
-		if t >= t_goal
-			t_goal += t_step
-			elapsed = time() - start_time
-			eta = (tf - t) / (t - 0) * elapsed
-			total = (tf - 0) / (t - 0) * elapsed
-			epdf = sim.epdf
-			#current = passages[] / (epdf.num_ensemble * t_step)
 
-			@printf("%2.2f / %2.2f ETA %5d %g out of %g: %.2f%%\n", t, tf, eta, epdf.num_ensemble, epdf.num_ensemble_planck, 100*epdf.num_ensemble/epdf.num_ensemble_planck) # , passages[], resets)
-			passages[] = 0
-			resets = 0
-			dump_hist(t, epdf)
-			dump_occupation(t, epdf)
-			open("n.dat", "w") do io
-				for i in eachindex(times)
-					println(io, times[i], '\t', particle_ns[i] / epdf.num_ensemble_planck)
-				end
-			end
-
-			dump_positions(epdf)
-		end
 		push!(times, t)
 		push!(particle_ns, sim.epdf.num_ensemble)
 	end
@@ -271,8 +277,8 @@ function trajectory(sim::Sim, tf)
 end
 
 const Z = 1.0
-const num_particles = round(Int, 10_000_000*Z)
-const dx = 0.001
+const num_particles = round(Int, 1_000_000*Z)
+const dx = 0.05
 const dt = 0.001
 const ic = "hotplanck"
 const b = 0.000
