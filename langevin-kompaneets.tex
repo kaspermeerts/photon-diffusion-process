@@ -363,7 +363,7 @@ In the next section we describe the Kompaneets equation for relaxation to the Pl
 
 \section{Kompaneets equation}
 
-The Compton effect is a quantum process in which photons scatter from free electrons.  It  eventually  leads to the relaxation of the photon distribution to that of the Planck radiation law.
+The Compton effect is a quantum process in which photons scatter from free electrons.  It eventually leads to the relaxation of the photon distribution to that of the Planck radiation law.
 The Kompaneets equation 
 \begin{equation}\label{ke}
 	\omega^2\frac{\partial n}{\partial t}(t,\omega)= \frac{n_e\sigma_T 
@@ -377,7 +377,7 @@ The Kompaneets equation
 For simplicity it is convenient to use the dimensionless counterpart of \eqref{ke} in order to introduce (in the next Section) the Kompaneets {\it process}, which describes the hopping of photons in reciprocal space.\\ 
 The dynamics of the average photon occupation number $n(t, x)$ at dimensionless frequency $x= \hbar \omega/k_B T$ in a thermal environment with temperature $T$, is obtained from equation \eqref{ke} as
 \begin{equation}\label{ake}
-x^2\frac{\partial n}{\partial t}(t,x) = \frac{\partial }{\partial x}x^4\left\{
+x^2\frac{\partial n}{\partial t}(y,x) = \frac{\partial }{\partial x}x^4\left\{
 \frac{\partial n}{\partial x}(y,x) + 
 \left[1+n(y,x)\right]n(y,x)\right\}
 \end{equation}
@@ -391,7 +391,7 @@ where $\tau = l/c$ is the average collision rate, related
 to the mean free path of photons $l=(n_e\sigma_T)^{-1}$. For simplicity, we will take our units such that $\tau_C = 1$, identifing $y$ with $t$.\\
 Note that the
 \begin{equation}\label{cc}
-n_\mu(x) = \frac 1{e^{x+\mu}-1}, \qquad \mu\geq 0
+n_\mu(x) = \frac 1{e^{x-\mu}-1}, \qquad \mu\leq 0
 \end{equation}
 are stationary solutions of \eqref{ake}: $\frac{\dd n_\mu}{\dd x}(x) + [ 
 1+n_\mu(x) ] \,n_\mu(x)=0$.\\
@@ -429,7 +429,7 @@ proportional to the number of photons per volume. Since the Kompaneets equation 
 is photon-number preserving, $Z_t=Z$ is time-independent and yields for the 
 stationary $n_\mu$ in \eqref{cc},
 \[
-Z = \frac{\text{Li}_3 (e^{-\mu})}{\zeta(3)}
+Z = \frac{\text{Li}_3 (e^{\mu})}{\zeta(3)}
 \]
 with Li$_3$ the polylogarithm of order 3.
 In that notation, the Kompaneets equation \eqref{ake} becomes
@@ -538,7 +538,7 @@ Continuing with \eqref{deln} and writing $n(t,\vb{k}) = \left\langle n_{\vb{k}}(
 -  w(\vb{k}, \vb{a}\delta) \left\langle (1 + n_{\vb{k}+\vb{a} \delta} ) 
 n_{\vb{k}} \right\rangle
 \end{align*}
-Assuming that the correlations between occupations factorize, we end up with
+Next we assume that the correlations between occupations factorize.  That is not only part of standard kinetic theory; it originates mainly in the extremely weak interaction between photons.  We end up then with
 \begin{align}
 {\pdv{n}{t} }(t,\vb{k}) 
 = \sum_{\vb{a}}  w(\vb{k} - \vb{a} \delta, \vb{a}\delta) (1 
@@ -609,7 +609,7 @@ Remember that we interpret $n_{\vb{k}}$ as a given continuum field.  As a conseq
  \begin{equation} \label{3dsde}
 \dot{\mbf{k}}_t = \nabla_{\vb{k}}{D}({\mbf{k}_t}) -\beta D(\vb{k}_t)\,\nabla_{\vb{k}} U (\vb{k}_t)(1+n_{\vb{k}_t}) + \sqrt{2D(\mbf{k}_t)}\,\mbf{\Xi}_t	
 \end{equation}
-where $\mbf{\Xi}_t$ is a standard white noise on $\bbR^3$ and It\^o-convention must be applied.
+where $\mbf{\Xi}_t$ is a standard white noise on $\bbR^3$ and It\^o-convention must be applied.  The derivation of \eqref{3dsde} from \eqref{5o} is not trivial.  It would follow standard practice without the nonlinearity (stimulated emission) by understanding the backward generator $\cal L$ as the generator of the time-evolution of the walk in reciprocal space.  Yet, full rigor is not attempted here and the precise derivation of the tagged photon dynamics remains mathematically challenging; see also \cite{fra} for more details. Numerical checks will follow below.
 
 	\subsection{Tagged photon nonlinear Markov process}
 We get to our main result.
@@ -739,10 +739,11 @@ of \num{e-3}.
 If we lower $Z$ to, say, $0.1$, the frequency spectral density instead 
 converges to something closely resembling the Wien distribution $\simeq 
 x^2e^{-x}$, as verified in Fig.~\ref{fig:spd-boltzmann}. This corresponds to 
-\eqref{cc} with $\mu\simeq 2.13$. There is no further convergence to the Planck 
-law here because there is particle conservation and because of the absence of 
-low-frequency drift or diffusion for $x\ll 1$, making both \eqref{drift} and 
-\eqref{diffusion} negligible since  $n_t(x)$ is of order 1 there.\\
+\eqref{cc} with $\mu\simeq -2.13$. There is no further convergence to the 
+Planck law here because there is particle conservation and because of the 
+absence of low-frequency drift or diffusion for $x\ll 1$, making both 
+\eqref{drift} and \eqref{diffusion} negligible since  $n_t(x)$ is of order 1 
+there.\\
 
 We conclude from these simulations that the constructed process \eqref{kp-ito2}
 can be reliably simulated and indeed, for its deterministic behavior reproduces 
@@ -757,8 +758,8 @@ Maxwellian is rapidly established. \\
 Finally, we note that when taking $Z>1$, a condensate is expected to form 
 \cite{levermore}.  Fig.~\ref{fig:spd-Zcondensate} shows that condensate appearing for the simulated spectral density for $Z=1.1$. In that case, we also find particles 
 going out of bounds at $x=0$, leading to unphysical negative energies. However, that may be
-remedied by non-particle-conserving processes, which absorb the condensate at 
-the origin (though not shown here).
+remedied by non-particle-conserving processes (e.g. double Compton or Brehmsstrahlung), which absorb the condensate at 
+the origin (though simulation results are not shown here).
 
 \begin{figure}
 	\includegraphics[width=0.8\textwidth]{{spd_N-1e5.04_dx-0.05_t-100_dt-0.0001_ic-hotplanck_Z-1.1000}.pdf}
@@ -839,9 +840,10 @@ A second  change is to add an extra diffusion (changing \eqref{diffusion}) where
 \begin{equation}\label{sc}
 	\frac{\partial}{\partial t} \rho(t,x) = - \frac{\partial}{\partial x} \left[ \left(2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(t,x)\right)\right)\rho(t,x)\right] + \frac{\partial^2}{\partial x^2}[D(x)\rho(t,x)]
 \end{equation} 
+Note the stimulated emission with the occupation number density $n(t,x)$; of course we can subsitute the spectral density from \eqref{eq:spd}.  Yet is numbers that matter, not probability.\\
 Observe that \eqref{aeke} remains a continuity equation, photon-number preserving just like Kompaneets. It means that $Z_t$ in \eqref{eq:spd} for the density of the nonequilibrium extension \eqref{aeke} is also a time-independent prefactor, depending only on the environment temperature and the (constant) number of photons per volume.\\
 Interpreting similarly as before the above equation as a Fokker-Planck type 
-equation, we find the associated Langevin equation in the Itô-interpretation
+equation, we find the associated Langevin equation in the It\^o-interpretation
 \begin{equation}\label{ekp}
 	\dot{x} = 2\frac{D(x)}{x} + \partial_xD(x) - D(x)g(x)\left(1+n(t,x)\right) + \sqrt{2D(x)}\, \xi_t
 \end{equation}
@@ -871,7 +873,9 @@ are randomly chosen and removed from the simulation. On the other hand, if
 there is a deficit, particles are added, randomly distributed over the bin, to 
 make up the difference.\\ 
 Notice that as particles are being added to or removed from the ensemble, the 
-value of $Z$ will change, i.e, it becomes time-dependent $Z=Z_y$.
+value of $Z$ will change, i.e, it becomes time-dependent $Z=Z_t$.\\
+In the following subsections we separate the influence of $b$ and $c$ in \eqref{ext-dri}; indeed we estimate it is interesting to study their influence separately and the physical mechanisms underlying their presence.
+
 
 \subsection{Adding low-frequency diffusion}
 
@@ -909,9 +913,9 @@ processes should make the stationary distribution slightly different at low
 frequencies.
 \begin{figure}
 	\includegraphics[width=0.8\linewidth]{{spd_N-1e5.70_dx-0.05_t-100_dt-0.0001_ic-planck_c-0.1000_brems}.pdf}
-	\caption{Solid line corresponds to the simulation of \eqref{ekp} for 
+	\caption{Solid line corresponds to the simulation of \eqref{ekp} using \eqref{ext-dri} for 
 	$c=0.10, b=0$.  The dashed line is the Planck law. The dotted line depicts 
-	the supposed stationary distribution \eqref{supsim}
+	the supposed stationary distribution \eqref{supsim}.
 	}\label{fig:spd-c}
 \end{figure}
 
@@ -938,14 +942,14 @@ effective temperature for the stationary distribution.
 
 \subsection{Adding frequency-dependent drift}
 
-Taking now a non-zero driving in \eqref{ekp}, we set $b=0.1$ and $k=0.4$, keeping $c=0$.  A marked deviation from the Planck law becomes visible.
+Taking now a non-zero driving in \eqref{ext-dri}, we set $b=0.1$ and $k=0.4$, keeping $c=0$.  A marked deviation from the Planck law becomes visible.
 It is also interesting to note a remarkable feature for $b\neq 0$, which is the formation of a condensate around $x=0$. However, the low-frequency reaction mechanism (either double Compton or Bremssthralung) is able to absorb the condensate. In fact, the appearance of that condensate can be explained by looking at the stochastic equation \eqref{ekp}, where the extra drift coming from $g(x)$ contributes in the stimulated emission term, making shifts towards negatives values of frequency more frequent.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\linewidth]{{spd_N-1e4.86_dx-0.05_t-100_dt-0.001_ic-planck_b-0.1000_k-0.4000_Z-0.7300_brems}.pdf}
 	\caption{Stationary density profile when adding the frequency-dependent 
-	drift with $b=0.1$ and $k=0.4$, keeping $c=0$ in \eqref{ekp}.  Again a 
+	drift with $b=0.1$ and $k=0.4$, keeping $c=0$ in \eqref{ext-dri}.  Again a 
 	deviation is seen from the Planck law (dashed line), with the simulation 
 	almost completely overlapping with the stationary solution.}
 	\label{fig:spd-b}
@@ -975,7 +979,9 @@ parameters considered, modifications to the Planck law that ultimately lead to
 higher occupancy in the low-frequency part of the spectrum are seen. Those 
 modifications match very well with the theoretical stationary solution 
 \eqref{supsim}, but slight deviations are expected due to the inclusion of 
-reaction mechanisms.
+reaction mechanisms.\\
+ From the mathematical point of view, the derivation of the Kompaneets process is interesting and challenging.  It appears to open a new theme in the domain of nonlinear Markov diffusions \cite{fra}.\\
+Let us finish by emphasizing that the  proposed mechanisms remain conjectural and that the theory is largely phenomenological.  A follow-up can be found in \cite{res}, where a resetting mechanism is added to the Kompaneets process corresponding to random abrupt Doppler shifts to the low frequency regime. 
 
 \begin{appendix}
 
@@ -988,7 +994,7 @@ then, $f$ itself is a random variable. Suppose also that$\vb{X}_t$ follows the s
 \end{equation*}
 where $\vb{\Xi}_t$ is a three-dimensional white noise as before.
 
-Then, Itô's lemma states that $f$ satisfies the stochastic differential equation
+Then, It\^o's lemma states that $f$ satisfies the stochastic differential equation
 \begin{equation}\label{ilem}
 	\dot{f} (t, \vb{X}_t)= \frac{\partial f}{\partial t}+ \left(\nabla_{\vb{X}}f\right)\cdot\vb{B} +\frac{1}{2}\mathrm{Tr}\left[\vb{Q}^T_t\left(H_Xf\right)\vb{Q}_t\right] + \left(\nabla_{\vb{X}}f\right)^T\vb{Q}_t\, \vb{\Xi}_t
 \end{equation}
@@ -997,39 +1003,55 @@ where the positive $d\times d$ matrix $\vb{Q}_t$ is such that the diffusion tens
 and $H_X$ is the Hessian matrix with respect to $\vb{X}_t$. 
 
 
-We use that to show in more detail the derivation of equation \eqref{kp-ito2}, assuming further that Itô's lemma holds when $B$ depends also on the distribution of $\vb{X}_t$.  We begin with the dimensionless version of \eqref{3dsde}, applying Itô's lemma for 
-\[f(\vb{k})=|\vb{k}|\]
+We use that to show in more detail the derivation of equation \eqref{kp-ito2}.  We begin with the $i$-th generator in \eqref{2o}
+\begin{align}
+	\frac 1{\delta^2}{L_i}_\delta F(\vb{K}) = D(\vb{k}_i)(1+ 
+	n_{\vb{k}_i}(\vb{K}))\Delta_{\vb{k}_i}&F(\vb{K})+\sum_{\vb{a}}\bigg{\{}\left(\frac{1}{2}\vb{a}\cdot \nabla_{\vb{k}} D (\vb{k}_i) 
+	-\frac{\beta}{2}D(\vb{k}_i)\vb{a}\cdot \nabla_{\vb{k}} U 
+	(\vb{k}_i)\right)\nonumber\\
+	&(1+n_{\vb{k}_i}(\vb{K}))\
+	+ D(\vb{k}_i) \,\vb{a}\cdot 
+	\nabla_{\vb{k}} n\bigg{\}}\vb{a}\cdot\nabla_{\vb{k}_i}F(\vb{K})\label{gen-i}
+\end{align}
+which leads by applying the steps \eqref{sumj}--\eqref{5o} to the It\^o process for the $i$-th photon
+ \begin{equation} \label{i-3dsde}
+ 	\dot{\mbf{k_i}}_t = \nabla_{\vb{k}}{D}({\mbf{k_i}_t}) -\beta D(\vb{k_i}_t)\,\nabla_{\vb{k}} U (\vb{k_i}_t)(1+n_{\vb{k_i}_t}(\vb{K})) + \sqrt{2D(\mbf{k_i})}\,\mbf{\Xi}_t	
+ \end{equation}
+
 
 In order to simplify notation, we will opt to not differentiate the quantities from their dimensionless counterpart, therefore, it should be noted that all quantities appearing here are dimensionless. In particular, we shall identify the photon energy with its dimensionless version
-\[\beta U (\omega) \to U(x)=x\]
+\[\beta U (\omega_i) \to U(x_i)=x_i\]
+
+We apply It\^o's lemma for 
+\[f(\vb{k_i})=|\vb{k_i}|.\]
 
 A simple calculation yields
 \begin{align*}
-	&\nabla_{\vb{k}}f =  \frac{\vb{k}}{|\vb{k}|}\\
-	&H_{\vb{k}}f = 
+	&\nabla_{\vb{k_i}}f =  \frac{\vb{k_i}}{|\vb{k_i}|}\\
+	&H_{\vb{k_i}}f = 
 	\begin{pmatrix}
-		\frac{1}{|\vb{k}|}	-\frac{k_x^2}{|\vb{k}|^3} & & \\
-		&\frac{1}{|\vb{k}|} -\frac{k_y^2}{|\vb{k}|^3}  &\\
-		& & \frac{1}{|\vb{k}|}- \frac{k_z^2}{|\vb{k}|^3}
+		\frac{1}{|\vb{k_i}|}	-\frac{{k_{ix}}^2}{|\vb{k_i}|^3} & & \\
+		&\frac{1}{|\vb{k_i}|} -\frac{{k_{iy}}^2}{|\vb{k_i}|^3}  &\\
+		& & \frac{1}{|\vb{k_i}|}- \frac{{k_{iz}}^2}{|\vb{k_i}|^3}
 	\end{pmatrix}
 \end{align*}
-
-Recall from \eqref{3dsde} that
+recall from \eqref{i-3dsde} that
 \begin{align*}
-	&\vb{B}(\vb{k},n_t) =\nabla_{\vb{k}}D(\vb{k}) - D(\vb{k})\nabla_{\vb{k}}{U}(\vb{k})(1+n_t(\vb{k})) \\
-	&\vb{Q}(\vb{k}) = \sqrt{2D(\vb{k})}\mathbf{I}_{3\times 3}
+	&\vb{B}(\vb{k_i}) =\nabla_{\vb{k}}D(\vb{k_i}) - D(\vb{k_i})\nabla_{\vb{k}}{U}(\vb{k_i})(1+n_{\vb{k_i}}(\vb{K})) \\
+	&\vb{Q}(\vb{k_i}) = \sqrt{2D(\vb{k_i})}\mathbf{I}_{3\times 3}
 \end{align*}
 
-Therefore, we can easily find all terms in Itô's lemma \eqref{ilem}
+Therefore, we can easily find all terms in It\^o's lemma \eqref{ilem}
 \begin{align*}
 	\begin{cases}
 	&\partial_t f=0\\
-	&\left(\nabla_{\vb{X}}f\right)\cdot\vb{B} =\frac{\vb{k}}{|\vb{k}|} \cdot\left(\nabla_{\vb{k}}D(\vb{k}) - D(\vb{k})\nabla_{\vb{k}}{U}(\vb{k})(1+n_t(\vb{k}))\right)\\
-	&\frac{1}{2}\mathrm{Tr}\left[\mbf{Q}^T_t\left(H_Xf\right)\mbf{Q}_t\right] = 2 \frac{D(\vb{k})}{|\vb{k}|}  \\
-	&\left(\pmb{\nabla_X}f\right)^T\mbf{Q}_t  = \sqrt{2D(\vb{k})}\frac{\vb{k}}{|\vb{k}|}  
+	&\left(\nabla_{\vb{X}}f\right)\cdot\vb{B} =\frac{\vb{k_i}}{|\vb{k_i}|} \cdot\left(\nabla_{\vb{k}}D(\vb{k_i}) - D(\vb{k_i})\nabla_{\vb{k}}{U}(\vb{k_i})(1+n_{\vb{k_i}}(\vb{K}))\right)\\
+	&\frac{1}{2}\mathrm{Tr}\left[\mbf{Q}^T_t\left(H_Xf\right)\mbf{Q}_t\right] = 2 \frac{D(\vb{k_i})}{|\vb{k_i}|}  \\
+	&\left(\pmb{\nabla_X}f\right)^T\mbf{Q}_t  = \sqrt{2D(\vb{k_i})}\frac{\vb{k_i}}{|\vb{k_i}|}  
 	\end{cases}
 \end{align*}
-finally, substitute back in \eqref{ilem}, writing quantities in terms of the dimensionless frequency $\vb{k}=x\, \vb{\hat{x}}$ to find \eqref{kp-ito2}.
+we substitute back in \eqref{ilem} and write quantities in terms of the dimensionless frequency $\vb{k_i}=x_i\, \vb{\hat{x_i}}$. Repeating the process for $i=1,\dots, N$, taking the sum and the continuum limit for the generator in frequency space similarly than done in steps \eqref{2o}--\eqref{5o} we find \eqref{kp-ito2}.\\
+Applying directly It\^o's lemma for a nonlinear Markov diffusion is not needed here, but is another mathematical question that is raised by the Kompaneets process.
 
 \section{Data Availability Statement}
 
