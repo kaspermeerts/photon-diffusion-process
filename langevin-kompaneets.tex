@@ -725,13 +725,13 @@ of \num{e-3}.
 \end{figure}
 
 \begin{figure}
-	\includegraphics[width=0.8\textwidth]{{spd_N-1e6.00_dx-0.05_t-3_dt-0.0001_ic-hotplanck}.pdf}
+	\includegraphics[width=0.8\textwidth]{{spd_N-1e6.00_t-3_ic-hotplanck}.pdf}
 	\caption{The spectral probability density $\rho_t$ in function of the dimensionless frequency $x$ for the Kompaneets process \eqref{kp-ito2}, with plots for $t=1,2,3$ going from right to left. The dotted line indicates the initial ``hot Planck'' condition corresponding to the occupation field $n_0(x) = n_\text{BE}(x/2)/8$ for which $Z=1$. Notice the fast thermalization to a Wien-like tail, followed by a slow final thermalization at lower frequencies ($x<6$).}
 	\label{fig:spd-kompaneets}
 \end{figure}
 
 \begin{figure}
-	\includegraphics[width=0.8\textwidth]{{spd_N-1e6.00_dx-0.05_t-3_dt-0.0001_ic-hotplanck_Z-0.1000}.pdf}
+	\includegraphics[width=0.8\textwidth]{{spd_N-1e6.00_t-3_ic-hotplanck_Z-0.10}.pdf}
 	\caption{Similar to Fig.~\ref{fig:spd-kompaneets}, but with $Z=0.1$, {\it i.e.},  with the initial occupation field $n_0(x) = n_\text{BE}(x/2)/80$. There is a marked difference (going like $x^2$ at low frequency) with the dashed line representing the Planck density, as there is particle conservation. There is only the fast thermalization to a(n almost) Wien density because of the absence of low-frequency activity,  $x^2 n_t(x)\ll 1$ at low $x$.}
 	\label{fig:spd-boltzmann}
 \end{figure}
@@ -762,7 +762,7 @@ remedied by non-particle-conserving processes (e.g. double Compton or Brehmsstra
 the origin (though simulation results are not shown here).
 
 \begin{figure}
-	\includegraphics[width=0.8\textwidth]{{spd_N-1e5.04_dx-0.05_t-100_dt-0.0001_ic-hotplanck_Z-1.1000}.pdf}
+	\includegraphics[width=0.8\textwidth]{{spd_N-1e5.04_t-100_ic-hotplanck_Z-1.10}.pdf}
 	\caption{"Stationary" spectral density for $Z=1.1$. The dashed line is the 
 	Planck density. Notice the formation of a condensate around the origin. In 
 	that case, there is also the appearance of non-physical negative 
@@ -912,7 +912,7 @@ found in the simulation. This is not surprising since the addition of reactive
 processes should make the stationary distribution slightly different at low 
 frequencies.
 \begin{figure}
-	\includegraphics[width=0.8\linewidth]{{spd_N-1e5.70_dx-0.05_t-100_dt-0.0001_ic-planck_c-0.1000_brems}.pdf}
+	\includegraphics[width=0.8\linewidth]{{spd_N-1e5.70_t-100_ic-planck_c-0.1000_brems}.pdf}
 	\caption{Solid line corresponds to the simulation of \eqref{ekp} using \eqref{ext-dri} for 
 	$c=0.10, b=0$.  The dashed line is the Planck law. The dotted line depicts 
 	the supposed stationary distribution \eqref{supsim}.
@@ -920,7 +920,7 @@ frequencies.
 \end{figure}
 
 \begin{figure}
-	\includegraphics[width=0.8\linewidth]{{temp_N-1e5.70_dx-0.05_t-100_dt-0.0001_ic-planck_c-0.1000_brems}.pdf}
+	\includegraphics[width=0.8\linewidth]{{temp_N-1e5.70_t-100_ic-planck_c-0.1000_brems}.pdf}
 	\caption{Profile of effective temperature corresponding to Fig. 4 and 
 	defined in \eqref{effT}. The very-low frequency regime is dominated by the 
 	{\it ad hoc} cutoff and procedures replacing Bremsstrahlung and double 
@@ -947,7 +947,7 @@ It is also interesting to note a remarkable feature for $b\neq 0$, which is the 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\linewidth]{{spd_N-1e4.86_dx-0.05_t-100_dt-0.001_ic-planck_b-0.1000_k-0.4000_Z-0.7300_brems}.pdf}
+	\includegraphics[width=0.8\linewidth]{{spd_N-1e4.86_t-100_ic-planck_b-0.10_k-0.40_Z-0.73_brems}.pdf}
 	\caption{Stationary density profile when adding the frequency-dependent 
 	drift with $b=0.1$ and $k=0.4$, keeping $c=0$ in \eqref{ext-dri}.  Again a 
 	deviation is seen from the Planck law (dashed line), with the simulation 
