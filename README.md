@@ -1,1 +1,1 @@
-Under construction
+Project migrated from [KU Leuven GitLab](https://gitlab.kuleuven.be/u0131889/photon-diffusion-process) to [my personal GitHub](https://github.com/kaspermeerts/photon-diffusion-process)
